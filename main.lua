@@ -1,15 +1,7 @@
-require("coisaCore")
-
-local push = require "push"
-
-local gameWidth, gameHeight = 1080, 720 --fixed game resolution
-local windowWidth, windowHeight = love.window.getDesktopDimensions()
-windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
-
-push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false})
+require("trecoCore")
 
 function love.load()
-	cCore.loadScene(R.scene.gameScene)
+	cCore.loadScene(R.scene.testScene)
 end
 
 function love.update(dt)
@@ -17,11 +9,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    push:start()
-
-    cCore.draw()
-
-    push:finish()
+	cCore.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
