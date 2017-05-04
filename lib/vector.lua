@@ -104,6 +104,10 @@ function vector.angleTo(a, b)
 	return math.atan2(b.y-a.y, b.x-a.x)
 end
 
+function vector.normalize(a)
+	return a / vector.magnitude(a)
+end
+
 function vector.floor(a)
 	a.x = math.floor(a.x)
 	a.y = math.floor(a.y)
