@@ -121,6 +121,18 @@ function Script:_drawAfter()
 	end
 end
 
+function Script:_keypressed(k)
+	if self.keypressed then
+		self:callEach("keypressed", k)
+	end
+end
+
+function Script:_keyreleased(k)
+	if self.keyreleased then
+		self:callEach("keyreleased", k)
+	end
+end
+
 function Script:callEach(func, ...)
 	for i in pairs(self.cList) do
 		self[func](self, tCore.currentScene.trecos[i], ...)

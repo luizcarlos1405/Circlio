@@ -115,6 +115,14 @@ function tCore.mousepressed(x,y,b)
 end
 
 function tCore:keypressed(k)
+	tCore.callScripts("_keypressed", k)
+	if tCore.currentScene and tCore.currentScene.keypressed then
+		tCore.currentScene:keypressed(k)
+	end
+end
+
+function tCore:keyreleased(k)
+	tCore.callScripts("_keyreleased", k)
 	if tCore.currentScene and tCore.currentScene.keypressed then
 		tCore.currentScene:keypressed(k)
 	end

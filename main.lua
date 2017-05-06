@@ -28,7 +28,12 @@ function love.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
+    tCore:keypressed(key)
     if key == 'escape' then
         love.event.quit()
     end
+end
+
+function love.keyreleased(key)
+	tCore:keyreleased(key)
 end
