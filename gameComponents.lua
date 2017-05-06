@@ -1,6 +1,8 @@
 Tank = Component("tank", {
 	arena = false,
 	pos = 0,
+	fireRate = 0.5,
+	strong = 1,
 	color = Color.blue
 	}, function(arena, pos, color)
 		return {arena = arena, pos = pos, color = color}
