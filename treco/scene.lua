@@ -9,7 +9,7 @@ local function new(name)
 	s.name = name
 	s.isScene = true
 
-	cCore.registerScene(s)
+	tCore.registerScene(s)
 	return s
 end
 
@@ -149,7 +149,7 @@ function Scene:loadMap(name)
 
 
 			    	--Se tiver um tile vazio ou acabou o mapa, e os tiles anteriores tinham colisão, fecha um collider
-			    	nextTile = math.min(curTile+1, map.width*map.height-1)
+			    	local nextTile = math.min(curTile+1, map.width*map.height-1)
 
 			    	if ((l.data[curTile] == 0 or i == (map.width-1) or closeCollider) and l.properties.collision and colW>0) then
 		    			colCount = colCount + 1

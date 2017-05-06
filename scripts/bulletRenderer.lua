@@ -1,9 +1,12 @@
 BulletRenderer = Script({Bullet})
 
-local vel = 50
 
 function BulletRenderer:update(b, dt)
-	b.pos = b.pos + b.bullet.dir*vel*dt
+	b.pos = b.pos + b.bullet.dir*b.bullet.speed*dt
+
+	if vector.dist(b.pos, gameCenter)>gameArena.raio then
+		b:destroy()
+	end
 end
 
 function BulletRenderer:draw(b)

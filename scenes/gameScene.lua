@@ -1,40 +1,29 @@
 gameScene = Scene("gameScene")
 
-raio = gameHeight/2 - 10
+require("gameComponents")
 
-Tank = Component("tank", {
-	pos = 0
-	})
 
-Bullet = Component("bullet", {
-	dir = false
-	})
+--Scripts
+require("scripts.arenaRenderer")
+require("scripts.tankRenderer")
+require("scripts.bulletRenderer")
+require("scripts.playerController")
 
-require("TankRenderer")
-require("BulletRenderer")
+local trecoArena, Player1, Player2
 
 function gameScene:init()
-	Player = Treco("asdqwe", {Tank})
-
+	trecoArena = Treco(Position(gameCenter), Arena(gameHeight/2 - 10))
+	Player1 = Treco(Tank(trecoArena, 0, Color.green), PlayerInput("a","d","w"))
+	Player2 = Treco(Tank(trecoArena, math.pi, Color.red), PlayerInput("j","l","i"))
+	gameArena = trecoArena.arena
 end
 
 function gameScene:update(dt)
-	if (love.keyboard.isDown("a")) then
-		Player.tank.pos = Player.tank.pos + 5*dt
-	end
-	if (love.keyboard.isDown("d")) then
-		Player.tank.pos = Player.tank.pos - 5*dt
-	end
-
-	if (love.keyboard.isDown("space")) then
-		Treco("bul", {Position({x = Player.pos.x, y = Player.pos.y}), Bullet({dir = vector.normalize(gameCenter-Player.pos)})})
-	end
+	--gameArena.raio = gameArena.raio-10*dt
 end
 
 function gameScene:draw()
-	love.graphics.setColor(Color.white:value())
-    love.graphics.setLineWidth(10)
-    love.graphics.circle("line", gameWidth/2, gameHeight/2, raio)
+
 end
 
 return gameScene

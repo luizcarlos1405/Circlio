@@ -1,29 +1,28 @@
+require("treco.trecoCore")
 
-vector = require("lib.vector")
-local push = require "push"
+local push = require("lib.push")
 
 gameWidth, gameHeight = 1080, 720 --fixed game resolution
-gameCenter = vector(gameWidth/2,gameWidth/2)
 windowWidth, windowHeight = love.window.getDesktopDimensions()
 windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
 
 push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false})
-require("trecoCore")
+
 
 gameCenter = vector(push:getWidth()/2,push:getHeight()/2)
 
 function love.load()
-	cCore.loadScene(R.scene.gameScene)
+	tCore.loadScene(R.scene.gameScene)
 end
 
 function love.update(dt)
-	cCore.update(dt)
+	tCore.update(dt)
 end
 
 function love.draw()
     push:start()
 
-	cCore.draw()
+	tCore.draw()
 
     push:finish()
 end
