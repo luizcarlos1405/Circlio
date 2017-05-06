@@ -9,6 +9,7 @@ local function getCellRect(world, cx,cy)
 end
 
 function bump_debug.draw(world)
+
   --[[local cellSize = world.cellSize
   local font = love.graphics.getFont()
   local fontHeight = font:getHeight()
@@ -25,7 +26,7 @@ function bump_debug.draw(world)
       love.graphics.rectangle('line', l,t,w,h)
     end
   end]]
-
+  love.graphics.setLineWidth(3)
   local items = world:getItems()
   for k,v in pairs(items) do
     if(v.collider.isSlope) then

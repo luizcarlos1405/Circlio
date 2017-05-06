@@ -6,6 +6,7 @@ local bumpdebug = require(BASE.."lib.bump_debug")
 local physics = bump.newWorld(40)
 
 function BumpWrapper:init(c)
+	self.debug = false
 	local scale = c.scale or vector(1,1)
 	if c.collider.w == -1 then
 		if c.sprite and c.sprite.texture and not c.sprite.quad then
@@ -42,7 +43,7 @@ function BumpWrapper:moveTo(c, m, ...)
 	physics:update(c, m.x, m.y)
 end
 
-function BumpWrapper:drawOnce()
+function BumpWrapper:drawBefore()
 	if self.debug then
 		bumpdebug.draw(physics)
 	end

@@ -28,10 +28,8 @@ end
 function PlayerController:keyreleased(t, key)
 	if key == t.input.shoot and cooldown > t.tank.fireRate then
 		cooldown = 0
-		if holdTime < 3 then
-			Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-t.pos), speed = 100 + (1.913^holdTime) * 100}))
-		else
-			Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-t.pos), speed = 800}))
-		end
+		holdTime = math.min(holdTime, 3)
+		Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-t.pos), speed = 100 + (1.913^holdTime) * 100}), BoxCollider(10,10, vector(-5,-5)))
+		
 	end
 end
