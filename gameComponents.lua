@@ -1,30 +1,21 @@
 Tank = Component("tank", {
+	name = "Player",
 	arena = false,
 	pos = 0,
 	color = Color.blue,
-	var = {x = 0, y = 0},
-	}, function(arena, pos, color, holdbar)
-		return {arena = arena, pos = pos, color = color}
+	life = 3,
+	firerate = 0.5
+	}, function(name, arena, pos, color, life, firerate)
+		return {nome = nome, arena = arena, pos = pos, color = color, life = life, firerate = firerate}
 	end)
 
-PlayerInput = Component("input", {
+KeyboardInput = Component("kbInput", {
 	left = "a",
 	right = "d",
 	shoot = "w"
 	}, function(l,r,s)
 		return {left = l, right = r, shoot = s}
 	end)
-
-PlayerStatus = Component("status", {
-	life = 3,
-	cooldown = 0,
-	holdtime = 0,
-	fireRate = 0.5,
-	name = "Player"
-	}, function(c, h, f, n)
-		return {cooldown = c, holdtime = h, fireRate = f, name = n}
-	end
-)
 
 Bullet = Component("bullet", {
 	dir = false,
