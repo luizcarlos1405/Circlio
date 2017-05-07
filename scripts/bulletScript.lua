@@ -1,13 +1,20 @@
-BulletRenderer = Script({Bullet})
+BulletScript = Script({Bullet})
+--[[
+	BulletScript
+	Renderiza e lida com colisão de bullets
 
-local maxBounce = 1
-local bulletRadius = 8
+	Teoricamente deveria ser 2 scripts, mas tem pouca coisa ainda
+]]
 
-function BulletRenderer:init(b)
+
+local maxBounce = 1		--Máximo de vezes que a bala pode quicar antes de explodir
+local bulletRadius = 8	
+
+function BulletScript:init(b)
 	b.bullet.bounceCount = 0
 end
 
-function BulletRenderer:update(b, dt)
+function BulletScript:update(b, dt)
 
 	local bulletFilter = function(item, other)
 		if other.tank then return "cross"
@@ -26,7 +33,7 @@ function BulletRenderer:update(b, dt)
 
 		if col.other.tank then
 			if not (col.other.status.name == b.bullet.source and b.bullet.bounceCount == 0) then
-				col.other.status.life = col.other.status.life - 25
+				col.other.status.life = col.other.status.life - 1
 				b:destroy()
 				return
 			end
@@ -47,7 +54,7 @@ function BulletRenderer:update(b, dt)
 
 end
 
-function BulletRenderer:draw(b)
+function BulletScript:draw(b)
 	love.graphics.setColor(Color.blue:value())
 	love.graphics.circle("fill", b.pos.x, b.pos.y, bulletRadius)
 end

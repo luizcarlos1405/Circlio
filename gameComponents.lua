@@ -15,13 +15,13 @@ PlayerInput = Component("input", {
 	end)
 
 PlayerStatus = Component("status", {
-	life = 100,
+	life = 3,
 	cooldown = 0,
 	holdtime = 0,
 	fireRate = 0.5,
 	name = "Player"
-	}, function(l, c, h, f, n)
-		return {life = l, cooldown = c, holdtime = h, fireRate = f, name = n}
+	}, function(c, h, f, n)
+		return {cooldown = c, holdtime = h, fireRate = f, name = n}
 	end
 )
 

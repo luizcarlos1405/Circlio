@@ -1,6 +1,7 @@
 require("treco.trecoCore")
 
 local push = require("lib.push")
+require("lib.util")
 
 gameWidth, gameHeight = 1080, 720 --fixed game resolution
 windowWidth, windowHeight = love.window.getDesktopDimensions()

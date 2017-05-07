@@ -1,6 +1,11 @@
-require("lib.map")
-
 PlayerController = Script({Tank, PlayerInput, PlayerStatus})
+--[[
+	PlayerController
+	Controla um tank com input do jogador pelo teclado
+
+	Não deveria ter lógica de atirar e mudar posição aqui, só entrada. O certo seria estar num script "TankMotor"
+	Isso serve pra separar a entrada da lógica, asim facilitando a criação de novas formas de entrada, e também uma IA
+]]
 
 function PlayerController:update(t, dt)
 
@@ -17,22 +22,6 @@ function PlayerController:update(t, dt)
 	t.status.cooldown = t.status.cooldown + dt
 
 	Physics:updateRect(t)
-end
-
-function PlayerController:draw(t)
-	love.graphics.print("HOLD" .. t.status.holdtime)
-
-	love.graphics.setLineWidth(2)
-	love.graphics.setColor(255, 0, 0)
-	love.graphics.arc("line", "open", gameCenter.x, gameCenter.y, gameArena.raio+20, t.tank.pos-math.rad(5), t.tank.pos-math.rad(5) + math.rad(10))
-
-	love.graphics.setLineWidth(10)
-	love.graphics.setColor(map(t.status.holdtime, 0, 3, 255, 0), map(t.status.holdtime, 0, 3, 0, 150), map(t.status.holdtime, 0, 3, 0, 255))
-	love.graphics.arc("line", "open", gameCenter.x, gameCenter.y, gameArena.raio+40, t.tank.pos-math.rad(5), t.tank.pos-math.rad(5) + map(t.status.holdtime, 0, 3, 0, math.rad(10)))
-
-	love.graphics.setColor(255, 0, 0)
-	love.graphics.arc("line", "open", gameCenter.x, gameCenter.y, gameArena.raio+20, t.tank.pos-math.rad(5), t.tank.pos-math.rad(5) + map(t.status.life, 0, 100, 0, math.rad(10)))
-
 end
 
 function PlayerController:keypressed(t, key)
