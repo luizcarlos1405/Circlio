@@ -2,6 +2,7 @@ Tank = Component("tank", {
 	arena = false,
 	pos = 0,
 	color = Color.blue,
+	var = {x = 0, y = 0},
 	}, function(arena, pos, color, holdbar)
 		return {arena = arena, pos = pos, color = color}
 	end)

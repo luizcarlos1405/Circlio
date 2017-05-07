@@ -24,6 +24,13 @@ function PlayerController:update(t, dt)
 	Physics:updateRect(t)
 end
 
+
+function PlayerController:draw(t)
+	-- IMPRESSÃO DO CENTRO DO CIRCULO
+	love.graphics.rectangle("line", gameCenter.x-5, gameCenter.y-5, 10, 10)
+	
+end
+
 function PlayerController:keypressed(t, key)
 	if key == t.input.shoot then
 		t.status.holdtime = 0
@@ -33,7 +40,17 @@ end
 function PlayerController:keyreleased(t, key)
 	if key == t.input.shoot and t.status.cooldown > t.status.fireRate then
 		t.status.cooldown = 0
-		Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-t.pos), speed = 100 + (1.913^t.status.holdtime) * 100, source = t.status.name}), BoxCollider(10,10, vector(-5,-5)))
+		if love.keyboard.isDown(t.input.left) then
+			t.tank.var.x = (-math.sin(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
+			t.tank.var.y = (math.cos(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
+		elseif love.keyboard.isDown(t.input.right) then
+			t.tank.var.x = (math.sin(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
+			t.tank.var.y = (-math.cos(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
+		else
+			t.tank.var.x = 0
+			t.tank.var.y = 0
+		end
+		Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-t.tank.var-t.pos), speed = 100 + (1.913^t.status.holdtime) * 100, source = t.status.name}), BoxCollider(10,10, vector(-5,-5)))
 		t.status.holdtime = 0
 	end
 end
