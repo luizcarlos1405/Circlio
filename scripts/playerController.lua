@@ -27,7 +27,7 @@ end
 
 function PlayerController:draw(t)
 	-- IMPRESSÃO DO CENTRO DO CIRCULO
-	love.graphics.rectangle("line", gameCenter.x-5, gameCenter.y-5, 10, 10)
+	--love.graphics.rectangle("line", gameCenter.x-5, gameCenter.y-5, 10, 10)
 	
 end
 
@@ -39,18 +39,22 @@ end
 
 function PlayerController:keyreleased(t, key)
 	if key == t.input.shoot and t.status.cooldown > t.status.fireRate then
+		--A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
 		t.status.cooldown = 0
+
+		local var = vector()
+		local aux = 0
+
 		if love.keyboard.isDown(t.input.left) then
-			t.tank.var.x = (-math.sin(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
-			t.tank.var.y = (math.cos(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
+			aux = -1
 		elseif love.keyboard.isDown(t.input.right) then
-			t.tank.var.x = (math.sin(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
-			t.tank.var.y = (-math.cos(t.tank.pos - math.pi) * 60) / math.min(t.status.holdtime + 1, 4)
-		else
-			t.tank.var.x = 0
-			t.tank.var.y = 0
+			aux = 1
 		end
-		Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-t.tank.var-t.pos), speed = 100 + (1.913^t.status.holdtime) * 100, source = t.status.name}), BoxCollider(10,10, vector(-5,-5)))
+		
+		var.x = (aux * math.sin(t.tank.pos - math.pi) * 100) --/ math.min(t.status.holdtime + 1, 4)
+		var.y = (aux * math.cos(t.tank.pos - math.pi) * 100) 
+		
+		Treco(Position(t.pos.x, t.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.pos), speed = 100 + (1.913^t.status.holdtime) * 100, source = t}), BoxCollider(10,10, vector(-5,-5)))
 		t.status.holdtime = 0
 	end
 end

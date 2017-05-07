@@ -42,7 +42,8 @@ function push:setupScreen(WWIDTH, WHEIGHT, RWIDTH, RHEIGHT, settings)
   love.window.setMode( self._RWIDTH, self._RHEIGHT, {
     fullscreen = self._fullscreen,
     resizable = self._resizable,
-    highdpi = self._highdpi
+    highdpi = self._highdpi,
+    vsync = self._vsync
   } )
 
   self:initValues()

@@ -77,6 +77,10 @@ function vector.__tostring(a)
 	return "["..a.x..","..a.y.."]"
 end
 
+function vector.dot(a, b)
+	return a.x*b.x + a.y*b.y
+end
+
 function vector.rotate(v, o)
 	local cos, sin = math.cos(o), math.sin(o)
 	v.x = cos * v.x - sin * v.y
