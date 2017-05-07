@@ -8,7 +8,7 @@ function BulletRenderer:init(b)
 end
 
 function BulletRenderer:update(b, dt)
-	nX, nY, cols = Physics:move(b, b.bullet.dir*b.bullet.speed*dt)
+	local nX, nY, cols = Physics:move(b, b.bullet.dir*b.bullet.speed*dt)
 
 	for k,col in pairs(cols) do
 		if col.other.bullet then
@@ -34,5 +34,5 @@ end
 
 function BulletRenderer:draw(b)
 	love.graphics.setColor(Color.blue:value())
-	love.graphics.circle("fill", b.pos.x, b.pos.y, bulletRadius)	
+	love.graphics.circle("fill", b.pos.x, b.pos.y, bulletRadius)
 end

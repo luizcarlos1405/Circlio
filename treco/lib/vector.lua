@@ -23,7 +23,7 @@ function vector.mul(a, b)
 	if (type(b) == "number") then
 		a.x = a.x*b
 		a.y = a.y*b
-	else	
+	else
 		a.x = a.x*b.x
 		a.y = a.y*b.y
 	end
