@@ -9,7 +9,7 @@ local function chargeFire(t)
 	t.isCharging = true
 end
 
-local function fire(t)
+local function fire(t) 
 	if not t:canFire() then return end
 
 	--A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
@@ -58,10 +58,7 @@ function TankMotor:init(t)
 	t.tank.damage = damage
 
 	--Referencia de volta ao treco, pois as funções daqui vao receber a table do componente direto, e não do treco
-	t.tank.treco = t
-
-
-	
+	t.tank.treco = t	
 end
 
 local maxSpeed = 1.8
