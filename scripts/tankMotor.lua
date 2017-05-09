@@ -24,10 +24,10 @@ local function fire(t)
 	elseif t.dir<0 then
 		aux = -1
 	end
-	
+
 	var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
-	var.y = (aux * math.cos(t.pos - math.pi) * 100) 
-	
+	var.y = (aux * math.cos(t.pos - math.pi) * 100)
+
 	Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
 	t.holdtime = 0
 end
@@ -61,7 +61,7 @@ function TankMotor:init(t)
 	t.tank.treco = t
 
 
-	
+
 end
 
 local maxSpeed = 1.8
@@ -72,7 +72,7 @@ function TankMotor:update(t, dt)
 	end
 
 	t.tank.speed = approach(t.tank.dir*maxSpeed, t.tank.speed, dt*15)
-	
+
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
 
 	Physics:updateRect(t)

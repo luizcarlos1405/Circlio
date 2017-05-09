@@ -5,14 +5,16 @@ KeyboardInputHandler = Script({Tank, KeyboardInput})
 ]]
 
 function KeyboardInputHandler:update(t, dt)
+    local dir = 0
 
-	if (love.keyboard.isDown(t.kbInput.left)) then
-		t.tank:move(1)
-	elseif (love.keyboard.isDown(t.kbInput.right)) then
-		t.tank:move(-1)
-	else
-		t.tank:move(0)
-	end
+    if love.keyboard.isDown(t.kbInput.left) then
+        dir = 1
+    end
+    if love.keyboard.isDown(t.kbInput.right) then
+        dir = dir - 1
+    end
+
+    t.tank:move(dir)
 end
 
 function KeyboardInputHandler:keypressed(t, key)

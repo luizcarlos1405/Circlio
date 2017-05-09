@@ -31,6 +31,7 @@ function love.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
+    print("keypressed: ", key)
     tCore:keypressed(key)
     if key == 'escape' then
         love.event.quit()
@@ -38,5 +39,6 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.keyreleased(key)
+    print("keyreleased: ", key)
 	tCore:keyreleased(key)
 end
