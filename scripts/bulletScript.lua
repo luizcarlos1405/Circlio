@@ -20,7 +20,7 @@ function BulletScript:update(b, dt)
 
 	local bulletFilter = function(item, other)
 		if other.tank then return "cross" end
-		if other.bullet then return "slide" end
+		if other.bullet then return "cross" end
 	end
 
 	local nX, nY, cols = Physics:move(b, b.bullet.dir*b.bullet.speed*dt, bulletFilter)
@@ -31,14 +31,16 @@ function BulletScript:update(b, dt)
 		for k,col in pairs(cols) do
 			--Colisão com bullet
 			if col.other.bullet then
-				col.other:destroy()
-				b:destroy()
+				--col.other:destroy()
+				--b:destroy()
 				return
 			end
 
 			--Colisão com tank
 			if col.other.tank then
-				if not (col.other.tank.name == b.bullet.source and b.bullet.bounceCount == 0) then
+				if not (col.other.tank.name == b.bullet.source.tank.name and b.bullet.bounceCount == 0) then
+
+					print(col.other.tank.name, b.bullet.source.tank.name, b.bullet.bounceCount)
 					col.other.tank:damage(-1)
 					b:destroy()
 					return
@@ -47,7 +49,7 @@ function BulletScript:update(b, dt)
 		end
 
 		--Colisão com a arena
-		if vector.dist(b.pos, gameCenter)+bulletRadius>gameArena.raio then
+		if vector.dist(b.pos, gameCenter) + bulletRadius > gameArena.raio then
 			b.bullet.bounceCount = b.bullet.bounceCount + 1
 			if b.bullet.bounceCount > maxBounce then
 				b:destroy()

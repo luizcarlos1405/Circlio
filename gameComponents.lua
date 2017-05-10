@@ -6,7 +6,7 @@ Tank = Component("tank", {
 	life = 3,
 	firerate = 0.5
 	}, function(name, arena, pos, color, life, firerate)
-		return {nome = nome, arena = arena, pos = pos, color = color, life = life, firerate = firerate}
+		return {name = name, arena = arena, pos = pos, color = color, life = life, firerate = firerate}
 	end)
 
 KeyboardInput = Component("kbInput", {
@@ -28,3 +28,5 @@ Arena = Component("arena", {
 	}, function(raio)
 		return {raio = raio}
 	end)
+
+Bot = Component("bot", {})
