@@ -95,3 +95,54 @@ function tankPowerUp:keypressed(t, key)
         self:setPowerUp(t, "SpeedBoost")
     end
 end
+
+-- Função especial de tiro para o update Spread Shot
+local function spreadShotFire(t)
+    if not t:canFire() then return end
+
+    --A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
+    t.lastFire = love.timer.getTime()
+    t.isCharging = false
+
+    local var = vector()
+    local aux = 0
+
+    if t.dir>0 then
+        aux = 1
+    elseif t.dir<0 then
+        aux = -1
+    end
+
+    var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
+    var.y = (aux * math.cos(t.pos - math.pi) * 100)
+
+    -- Bala do meio
+    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    Treco(Position(bulletPos.x, bulletPos.y),
+    Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
+    speed = 500 + (1.913^t.holdtime) * 100,
+    size = 5 + t.holdtime*5,
+    source = t.treco}),
+    BoxCollider(14,14, vector(-7,-7)))
+
+    -- Bala sentido horario
+    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    Treco(Position(bulletPos.x, bulletPos.y),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), PU.spreadshot.mod),
+    speed = 500 + (1.913^t.holdtime) * 100,
+    size = 5 + t.holdtime*5,
+    source = t.treco}),
+    BoxCollider(14,14, vector(-7,-7)))
+
+    -- Bala sentido anti-horario
+    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    Treco(Position(bulletPos.x, bulletPos.y),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), -PU.spreadshot.mod),
+    speed = 500 + (1.913^t.holdtime) * 100,
+    size = 5 + t.holdtime*5,
+    source = t.treco}),
+    BoxCollider(14,14, vector(-7,-7)))
+    
+    t.fired()
+    t.holdtime = 0
+end
