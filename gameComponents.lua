@@ -6,7 +6,10 @@ Tank = Component("tank", {
     life = 3,
     firerate = 0.5,
     maxSpeed = 1.8,
-    powerups = {},
+    powerups = {FastFire = false,
+    SpreadShot = false,
+    SpeedBoost = false
+    },
 }, function(name, arena, pos, color, life, firerate, maxSpeed)
         return {name = name, arena = arena, pos = pos, color = color, life = life, firerate = firerate, maxSpeed = maxSpeed}
 	end)
