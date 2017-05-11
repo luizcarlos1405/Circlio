@@ -7,13 +7,13 @@ BulletScript = Script({Bullet})
 ]]
 
 
-local maxBounce = 1		--Máximo de vezes que a bala pode quicar antes de explodir
+--local maxBounce = 1		--Máximo de vezes que a bala pode quicar antes de explodir
 local bulletRadius = 10	
+local maxLife = 3
 local minLife = 0.2		--Minimo de tempo para não colidir com nada(evita colidir com o próprio canhão de onde sai)
 
 function BulletScript:init(b)
 	b.bullet.lifeTimer = love.timer.getTime()
-	b.bullet.bounceCount = 0
 end
 
 function BulletScript:update(b, dt)
@@ -31,16 +31,17 @@ function BulletScript:update(b, dt)
 		for k,col in pairs(cols) do
 			--Colisão com bullet
 			if col.other.bullet then
-				--col.other:destroy()
-				--b:destroy()
+				if b.bullet.size > col.other.bullet.size then
+					col.other:destroy()
+				else
+					b:destroy()
+				end
 				return
 			end
 
 			--Colisão com tank
 			if col.other.tank then
-				if not (col.other.tank.name == b.bullet.source.tank.name and b.bullet.bounceCount == 0) then
-
-					print(col.other.tank.name, b.bullet.source.tank.name, b.bullet.bounceCount)
+				if not (col.other.tank.name == b.bullet.source.tank.name) then
 					col.other.tank:damage(-1)
 					b:destroy()
 					return
@@ -49,22 +50,20 @@ function BulletScript:update(b, dt)
 		end
 
 		--Colisão com a arena
-		if vector.dist(b.pos, gameCenter) + bulletRadius > gameArena.raio then
-			b.bullet.bounceCount = b.bullet.bounceCount + 1
-			if b.bullet.bounceCount > maxBounce then
+		if vector.dist(b.pos, gameCenter) + b.bullet.size > gameArena.raio then
+			if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
 				b:destroy()
-			else
-				local normal = vector.normalize(b.pos-gameCenter)
-				local aux = 2 * vector.dot(b.bullet.dir, normal)
-						
-				--jeito "normal"
-				--b.bullet.dir = b.bullet.dir - normal * aux
-
-				--Melhor desempenho
-				vector.mul(normal, aux)
-				vector.sub(b.bullet.dir, normal)
-				
+				return
 			end
+			local normal = vector.normalize(b.pos-gameCenter)
+			local aux = 2 * vector.dot(b.bullet.dir, normal)
+					
+			--jeito "normal"
+			--b.bullet.dir = b.bullet.dir - normal * aux
+
+			--Melhor desempenho
+			vector.mul(normal, aux)
+			vector.sub(b.bullet.dir, normal)
 		end
 	end
 
@@ -72,5 +71,5 @@ end
 
 function BulletScript:draw(b)
 	love.graphics.setColor(b.bullet.source.tank.color:value())
-	love.graphics.circle("fill", b.pos.x, b.pos.y, bulletRadius)
+	love.graphics.circle("fill", b.pos.x, b.pos.y, b.bullet.size)
 end

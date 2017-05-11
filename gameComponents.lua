@@ -25,6 +25,7 @@ KeyboardInput = Component("kbInput", {
 Bullet = Component("bullet", {
 	dir = false,
 	speed = 200,
+	size = 10,
 	source = "none"
 	})
 

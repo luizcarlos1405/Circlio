@@ -32,7 +32,17 @@ function TankRenderer:draw(t)
 		--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
 		love.graphics.arc("line", "open", gameCenter.x, gameCenter.y, gameArena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))	
 	end
+	love.graphics.setLineWidth(2)
+	for i=t.tank.life, lifeMax-1 do
+		--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
+		love.graphics.arc("line", "open", gameCenter.x, gameCenter.y, gameArena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))	
+	end
 
+	--Desenha bullet crescendo
+	local bulletPos = gameCenter+vector(math.cos(t.tank.pos)*(gameArena.raio-35), math.sin(t.tank.pos)*(gameArena.raio-35))
+	love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
+
+	love.graphics.setLineWidth(10)
 	--Desenha força do tiro
 	love.graphics.setColor(map(t.tank.holdtime, 0, 3, 255, 0), map(t.tank.holdtime, 0, 3, 0, 150), map(t.tank.holdtime, 0, 3, 0, 255))
 	love.graphics.arc("line", "open", gameCenter.x, gameCenter.y, gameArena.raio+36, 
