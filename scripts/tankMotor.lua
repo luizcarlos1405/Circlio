@@ -25,10 +25,13 @@ local function fire(t)
 		aux = -1
 	end
 
-	var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
+    var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
 	var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
+    print("FIRE")
 	Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+
+    t.fired()
 	t.holdtime = 0
 end
 
@@ -60,18 +63,17 @@ function TankMotor:init(t)
 	--Referencia de volta ao treco, pois as funções daqui vao receber a table do componente direto, e não do treco
 	t.tank.treco = t
 
-
+    -- Callback pra quando o jogador atirar
+    function t.tank.fired()end
 
 end
-
-local maxSpeed = 1.8
 
 function TankMotor:update(t, dt)
 	if(t.tank.isCharging and t.tank:canFire()) then
 		t.tank.holdtime = math.min(t.tank.holdtime + dt, 3)
 	end
 
-	t.tank.speed = approach(t.tank.dir*maxSpeed, t.tank.speed, dt*15)
+	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
 
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
 

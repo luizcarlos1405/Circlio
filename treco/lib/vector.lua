@@ -124,8 +124,8 @@ end
 
 --Constantes
 vector.zero = new(0,0)
-vector.forward = new(1,0)
-vector.back = new(-1,0)
+vector.foward = new(1,0)
+vector.backward = new(-1,0)
 
 vector.up = new(0,-1)
 vector.right = new(1,0)

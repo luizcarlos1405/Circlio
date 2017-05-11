@@ -1,12 +1,14 @@
 Tank = Component("tank", {
-	name = "Player",
-	arena = false,
-	pos = 0,
-	color = Color.blue,
-	life = 3,
-	firerate = 0.5
-	}, function(name, arena, pos, color, life, firerate)
-		return {name = name, arena = arena, pos = pos, color = color, life = life, firerate = firerate}
+    name = "Player",
+    arena = false,
+    pos = 0,
+    color = Color.blue,
+    life = 3,
+    firerate = 0.5,
+    maxSpeed = 1.8,
+    powerups = {},
+}, function(name, arena, pos, color, life, firerate, maxSpeed)
+        return {name = name, arena = arena, pos = pos, color = color, life = life, firerate = firerate, maxSpeed = maxSpeed}
 	end)
 
 KeyboardInput = Component("kbInput", {
