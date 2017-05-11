@@ -40,7 +40,11 @@ function TankRenderer:draw(t)
 
 	--Desenha bullet crescendo
 	local bulletPos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-35), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-35))
-	love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
+	if t.tank.isCharging then
+		love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
+	else
+		love.graphics.circle("fill", bulletPos.x, bulletPos.y, t.tank.cooldownBulletSize)
+	end
 
 	love.graphics.setLineWidth(10)
 	--Desenha força do tiro
