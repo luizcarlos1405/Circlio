@@ -12,8 +12,8 @@ tankPowerUp.powerups = {
             -- Guarda valor original/base do firerate
             t.tank.baseFireRate = t.tank.firerate
             -- Inicia powerup
-            t.tank.fastfiretime = PUTIME
-            t.tank.firerate = PUFIRERATE
+            t.tank.fastfiretime = PU.fastfire.time
+            t.tank.firerate = t.tank.firerate * PU.fastfire.mod
             t.tank.powerups["FastFire"] = true
         elseif t.tank.fastfiretime > 0 then
             -- Atualiza o estado do powerup
@@ -29,8 +29,8 @@ tankPowerUp.powerups = {
             -- Guarda valor original/base do firerate
             t.tank.baseMaxSpeed = t.tank.maxSpeed
             -- Inicia powerup
-            t.tank.speedboosttime = PUTIME
-            t.tank.maxSpeed = MAXSPEED
+            t.tank.speedboosttime = PU.speedboost.time
+            t.tank.maxSpeed = t.tank.maxSpeed * PU.speedboost.mod
             t.tank.powerups["SpeedBoost"] = true
         elseif t.tank.speedboosttime > 0 then
             -- Atualiza o estado do powerup
@@ -44,7 +44,7 @@ tankPowerUp.powerups = {
     SpreadShot = function(t, dt)
         if not t.tank.powerups["SpreadShot"] then
             -- Inicia powerup
-            t.tank.spreadshottime = PUTIME
+            t.tank.spreadshottime = PU.spreadshot.time
             t.tank.powerups["SpreadShot"] = true
         elseif t.tank.spreadshottime > 0 then
             -- Atualiza o estado do powerup

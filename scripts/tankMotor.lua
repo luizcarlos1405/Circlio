@@ -32,8 +32,8 @@ local function fire(t)
         Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
     else
         Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
-        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), SPREADANGLE), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
-        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), -SPREADANGLE), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), PU.spreadshot.mod), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), -PU.spreadshot.mod), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
     end
 
     t.fired()
