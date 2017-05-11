@@ -28,17 +28,14 @@ local function fire(t)
     var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
 	var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
+    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    Treco(Position(bulletPos.x, bulletPos.y),
+    Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
+    speed = 500 + (1.913^t.holdtime) * 100,
+    size = 5 + t.holdtime*5,
+    source = t.treco}),
+    BoxCollider(14,14, vector(-7,-7)))
 
-    if not t.powerups["SpreadShot"] then
-        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(t.arena.pos-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
-    else
-        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(t.arena.pos-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
-        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(t.arena.pos-var-t.treco.pos), PU.spreadshot.mod), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
-        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(t.arena.pos-var-t.treco.pos), -PU.spreadshot.mod), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
-    end
-
-
-    t.fired()
 	t.holdtime = 0
 end
 
@@ -69,10 +66,6 @@ function TankMotor:init(t)
 
 	--Referencia de volta ao treco, pois as funções daqui vao receber a table do componente direto, e não do treco
 	t.tank.treco = t
-
-    -- Callback pra quando o jogador atirar
-    function t.tank.fired()end
-
 end
 
 function TankMotor:update(t, dt)
