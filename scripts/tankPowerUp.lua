@@ -1,5 +1,8 @@
 tankPowerUp = Script({Tank})
 
+-- Função especial de tiro para o update Spread Shot protótipo
+local function spreadShotFire(t)end
+
 -- Table de powerups e as funções que os definem
 tankPowerUp.powerups = {
     Life = function(t, dt)
@@ -9,8 +12,10 @@ tankPowerUp.powerups = {
     FastFire = function(t, dt)
         print("AQUI")
         if not t.tank.powerups["FastFire"] then
-            -- Guarda valor original/base do firerate
+            -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
+            t.tank.baseFireFunction = t.tank.fire
+            t.tank.fire = spreadShotFire
             -- Inicia powerup
             t.tank.fastfiretime = PU.fastfire.time
             t.tank.firerate = t.tank.firerate * PU.fastfire.mod
@@ -19,7 +24,8 @@ tankPowerUp.powerups = {
             -- Atualiza o estado do powerup
             t.tank.fastfiretime = t.tank.fastfiretime - dt
         else
-            -- Retorna para o valor base e finaliza o powerup
+            -- Retorna para valores base e finaliza o powerup
+            t.tank.fire = t.tank.baseFireFunction
             t.tank.firerate = t.tank.baseFireRate
             t.tank.powerups["FastFire"] = false
         end
@@ -96,8 +102,7 @@ function tankPowerUp:keypressed(t, key)
     end
 end
 
--- Função especial de tiro para o update Spread Shot
-local function spreadShotFire(t)
+function spreadShotFire(t)
     if not t:canFire() then return end
 
     --A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
@@ -142,7 +147,6 @@ local function spreadShotFire(t)
     size = 5 + t.holdtime*5,
     source = t.treco}),
     BoxCollider(14,14, vector(-7,-7)))
-    
-    t.fired()
+
     t.holdtime = 0
 end
