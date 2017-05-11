@@ -28,7 +28,13 @@ local function fire(t)
     var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
 	var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
-	Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+    if not t.powerups["SpreadShot"] then
+        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+    else
+        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), SPREADANGLE), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+        Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), -SPREADANGLE), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+    end
 
     t.fired()
 	t.holdtime = 0
