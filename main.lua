@@ -1,4 +1,5 @@
 require("treco.trecoCore")
+require("gameconf")
 
 local push = require("lib.push")
 require("lib.util")

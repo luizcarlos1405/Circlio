@@ -1,7 +1,4 @@
 tankPowerUp = Script({Tank})
-tankPowerUp.PUTIME = 3 -- tempo de powerup 3 segundos
-tankPowerUp.PUFIRERATE = 0.25 -- firerate 0.25
-tankPowerUp.MAXSPEED = 3 -- maxSpeed 3 alguma coisa
 
 -- Table de powerups e as funções que os definem
 tankPowerUp.powerups = {
@@ -16,8 +13,8 @@ tankPowerUp.powerups = {
             -- Guarda valor original/base do firerate
             t.tank.baseFireRate = t.tank.firerate
             -- Inicia powerup
-            t.tank.fastfiretime = tankPowerUp.PUTIME
-            t.tank.firerate = tankPowerUp.PUFIRERATE
+            t.tank.fastfiretime = PUTIME
+            t.tank.firerate = PUFIRERATE
             table.insert(t.tank.powerups, "FastFire")
         elseif t.tank.fastfiretime > 0 then
             -- Atualiza o estado do powerup
@@ -33,8 +30,8 @@ tankPowerUp.powerups = {
             -- Guarda valor original/base do firerate
             t.tank.baseMaxSpeed = t.tank.maxSpeed
             -- Inicia powerup
-            t.tank.speedboosttime = tankPowerUp.PUTIME
-            t.tank.maxSpeed = tankPowerUp.MAXSPEED
+            t.tank.speedboosttime = PUTIME
+            t.tank.maxSpeed = MAXSPEED
             table.insert(t.tank.powerups, "SpeedBoost")
         elseif t.tank.speedboosttime > 0 then
             -- Atualiza o estado do powerup
@@ -48,7 +45,7 @@ tankPowerUp.powerups = {
     SpreadShot = function(t, dt)
         if not tankPowerUp:hasPowerUp(t, "SpreadShot") then
             -- Inicia powerup
-            t.tank.spreadshottime = tankPowerUp.PUTIME
+            t.tank.spreadshottime = PUTIME
             table.insert(t.tank.powerups, "SpreadShot")
             -- Reescreve callback pra atirar mais duas bolinhas
             function t.tank.fired()

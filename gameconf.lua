@@ -1,0 +1,4 @@
+-- Power Ups
+PUTIME = 3
+PUFIRERATE = 0.25
+MAXSPEED = 3
