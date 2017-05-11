@@ -28,7 +28,15 @@ local function fire(t)
     var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
 	var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
-	Treco(Position(t.treco.pos.x, t.treco.pos.y), Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos), speed = 100 + (1.913^t.holdtime) * 100, source = t.treco}), BoxCollider(14,14, vector(-7,-7)))
+	
+	--
+	local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+	Treco(Position(bulletPos.x, bulletPos.y), 
+		Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
+		 	speed = 500 + (1.913^t.holdtime) * 100, 
+		 	size = 5 + t.holdtime*5, 
+		 	source = t.treco}), 
+		BoxCollider(14,14, vector(-7,-7)))
 
     t.fired()
 	t.holdtime = 0
