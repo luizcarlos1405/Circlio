@@ -126,7 +126,7 @@ function spreadShotFire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(14,14, vector(-7,-7)))
+    BoxCollider(5 + t.holdtime*5))
 
     -- Bala sentido horario
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
@@ -135,7 +135,7 @@ function spreadShotFire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(14,14, vector(-7,-7)))
+    BoxCollider(5 + t.holdtime*5))
 
     -- Bala sentido anti-horario
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
@@ -144,7 +144,7 @@ function spreadShotFire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(14,14, vector(-7,-7)))
+    BoxCollider(5 + t.holdtime*5))
 
     t.holdtime = 0
 end

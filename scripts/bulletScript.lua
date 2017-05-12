@@ -30,7 +30,7 @@ function BulletScript:update(b, dt)
 	if (love.timer.getTime() - b.bullet.lifeTimer > minLife) then
 		for k,col in pairs(cols) do
 			-- Colisão com bullet
-			if col.shape.bullet then
+			if col.shape.bullet and col.shape.bullet.source ~= b.bullet.source then
 				if b.bullet.size > col.shape.bullet.size then
 					col.shape:destroy()
 				else
@@ -54,9 +54,8 @@ function BulletScript:update(b, dt)
 		--Colisão com a arena
 		if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
 			if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
-                b.collider.shape:destroy()
-                print("DESTROY")
                 b:destroy()
+                b.collider.shape:destroy()
 				return
 			end
 			local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)

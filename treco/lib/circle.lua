@@ -49,7 +49,8 @@ do
     destroy = function(self)
       for k, v in pairs(AC.shapes) do
         if v == self then
-          table.remove(AC.shapes, k)
+            self = nil
+            table.remove(AC.shapes, k)
         end
       end
     end
@@ -76,6 +77,7 @@ do
       if behavior ~= "static" and behavior ~= "dynamic" then
         error("Invalid shape behavior. Valids shape behaviors are 'kynetic' and 'dynamic'")
       end
+
       return AC:addShape(self)
     end,
     __base = _base_0,

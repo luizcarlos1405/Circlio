@@ -2,14 +2,13 @@ require(BASE.."lib.allcoll")
 local circle = require(BASE.."lib.circle")
 
 acWrapper = Script({BoxCollider})
+acWrapper.debug = false
 
 function acWrapper:init(c)
-	self.debug = true
     c.collider.shape = circle(c.collider.r)
     c.collider.shape:moveTo(c.pos.x, c.pos.y)
     c.collider.shape.bullet = c.bullet
     c.collider.shape.tank = c.tank
-    table.insert(AC.shapes, c.collider.shape)
 end
 
 function acWrapper:update(dt)

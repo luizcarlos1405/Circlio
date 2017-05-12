@@ -49,6 +49,7 @@ local function damage(t, d)
 	t.life = t.life + d
 	if (t.life <= 0) then
 		t.treco:destroy()
+        t.treco.collider.shape:destroy()
 	end
 end
 
@@ -79,5 +80,8 @@ function TankMotor:update(t, dt)
 
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
 
+    -- move shape para a posição do player
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
+    local shapepos = gameCenter+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio), math.sin(t.tank.pos)*(t.tank.arena.arena.raio))
+    t.collider.shape:moveTo(shapepos.x, shapepos.y)
 end
