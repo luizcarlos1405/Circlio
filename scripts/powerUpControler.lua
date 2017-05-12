@@ -26,11 +26,11 @@ function powerUpControler:update(a, dt)
                 -- Colisão com qualquer outra coisa
                 -- Move o powerup e acelera na direção da colisão
                 k.circoll:move(mtv/2)
-                k.powerup.vel.x = k.powerup.vel.x + mtv.x * 30
-                k.powerup.vel.y = k.powerup.vel.y + mtv.y * 30
+                k.powerup.vel.x = k.powerup.vel.x + mtv.x * PU.mtvFactor
+                k.powerup.vel.y = k.powerup.vel.y + mtv.y * PU.mtvFactor
                 -- Move a bala e acelera na direção da colisão
                 col.treco.circoll:move(mtv/-2)
-                col.treco.bullet.dir = vector.normalize(vector(col.treco.bullet.dir.x - mtv.x/20, col.treco.bullet.dir.y - mtv.y/20))
+                col.treco.bullet.dir = vector.normalize(vector(col.treco.bullet.dir.x - mtv.x/BS.bullet.mtvFactor, col.treco.bullet.dir.y - mtv.y/BS.bullet.mtvFactor))
                 return
             --Colisão com a arena
             elseif col.treco.arena then
@@ -46,19 +46,19 @@ function powerUpControler:update(a, dt)
             elseif col.treco.powerup then
                 -- Move o powerup e acelera na direção da colisão
                 k.circoll:move(mtv/2)
-                k.powerup.vel.x = k.powerup.vel.x + mtv.x * 30
-                k.powerup.vel.y = k.powerup.vel.y + mtv.y * 30
+                k.powerup.vel.x = k.powerup.vel.x + mtv.x * PU.mtvFactor
+                k.powerup.vel.y = k.powerup.vel.y + mtv.y * PU.mtvFactor
 
                 -- Move o outro powerup
                 col.treco.circoll:move(mtv/-2)
-                col.treco.powerup.vel.x = col.treco.powerup.vel.x - mtv.x * 30
-                col.treco.powerup.vel.y = col.treco.powerup.vel.y - mtv.y * 30
+                col.treco.powerup.vel.x = col.treco.powerup.vel.x - mtv.x * PU.mtvFactor
+                col.treco.powerup.vel.y = col.treco.powerup.vel.y - mtv.y * PU.mtvFactor
             else
                 -- COlisão genérica, move apenas o powerup
                 -- Move o powerup e acelera na direção da colisão
                 k.circoll:move(mtv/2)
-                k.powerup.vel.x = k.powerup.vel.x + mtv.x * 30
-                k.powerup.vel.y = k.powerup.vel.y + mtv.y * 30
+                k.powerup.vel.x = k.powerup.vel.x + mtv.x * PU.mtvFactor
+                k.powerup.vel.y = k.powerup.vel.y + mtv.y * PU.mtvFactor
             end
 
         end
