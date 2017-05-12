@@ -24,8 +24,8 @@ KeyboardInput = Component("kbInput", {
 
 Bullet = Component("bullet", {
 	dir = false,
-	speed = 200,
-	size = 10,
+	speed = BS.bullet.speed,
+	size = BS.bullet.radius,
 	source = "none"
 	})
 
@@ -43,9 +43,10 @@ Asteroid = Component("asteroid", {
 	})
 
 PowerUp = Component("powerup",{
-        name = "Life"
-    }, function(name)
-        return {name = name}
+        name = "Life",
+        vel = vector.zero
+    }, function(name, vel)
+        return {name = name, vel = vel}
     end)
 
 Circoll = Component("circoll",{

@@ -9,8 +9,6 @@ BulletScript = Script({Bullet})
 
 --local maxBounce = 1		--Máximo de vezes que a bala pode quicar antes de explodir
 local bulletRadius = 10
-local maxLife = 3
-local minLife = 0.2		--Minimo de tempo para não colidir com nada(evita colidir com o próprio canhão de onde sai)
 
 function BulletScript:init(b)
 	b.bullet.lifeTimer = love.timer.getTime()
@@ -25,12 +23,12 @@ function BulletScript:update(b, dt)
 
 	cols = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
 
-	if (love.timer.getTime() - b.bullet.lifeTimer > minLife) then
+	if (love.timer.getTime() - b.bullet.lifeTimer > BS.bullet.minlife) then
 		for k,col in pairs(cols) do
 			-- Colisão com bullet
 			if col.treco.bullet then
 				if b.bullet.size < col.treco.bullet.size then
-					b:destroy()                    
+					b:destroy()
 				end
 				return
 			end
@@ -46,7 +44,7 @@ function BulletScript:update(b, dt)
 
             --Colisão com a arena
             if col.treco.arena then
-				if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
+				if (love.timer.getTime() - b.bullet.lifeTimer > BS.bullet.maxlife) then
 	                b:destroy()
 					return
 				end

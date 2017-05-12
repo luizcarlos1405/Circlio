@@ -1,6 +1,6 @@
 CirCollider = Script({Circoll})
 
-local debug = false
+local debug = true
 local tCirc = {}
 
 local function move(c, m)
@@ -20,12 +20,8 @@ local function move(c, m)
                 if distance < c.radius + k.radius then
                     cols[#cols+1] = k
                     -- Calcula mtv
-                    local V = vector.normalize(vector(c.treco.pos.x - k.treco.pos.x, c.treco.pos.x - k.treco.pos.x))
-                    -- local V = vector.normalize(V)
+                    local V = vector.normalize(vector(c.treco.pos.x - k.treco.pos.x, c.treco.pos.y - k.treco.pos.y))
                     mtv = V * (k.radius + c.radius - distance)
-                    if type(mtv.x) == "number" and type(mtv.y) == "number" then
-                        print(mtv.x, mtv.y)
-                    end
                 end
 			end
 		end

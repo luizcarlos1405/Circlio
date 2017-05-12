@@ -63,6 +63,11 @@ tankPowerUp.powerups = {
     end
 }
 
+tankPowerUp.indices = {}
+for k,v in pairs(tankPowerUp.powerups) do
+    table.insert(tankPowerUp.indices, k)
+end
+
 function tankPowerUp:update(t, dt)
     for k,v in pairs(t.tank.powerups) do
         if v then
@@ -86,21 +91,6 @@ end
 -- Retorna a chave do powerup ou nil se o tank não tiver
 function tankPowerUp:hasPowerUp(t, p)
     return t.tank.powerups[p]
-end
-
-function tankPowerUp:keypressed(t, key)
-    if key == 'l' then
-        self:setPowerUp(t, "Life")
-    end
-    if key == 'k' then
-        self:setPowerUp(t, "FastFire")
-    end
-    if key == 'j' then
-        self:setPowerUp(t, "SpreadShot")
-    end
-    if key == 'h' then
-        self:setPowerUp(t, "SpeedBoost")
-    end
 end
 
 function spreadShotFire(t)
@@ -153,3 +143,18 @@ function spreadShotFire(t)
 
     t.holdtime = 0
 end
+
+-- function tankPowerUp:keypressed(t, key)
+--     if key == 'l' then
+--         self:setPowerUp(t, "Life")
+--     end
+--     if key == 'k' then
+--         self:setPowerUp(t, "FastFire")
+--     end
+--     if key == 'j' then
+--         self:setPowerUp(t, "SpreadShot")
+--     end
+--     if key == 'h' then
+--         self:setPowerUp(t, "SpeedBoost")
+--     end
+-- end
