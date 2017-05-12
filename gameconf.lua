@@ -11,4 +11,4 @@ PU.spreadshot.time = 3
 PU.spreadshot.mod = math.pi/20
 -- powerUpControler.lua  Controlador
 PU.controler.mintime = 1
-PU.controler.maxtime = 5
+PU.controler.maxtime = 1

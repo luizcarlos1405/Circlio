@@ -28,7 +28,8 @@ function BulletScript:update(b, dt)
 	if (love.timer.getTime() - b.bullet.lifeTimer > minLife) then
 		for k,col in pairs(cols) do
 			-- Colisão com bullet
-			if col.treco.bullet then
+			if col.treco.bullet and col.treco.bullet.source ~= b.bullet.source then
+                -- Não colidingo com bullets de mesma origem
 				if b.bullet.size > col.treco.bullet.size then
 					--col.treco:destroy()
 				else
@@ -64,9 +65,9 @@ function BulletScript:update(b, dt)
             end
 		end
 
-		
+
 		--[[if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
-			
+
 		end]]
 	end
 end

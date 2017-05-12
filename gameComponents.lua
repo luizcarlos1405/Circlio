@@ -43,9 +43,9 @@ Asteroid = Component("asteroid", {
 	})
 
 PowerUp = Component("powerup",{
-        type = "Life"
-    }, function(type)
-        return {type = type}
+        name = "Life"
+    }, function(name)
+        return {name = name}
     end)
 
 Circoll = Component("circoll",{
