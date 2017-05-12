@@ -2,7 +2,6 @@ gameScene = Scene("gameScene")
 
 require("gameComponents")
 
-
 --Scripts
 require("scripts.arenaRenderer")
 require("scripts.tankRenderer")

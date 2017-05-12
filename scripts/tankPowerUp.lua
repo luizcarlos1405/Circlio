@@ -10,7 +10,6 @@ tankPowerUp.powerups = {
         t.tank.life = t.tank.life + 1
     end,
     FastFire = function(t, dt)
-        print("AQUI")
         if not t.tank.powerups["FastFire"] then
             -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
@@ -59,7 +58,6 @@ tankPowerUp.powerups = {
             -- Retorna para o valor base e finaliza o powerup
             t.tank.powerups["SpreadShot"] = false
         end
-        -- print(t.tank.spreadshottime)
     end
 }
 

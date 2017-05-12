@@ -23,11 +23,11 @@ local function init()
 
 	require(BASE.."scripts.renderer")
 	require(BASE.."scripts.animator")
-	require(BASE.."scripts.bumpWrapper")
+	require(BASE.."scripts.allCollWrapper")
 
 	require(BASE.."scripts.binder")
 
-	Physics = BumpWrapper
+	Physics = acWrapper
 
 end
 

@@ -1,5 +1,5 @@
 
-Position = Component("pos", vector(0,0), 
+Position = Component("pos", vector(0,0),
 	function(x,y)
 		if type(x) == "table" then
 			return x
@@ -33,17 +33,15 @@ Animation = Component("animation", {
 		anim = false,
 		lastUpdate = 0,
 		curFrame = 1
-	}, 
+	},
 	function(anim)
 		return {anim = anim}
 	end)
 
 BoxCollider = Component("collider",{
-	w = -1,
-	h = -1, 
-	offset = vector(0,0)
-}, function(w,h,offset)
-	return {w = w, h = h, offset = offset}
+	r = -1
+}, function(r)
+	return {r = r}
 end)
 
 Bind = Component("bind", {

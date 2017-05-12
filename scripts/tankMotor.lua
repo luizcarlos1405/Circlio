@@ -34,7 +34,7 @@ local function fire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(14,14, vector(-7,-7)))
+    BoxCollider(5 + t.holdtime*5))
 
 	t.holdtime = 0
 end
@@ -76,6 +76,4 @@ function TankMotor:update(t, dt)
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
 
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
-
-	Physics:updateRect(t)
 end
