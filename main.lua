@@ -12,7 +12,6 @@ windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a 
 
 push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, vsync = false})
 
-
 gameCenter = vector(push:getWidth()/2,push:getHeight()/2)
 
 function love.load()

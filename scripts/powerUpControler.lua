@@ -21,18 +21,47 @@ function powerUpControler:update(a, dt)
                 tankPowerUp:setPowerUp(col.treco, k.powerup.name)
                 self.powerups[k] = nil
                 k:destroy()
+            -- Colisão com as balas
+            elseif col.treco.bullet then
+                -- Colisão com qualquer outra coisa
+                -- Move o powerup e acelera na direção da colisão
+                k.circoll:move(mtv/2)
+                k.powerup.vel.x = k.powerup.vel.x + mtv.x/50
+                k.powerup.vel.y = k.powerup.vel.y + mtv.y/50
+                -- Move a bala e acelera na direção da colisão
+                col.treco.circoll:move(mtv/-2)
+                col.treco.bullet.dir = vector.normalize(vector(col.treco.bullet.dir.x - mtv.x/20, col.treco.bullet.dir.y - mtv.y/20))
                 return
+            --Colisão com a arena
+            elseif col.treco.arena then
+                local normal = vector.normalize(k.pos-gameCenter)
+                local aux = 2 * vector.dot(k.powerup.vel, normal)
+
+                --jeito "normal"
+                --b.bullet.dir = b.bullet.dir - normal * aux
+
+                --Melhor desempenho
+                vector.mul(normal, aux)
+                vector.sub(k.powerup.vel, normal)
+            elseif col.treco.powerup then
+                -- Move o powerup e acelera na direção da colisão
+                k.circoll:move(mtv/2)
+                k.powerup.vel.x = k.powerup.vel.x + mtv.x/50
+                k.powerup.vel.y = k.powerup.vel.y + mtv.y/50
+
+                -- Move o outro powerup
+                col.treco.circoll:move(mtv/-2)
+                col.treco.powerup.vel.x = col.treco.powerup.vel.x - mtv.x/50
+                col.treco.powerup.vel.y = col.treco.powerup.vel.y - mtv.y/50
+            else
+                -- COlisão genérica, move apenas o powerup
+                -- Move o powerup e acelera na direção da colisão
+                k.circoll:move(mtv/2)
+                k.powerup.vel.x = k.powerup.vel.x + mtv.x/50
+                k.powerup.vel.y = k.powerup.vel.y + mtv.y/50
             end
 
-            -- Colisão com qualquer outra coisa
-            -- print(mtv.x, mtv.y)
-            k.circoll:move(mtv)
-            k.powerup.vel.x = k.powerup.vel.x + mtv.x/50
-            k.powerup.vel.y = k.powerup.vel.y + mtv.y/50
         end
-        -- if gameCenter:dist(k.pos) > a.arena.raio then
-        --     k.powerup.vel = vector.zero
-        -- end
     end
 end
 
