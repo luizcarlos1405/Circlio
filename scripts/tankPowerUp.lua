@@ -122,32 +122,34 @@ function spreadShotFire(t)
     var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
     var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
+    local bulletSize = 5 + t.holdtime*5
+
     -- Bala do meio
-    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
     Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
-    speed = 500 + (1.913^t.holdtime) * 100,
-    size = 5 + t.holdtime*5,
+    speed = 300 + (1.913^t.holdtime) * 100,
+    size = bulletSize,
     source = t.treco}),
-    AllCollider(5 + t.holdtime*5))
+    Circoll(bulletSize))
 
     -- Bala sentido horario
-    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
     Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), PU.spreadshot.mod),
-    speed = 500 + (1.913^t.holdtime) * 100,
-    size = 5 + t.holdtime*5,
+    speed = 300 + (1.913^t.holdtime) * 100,
+    size = bulletSize,
     source = t.treco}),
-    AllCollider(5 + t.holdtime*5))
+    Circoll(bulletSize))
 
     -- Bala sentido anti-horario
-    local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
+    bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
     Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), -PU.spreadshot.mod),
-    speed = 500 + (1.913^t.holdtime) * 100,
-    size = 5 + t.holdtime*5,
+    speed = 300 + (1.913^t.holdtime) * 100,
+    size = bulletSize,
     source = t.treco}),
-    AllCollider(5 + t.holdtime*5))
+    Circoll(bulletSize))
 
     t.holdtime = 0
 end

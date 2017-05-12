@@ -29,10 +29,8 @@ function BulletScript:update(b, dt)
 		for k,col in pairs(cols) do
 			-- Colisão com bullet
 			if col.treco.bullet then
-				if b.bullet.size > col.treco.bullet.size then
-					--col.treco:destroy()
-				else
-                    b:destroy()
+				if b.bullet.size < col.treco.bullet.size then
+					b:destroy()                    
 				end
 				return
 			end

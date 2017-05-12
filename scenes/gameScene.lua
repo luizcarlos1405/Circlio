@@ -13,6 +13,7 @@ require("scripts.tankPowerUp")
 require("scripts.powerUpControler")
 require("scripts.asteroidScript")
 require("scripts.circollider")
+--require("scripts.gravity")
 
 local trecoArena, Player1, Player2, Player3
 
