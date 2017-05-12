@@ -44,7 +44,8 @@ Asteroid = Component("asteroid", {
 
 PowerUp = Component("powerup",{
         name = "Life",
-        vel = vector.zero
+        vel = vector.zero,
+        color = PU.color
     }, function(name, vel)
         return {name = name, vel = vel}
     end)

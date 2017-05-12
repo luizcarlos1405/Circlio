@@ -36,6 +36,14 @@ function powerUpControler:update(a, dt)
     end
 end
 
+function powerUpControler:draw(a)
+    for k,v in pairs(self.powerups) do
+        love.graphics.setLineWidth(PU.linewidth)
+        love.graphics.setColor(k.powerup.color.r, k.powerup.color.g, k.powerup.color.b)
+        love.graphics.circle('line', k.pos.x, k.pos.y, PU.radius)
+    end
+end
+
 function powerUpControler:spawn(a)
     local angle = love.math.random(0, 2*math.pi)
     local dist = love.math.random(0, a.arena.raio)

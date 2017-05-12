@@ -1,6 +1,8 @@
 -- Power Ups
 PU = {fastfire = {}, speedboost = {}, spreadshot = {}, controler = {}}
 PU.radius = 20
+PU.color = Color(255, 0, 0)
+PU.linewidth = 4
 -- tankPowerUp.lua Fast Fire
 PU.fastfire.time = 3
 PU.fastfire.mod = 0.5
