@@ -2,13 +2,21 @@ require(BASE.."lib.allcoll")
 local circle = require(BASE.."lib.circle")
 
 acWrapper = Script({BoxCollider})
-acWrapper.debug = false
+acWrapper.debug = true
 
 function acWrapper:init(c)
     c.collider.shape = circle(c.collider.r)
     c.collider.shape:moveTo(c.pos.x, c.pos.y)
     c.collider.shape.bullet = c.bullet
     c.collider.shape.tank = c.tank
+    c.collider.shape.treco = c
+
+    -- Reescreve função de destruir para desruir também o shape
+    function c:destroy()
+    	self.toDestroy = true
+    	tCore.removeTreco(self)
+        c.collider.shape:destroy()
+    end
 end
 
 function acWrapper:update(dt)

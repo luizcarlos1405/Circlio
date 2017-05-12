@@ -32,9 +32,8 @@ function BulletScript:update(b, dt)
 			-- Colisão com bullet
 			if col.shape.bullet and col.shape.bullet.source ~= b.bullet.source then
 				if b.bullet.size > col.shape.bullet.size then
-					col.shape:destroy()
+					col.shape.treco:destroy()
 				else
-					b.collider.shape:destroy()
                     b:destroy()
 				end
 				return
@@ -44,7 +43,6 @@ function BulletScript:update(b, dt)
             if col.shape.tank then
                 if not (col.shape.tank.name == b.bullet.source.tank.name) then
                     col.shape.tank:damage(-1)
-                    b.collider.shape:destroy()
                     b:destroy()
                     return
                 end
@@ -55,7 +53,7 @@ function BulletScript:update(b, dt)
 		if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
 			if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
                 b:destroy()
-                b.collider.shape:destroy()
+                -- b.collider.shape:destroy()
 				return
 			end
 			local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)

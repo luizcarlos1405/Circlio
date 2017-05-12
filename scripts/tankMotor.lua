@@ -49,7 +49,6 @@ local function damage(t, d)
 	t.life = t.life + d
 	if (t.life <= 0) then
 		t.treco:destroy()
-        t.treco.collider.shape:destroy()
 	end
 end
 
