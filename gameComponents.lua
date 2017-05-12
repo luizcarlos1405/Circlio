@@ -36,3 +36,8 @@ Arena = Component("arena", {
 	end)
 
 Bot = Component("bot", {})
+
+Asteroid = Component("asteroid", {
+	dir = vector(),
+	size = 27
+	})

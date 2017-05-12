@@ -4,6 +4,8 @@ require("gameconf")
 local push = require("lib.push")
 require("lib.util")
 
+timer = require("lib.timer")
+
 gameWidth, gameHeight = 1080, 720 --fixed game resolution
 windowWidth, windowHeight = love.window.getDesktopDimensions()
 windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
@@ -20,6 +22,7 @@ end
 
 function love.update(dt)
 	tCore.update(dt)
+    timer.update(dt)
 end
 
 function love.draw()

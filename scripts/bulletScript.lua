@@ -52,14 +52,14 @@ function BulletScript:update(b, dt)
 		end
 
 		--Colisão com a arena
-		if vector.dist(b.pos, gameCenter) + b.bullet.size > gameArena.raio then
+		if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
 			if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
                 b.collider.shape:destroy()
                 print("DESTROY")
                 b:destroy()
 				return
 			end
-			local normal = vector.normalize(b.pos-gameCenter)
+			local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)
 			local aux = 2 * vector.dot(b.bullet.dir, normal)
 
 			--jeito "normal"
