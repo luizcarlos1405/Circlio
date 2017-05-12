@@ -18,7 +18,7 @@ require("scripts.circollider")
 local trecoArena, Player1, Player2, Player3
 
 function gameScene:init()
-	trecoArena = Treco(Position(gameCenter), Arena(gameHeight/2 - 10), Circoll(gameHeight/2 - 10, true))
+	trecoArena = Treco(Position(gameCenter), Arena(gameHeight/2 - 30), Circoll(gameHeight/2 - 30, true))
 
 	-- Position dos Player1 e Player2 iniciados em (0, 0) apenas para utilizar o component AllCollider
 	-- Seria isso uma gambiarra?
