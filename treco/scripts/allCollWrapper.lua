@@ -1,7 +1,7 @@
 require(BASE.."lib.allcoll")
 local circle = require(BASE.."lib.circle")
 
-acWrapper = Script({BoxCollider})
+acWrapper = Script({AllCollider})
 acWrapper.debug = true
 
 function acWrapper:init(c)
@@ -19,7 +19,7 @@ function acWrapper:init(c)
     end
 end
 
-function acWrapper:update(dt)
+function acWrapper:update(c, dt)
 
 end
 

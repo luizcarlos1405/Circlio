@@ -1,4 +1,4 @@
-BumpWrapper = Script({BoxCollider})
+BumpWrapper = Script({AllCollider})
 
 local bump = require(BASE.."lib.bump")
 local bumpdebug = require(BASE.."lib.bump_debug")

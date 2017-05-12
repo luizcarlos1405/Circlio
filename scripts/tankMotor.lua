@@ -36,7 +36,7 @@ local function fire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(5 + t.holdtime*5))
+    AllCollider(5 + t.holdtime*5))
 
 	t.holdtime = 0
 end
@@ -79,8 +79,8 @@ function TankMotor:update(t, dt)
 
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
 
-    -- move shape para a posição do player
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
+    -- move shape para a posição do player
     local shapepos = gameCenter+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio), math.sin(t.tank.pos)*(t.tank.arena.arena.raio))
     t.collider.shape:moveTo(shapepos.x, shapepos.y)
 end

@@ -13,8 +13,6 @@ tankPowerUp.powerups = {
         if not t.tank.powerups["FastFire"] then
             -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
-            t.tank.baseFireFunction = t.tank.fire
-            t.tank.fire = spreadShotFire
             -- Inicia powerup
             t.tank.fastfiretime = PU.fastfire.time
             t.tank.firerate = t.tank.firerate * PU.fastfire.mod
@@ -24,7 +22,6 @@ tankPowerUp.powerups = {
             t.tank.fastfiretime = t.tank.fastfiretime - dt
         else
             -- Retorna para valores base e finaliza o powerup
-            t.tank.fire = t.tank.baseFireFunction
             t.tank.firerate = t.tank.baseFireRate
             t.tank.powerups["FastFire"] = false
         end
@@ -51,12 +48,17 @@ tankPowerUp.powerups = {
             -- Inicia powerup
             t.tank.spreadshottime = PU.spreadshot.time
             t.tank.powerups["SpreadShot"] = true
+            -- Reescreve função de tiro para atirar 3 bolinhas e guarda a original
+            t.tank.baseFireFunction = t.tank.fire
+            t.tank.fire = spreadShotFire
         elseif t.tank.spreadshottime > 0 then
             -- Atualiza o estado do powerup
             t.tank.spreadshottime = t.tank.spreadshottime - dt
         else
             -- Retorna para o valor base e finaliza o powerup
             t.tank.powerups["SpreadShot"] = false
+            -- Retorna à função de tiro original
+            t.tank.fire = t.tank.baseFireFunction
         end
     end
 }
@@ -71,11 +73,12 @@ end
 
 function tankPowerUp:setPowerUp(t, p)
     -- Se ele já tiver o powerup não colocar de novo
-    if self:hasPowerUp(t, p) then
+    if t.tank.powerups[p] then
         return false
     end
 
     -- Roda powerup
+    print(p)
     self.powerups[p](t)
     return true
 end
@@ -126,7 +129,7 @@ function spreadShotFire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(5 + t.holdtime*5))
+    AllCollider(5 + t.holdtime*5))
 
     -- Bala sentido horario
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
@@ -135,7 +138,7 @@ function spreadShotFire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(5 + t.holdtime*5))
+    AllCollider(5 + t.holdtime*5))
 
     -- Bala sentido anti-horario
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(gameArena.raio-35), math.sin(t.pos)*(gameArena.raio-35))
@@ -144,7 +147,7 @@ function spreadShotFire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(5 + t.holdtime*5))
+    AllCollider(5 + t.holdtime*5))
 
     t.holdtime = 0
 end

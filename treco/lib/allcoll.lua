@@ -276,7 +276,7 @@ do
         self.shapes[i]:drawShape()
       end
     end,
-    collisionStandartTreatment = function(self, shape, other, mtv, rotated)
+    collisionStandardTreatment = function(self, shape, other, mtv, rotated)
       if rotated then
         if shape.behavior == "dynamic" then
           if other.behavior == "static" then

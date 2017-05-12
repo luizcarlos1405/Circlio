@@ -41,3 +41,9 @@ Asteroid = Component("asteroid", {
 	dir = vector(),
 	size = 27
 	})
+
+PowerUp = Component("powerup",{
+        type = "Life"
+    }, function(type)
+        return {type = type}
+    end)

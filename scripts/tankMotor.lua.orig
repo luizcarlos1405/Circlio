@@ -34,7 +34,7 @@ local function fire(t)
     speed = 500 + (1.913^t.holdtime) * 100,
     size = 5 + t.holdtime*5,
     source = t.treco}),
-    BoxCollider(14,14, vector(-7,-7)))
+    AllCollider(14,14, vector(-7,-7)))
 
 	t.holdtime = 0
 end

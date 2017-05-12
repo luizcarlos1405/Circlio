@@ -1,11 +1,14 @@
 -- Power Ups
-PU = {fastfire = {}, speedboost = {}, spreadshot = {}}
--- Fast Fire
+PU = {fastfire = {}, speedboost = {}, spreadshot = {}, controler = {}}
+-- tankPowerUp.lua Fast Fire
 PU.fastfire.time = 3
 PU.fastfire.mod = 0.5
--- Speed Boost
+-- tankPowerUp.lua  Speed Boost
 PU.speedboost.time = 3
 PU.speedboost.mod = 2
--- Spread Shot
+-- tankPowerUp.lua  Spread Shot
 PU.spreadshot.time = 3
 PU.spreadshot.mod = math.pi/20
+-- powerUpControler.lua  Controlador
+PU.controler.mintime = 1
+PU.controler.maxtime = 5

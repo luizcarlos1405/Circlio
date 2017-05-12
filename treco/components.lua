@@ -38,7 +38,7 @@ Animation = Component("animation", {
 		return {anim = anim}
 	end)
 
-BoxCollider = Component("collider",{
+AllCollider = Component("collider",{
 	r = -1
 }, function(r)
 	return {r = r}
