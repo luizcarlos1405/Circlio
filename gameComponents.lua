@@ -5,7 +5,7 @@ Tank = Component("tank", {
     color = Color.blue,
     life = 3,
     firerate = 0.5,
-    maxSpeed = 1.8,
+    maxSpeed = 1.4,
     powerups = {FastFire = false,
     SpreadShot = false,
     SpeedBoost = false
@@ -47,3 +47,10 @@ PowerUp = Component("powerup",{
     }, function(type)
         return {type = type}
     end)
+
+Circoll = Component("circoll",{
+	radius = 10,
+	invert = false
+	}, function(r, i)
+		return {radius = r, invert = i}
+	end)

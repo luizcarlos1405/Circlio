@@ -23,16 +23,14 @@ function BulletScript:update(b, dt)
 		if other.bullet then return "cross" end
 	end
 
-	local nX, nY, cols = Physics:move(b, b.bullet.dir*b.bullet.speed*dt, bulletFilter)
+	cols = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
 
-	b.pos.x = nX
-	b.pos.y = nY
 	if (love.timer.getTime() - b.bullet.lifeTimer > minLife) then
 		for k,col in pairs(cols) do
 			-- Colisão com bullet
-			if col.shape.bullet and col.shape.bullet.source ~= b.bullet.source then
-				if b.bullet.size > col.shape.bullet.size then
-					col.shape.treco:destroy()
+			if col.treco.bullet then
+				if b.bullet.size > col.treco.bullet.size then
+					--col.treco:destroy()
 				else
                     b:destroy()
 				end
@@ -40,32 +38,36 @@ function BulletScript:update(b, dt)
 			end
 
 			--Colisão com tank
-            if col.shape.tank then
-                if not (col.shape.tank.name == b.bullet.source.tank.name) then
-                    col.shape.tank:damage(-1)
+            if col.treco.tank then
+                if not (col.treco.tank.name == b.bullet.source.tank.name) then
+                    col.treco.tank:damage(-1)
                     b:destroy()
                     return
                 end
             end
+
+            --Colisão com a arena
+            if col.treco.arena then
+				if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
+	                b:destroy()
+					return
+				end
+				local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)
+				local aux = 2 * vector.dot(b.bullet.dir, normal)
+
+				--jeito "normal"
+				--b.bullet.dir = b.bullet.dir - normal * aux
+
+				--Melhor desempenho
+				vector.mul(normal, aux)
+				vector.sub(b.bullet.dir, normal)
+            end
 		end
 
-		--Colisão com a arena
-		if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
-			if (love.timer.getTime() - b.bullet.lifeTimer > maxLife) then
-                b:destroy()
-                -- b.collider.shape:destroy()
-				return
-			end
-			local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)
-			local aux = 2 * vector.dot(b.bullet.dir, normal)
-
-			--jeito "normal"
-			--b.bullet.dir = b.bullet.dir - normal * aux
-
-			--Melhor desempenho
-			vector.mul(normal, aux)
-			vector.sub(b.bullet.dir, normal)
-		end
+		
+		--[[if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
+			
+		end]]
 	end
 end
 

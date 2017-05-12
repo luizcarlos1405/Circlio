@@ -14,7 +14,7 @@ function powerUpControler:update(a, dt)
     end
 
     for k,v in pairs(self.powerups) do
-        local nX, nY, cols = Physics:move(v, {x=0,y=0})
+        --local nX, nY, cols = Physics:move(v, {x=0,y=0})
         v:destroy()
     end
 

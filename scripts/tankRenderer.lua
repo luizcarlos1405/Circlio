@@ -48,10 +48,10 @@ function TankRenderer:draw(t)
 
 	love.graphics.setLineWidth(10)
 	--Desenha força do tiro
-	love.graphics.setColor(map(t.tank.holdtime, 0, 3, 255, 0), map(t.tank.holdtime, 0, 3, 0, 150), map(t.tank.holdtime, 0, 3, 0, 255))
+	--[[love.graphics.setColor(map(t.tank.holdtime, 0, 3, 255, 0), map(t.tank.holdtime, 0, 3, 0, 150), map(t.tank.holdtime, 0, 3, 0, 255))
 	love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+36, 
 		t.tank.pos - math.rad(barSize/2) + map(t.tank.holdtime, 3, 0, 0, math.rad(barSize/2)), 
-		t.tank.pos + math.rad(barSize/2) - map(t.tank.holdtime, 3, 0, 0, math.rad(barSize/2)))
+		t.tank.pos + math.rad(barSize/2) - map(t.tank.holdtime, 3, 0, 0, math.rad(barSize/2)))]]
 
 	
 	

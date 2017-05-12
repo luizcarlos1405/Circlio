@@ -15,7 +15,7 @@ local function fire(t)
 	--A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
 	t.lastFire = love.timer.getTime()
 	t.cooldownBulletSize = 0
-	timer.tween(0.5, t, {cooldownBulletSize = 5}, "out-quint")
+	timer.tween(t.firerate, t, {cooldownBulletSize = 5}, "out-quint")
 	t.isCharging = false
 
 	local var = vector()
@@ -31,12 +31,13 @@ local function fire(t)
 	var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
+    local bulletSize = 5 + t.holdtime*5
     Treco(Position(bulletPos.x, bulletPos.y),
     Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
-    speed = 500 + (1.913^t.holdtime) * 100,
-    size = 5 + t.holdtime*5,
+    speed = 300 + (1.913^t.holdtime) * 100,
+    size = bulletSize,
     source = t.treco}),
-    AllCollider(5 + t.holdtime*5))
+    Circoll(bulletSize))
 
 	t.holdtime = 0
 end
@@ -82,5 +83,5 @@ function TankMotor:update(t, dt)
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
     -- move shape para a posição do player
     local shapepos = gameCenter+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio), math.sin(t.tank.pos)*(t.tank.arena.arena.raio))
-    t.collider.shape:moveTo(shapepos.x, shapepos.y)
+    --t.collider.shape:moveTo(shapepos.x, shapepos.y)
 end

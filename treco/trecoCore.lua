@@ -23,7 +23,7 @@ local function init()
 
 	require(BASE.."scripts.renderer")
 	require(BASE.."scripts.animator")
-	require(BASE.."scripts.allCollWrapper")
+	--require(BASE.."scripts.allCollWrapper")
 
 	require(BASE.."scripts.binder")
 
