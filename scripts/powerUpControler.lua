@@ -69,7 +69,15 @@ function powerUpControler:draw(a)
     for k,v in pairs(self.powerups) do
         love.graphics.setLineWidth(PU.linewidth)
         love.graphics.setColor(k.powerup.color.r, k.powerup.color.g, k.powerup.color.b)
-        love.graphics.circle('line', k.pos.x, k.pos.y, PU.radius)
+        love.graphics.circle('fill', k.pos.x, k.pos.y, k.circoll.radius)
+
+        -- Nome
+        local s = ""
+        for uppercase in string.gmatch(k.powerup.name, "%u") do
+            s = s..uppercase
+        end
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.print(s, k.pos.x - 5 * s:len(), k.pos.y - 15)
     end
 end
 
@@ -77,7 +85,6 @@ function powerUpControler:spawn(a)
     local angle = love.math.random(0, 2*math.pi)
     local dist = love.math.random(0, a.arena.raio)
     local r = love.math.random(1, #tankPowerUp.indices)
-    print(#tankPowerUp.indices, r)
 
     local pu = Treco(Position(gameCenter.x+math.cos(angle)*dist, gameCenter.y+math.sin(angle)*dist),
     Circoll(PU.radius),

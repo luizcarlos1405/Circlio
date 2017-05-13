@@ -59,9 +59,6 @@ function BulletScript:update(b, dt)
 				vector.sub(b.bullet.dir, normal)
             end
 		end
-
-		--[[if vector.dist(b.pos, b.bullet.source.tank.arena.pos) + b.bullet.size > b.bullet.source.tank.arena.arena.raio then
-		end]]
 	end
 end
 

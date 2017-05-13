@@ -1,7 +1,7 @@
 -- Power Ups
 PU = {fastfire = {}, speedboost = {}, spreadshot = {}, controler = {}}
 PU.radius = 20
-PU.color = Color(255, 0, 0)
+PU.color = Color(32, 5, 183)
 PU.linewidth = 4
 PU.mtvFactor = 30 -- Varia nível de desvio ao atingir uma bala
 -- tankPowerUp.lua Fast Fire

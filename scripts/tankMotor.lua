@@ -82,6 +82,6 @@ function TankMotor:update(t, dt)
 
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
     -- move shape para a posição do player
-    local shapepos = gameCenter+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio), math.sin(t.tank.pos)*(t.tank.arena.arena.raio))
+    -- local shapepos = gameCenter+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio), math.sin(t.tank.pos)*(t.tank.arena.arena.raio))
     --t.collider.shape:moveTo(shapepos.x, shapepos.y)
 end
