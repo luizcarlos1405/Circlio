@@ -14,8 +14,8 @@ PU.speedboost.mod = 2
 PU.spreadshot.time = 7
 PU.spreadshot.mod = math.pi/20
 -- powerUpControler.lua  Controlador: tempo para aparecimento de novos powerups
-PU.controler.mintime = 20
-PU.controler.maxtime = 50
+PU.controler.mintime = 5
+PU.controler.maxtime = 10
 -- bulletScript.lua BulletScript
 BS = {bullet = {}}
 BS.bullet.speed = 200
