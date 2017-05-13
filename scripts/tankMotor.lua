@@ -31,7 +31,7 @@ local function fire(t)
 	var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
-    local bulletSize = 5 + t.holdtime*5
+    local bulletSize = BS.bullet.size + t.holdtime*BS.bullet.size
     Treco(Position(bulletPos.x, bulletPos.y),
     Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
     speed = 300 + (1.913^t.holdtime) * 100,
@@ -40,6 +40,9 @@ local function fire(t)
     Circoll(bulletSize))
 
 	t.holdtime = 0
+
+    -- Efeito sonoro de tiro também acionado na função de spreadShot definida no tankPowerUp.lua
+    effect.shoot:play({pitch = BS.bullet.size / (bulletSize * 0.1 + BS.bullet.size - 1)})
 end
 
 local function move(t, d)
@@ -51,6 +54,9 @@ local function damage(t, d)
 	if (t.life <= 0) then
 		t.treco:destroy()
 	end
+
+    -- Efeito sonoro de quando é atingido
+    effect.hit:play({pitch = love.math.random(8, 12)/10})
 end
 
 function TankMotor:init(t)

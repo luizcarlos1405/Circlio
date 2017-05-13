@@ -4,6 +4,7 @@ require("gameconf")
 local push = require("lib.push")
 require("lib.util")
 
+require("sounds")
 timer = require("lib.timer")
 
 gameWidth, gameHeight = 1080, 720 --fixed game resolution

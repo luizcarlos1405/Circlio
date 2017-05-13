@@ -1,5 +1,20 @@
 powerUpControler = Script({Arena})
 
+local function spawn(a)
+    local angle = love.math.random(0, 2*math.pi)
+    local dist = love.math.random(0, a.arena.raio)
+    local r = love.math.random(1, #tankPowerUp.indices)
+
+    local pu = Treco(Position(gameCenter.x+math.cos(angle)*dist, gameCenter.y+math.sin(angle)*dist),
+    Circoll(8),
+    PowerUp(tankPowerUp.indices[r]))
+    timer.tween(1, pu.circoll, {radius = PU.radius}, 'out-elastic')
+    powerUpControler.powerups[pu] = true
+
+    -- Efeito sonoro variando a nota entre 70% e 100% do ton original
+    effect.powerupAppear:play({pitch = love.math.random(7, 10)/10})
+end
+
 function powerUpControler:init(a)
     self.timer = love.math.random(PU.controler.mintime, PU.controler.maxtime)
     self.powerups = {}
@@ -10,7 +25,7 @@ function powerUpControler:update(a, dt)
 
     if self.timer < 0 then
         self.timer = love.math.random(PU.controler.mintime, PU.controler.maxtime)
-        self:spawn(a)
+        spawn(a)
     end
 
     for k,v in pairs(self.powerups) do
@@ -21,6 +36,8 @@ function powerUpControler:update(a, dt)
                 tankPowerUp:setPowerUp(col.treco, k.powerup.name)
                 self.powerups[k] = nil
                 k:destroy()
+                -- Efeito sonoro de pegar powerup
+                effect.powerupPick:play()
             -- Colisão com as balas
             elseif col.treco.bullet then
                 -- Colisão com qualquer outra coisa
@@ -79,16 +96,4 @@ function powerUpControler:draw(a)
         love.graphics.setColor(255, 255, 255)
         love.graphics.print(s, k.pos.x - 5 * s:len(), k.pos.y - 15)
     end
-end
-
-function powerUpControler:spawn(a)
-    local angle = love.math.random(0, 2*math.pi)
-    local dist = love.math.random(0, a.arena.raio)
-    local r = love.math.random(1, #tankPowerUp.indices)
-
-    local pu = Treco(Position(gameCenter.x+math.cos(angle)*dist, gameCenter.y+math.sin(angle)*dist),
-    Circoll(8),
-    PowerUp(tankPowerUp.indices[r]))
-    timer.tween(1, pu.circoll, {radius = PU.radius}, 'out-elastic')
-    self.powerups[pu] = true
 end

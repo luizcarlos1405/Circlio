@@ -112,7 +112,7 @@ function spreadShotFire(t)
     var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
     var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
-    local bulletSize = 5 + t.holdtime*5
+    local bulletSize = BS.bullet.size + t.holdtime*BS.bullet.size
 
     -- Bala do meio
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
@@ -142,6 +142,9 @@ function spreadShotFire(t)
     Circoll(bulletSize))
 
     t.holdtime = 0
+
+    -- Efeito sonoro de tiro também acionado na função original definida no tankMotor.lua
+    effect.shoot:play()
 end
 
 -- function tankPowerUp:keypressed(t, key)
