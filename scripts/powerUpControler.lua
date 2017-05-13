@@ -87,7 +87,8 @@ function powerUpControler:spawn(a)
     local r = love.math.random(1, #tankPowerUp.indices)
 
     local pu = Treco(Position(gameCenter.x+math.cos(angle)*dist, gameCenter.y+math.sin(angle)*dist),
-    Circoll(PU.radius),
+    Circoll(8),
     PowerUp(tankPowerUp.indices[r]))
+    timer.tween(1, pu.circoll, {radius = PU.radius}, 'out-elastic')
     self.powerups[pu] = true
 end
