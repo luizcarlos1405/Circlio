@@ -40,9 +40,13 @@ function gameScene:init()
 	--Treco(Position(gameCenter), Asteroid)
 
 	gameArena = trecoArena.arena
+
+    -- Inicia musica de fundo
+    music.battle:play()
 end
 
 function gameScene:update(dt)
+    music.battle:update(dt, {volume = 0.1})
 	--Velocidade do jogador precisa ser relativa ao raio da arena
     -- gameArena.raio = math.max(gameArena.raio-10*dt, 50)
 end
