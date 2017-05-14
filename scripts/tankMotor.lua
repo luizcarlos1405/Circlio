@@ -36,9 +36,10 @@ local function move(t, d)
 	t.dir = d
 end
 
-local function damage(t, d)
-	t.life = t.life + d
+local function damage(t, d, source)
+	t.life = math.min(gconf.tank.maxLife, t.life + d)
 	if (t.life <= 0) then
+		event.trigger("tank_die", t, source)
 		t.treco:destroy()
 	end
 end
@@ -61,6 +62,8 @@ function TankMotor:init(t)
 
 	--Referencia de volta ao treco, pois as funções daqui vao receber a table do componente direto, e não do treco
 	t.tank.treco = t
+
+	event.trigger("tank_spawn", t)
 end
 
 function TankMotor:update(t, dt)

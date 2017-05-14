@@ -33,7 +33,7 @@ function BulletScript:update(b, dt)
 			--Colisão com tank
             elseif col.treco.tank then
                 if not (col.treco.tank.name == b.bullet.source.tank.name) then
-                    col.treco.tank:damage(-1)
+                    col.treco.tank:damage(-1, b)
                     b:destroy()
                     event.trigger("tank_hit", col.treco)
                     return
