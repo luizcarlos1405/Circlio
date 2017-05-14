@@ -14,15 +14,15 @@ tankPowerUp.powerups = {
             -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
             -- Inicia powerup
-            t.tank.fastfiretime = PU.fastfire.time
-            t.tank.firerate = t.tank.firerate * PU.fastfire.mod
+            t.tank.fastfiretime = gconf.powerup.fastfire.time
+            t.tank.firerate = t.tank.firerate * gconf.powerup.fastfire.mod
             t.tank.powerups["fastFire"] = true
         elseif t.tank.fastfiretime > 0 then
             -- Atualiza o estado do powerup
             if dt then
                 t.tank.fastfiretime = t.tank.fastfiretime - dt
             else
-                t.tank.fastfiretime = PU.fastfire.time
+                t.tank.fastfiretime = gconf.powerup.fastfire.time
             end
         else
             -- Retorna para valores base e finaliza o powerup
@@ -35,8 +35,8 @@ tankPowerUp.powerups = {
             -- Guarda valor original/base do firerate
             t.tank.baseMaxSpeed = t.tank.maxSpeed
             -- Inicia powerup
-            t.tank.speedboosttime = PU.speedboost.time
-            t.tank.maxSpeed = t.tank.maxSpeed * PU.speedboost.mod
+            t.tank.speedboosttime = gconf.powerup.speedboost.time
+            t.tank.maxSpeed = t.tank.maxSpeed * gconf.powerup.speedboost.mod
             t.tank.powerups["speedBoost"] = true
 
         elseif t.tank.speedboosttime > 0 then
@@ -44,7 +44,7 @@ tankPowerUp.powerups = {
             if dt then
                 t.tank.speedboosttime = t.tank.speedboosttime - dt
             else
-                t.tank.speedboosttime = PU.speedboost.time
+                t.tank.speedboosttime = gconf.powerup.speedboost.time
             end
         else
             -- Retorna para o valor base e finaliza o powerup
@@ -55,7 +55,7 @@ tankPowerUp.powerups = {
     spreadShot = function(t, dt)
         if not t.tank.powerups["spreadShot"] then
             -- Inicia powerup
-            t.tank.spreadshottime = PU.spreadshot.time
+            t.tank.spreadshottime = gconf.powerup.spreadshot.time
             t.tank.powerups["spreadShot"] = true
             -- Reescreve função de tiro para atirar 3 bolinhas e guarda a original
             t.tank.baseFireFunction = t.tank.fire
@@ -67,7 +67,7 @@ tankPowerUp.powerups = {
                 t.tank.spreadshottime = t.tank.spreadshottime - dt
             else
                 -- Se já tiver o powerup reseta o tempo
-                t.tank.spreadshottime = PU.spreadshot.time
+                t.tank.spreadshottime = gconf.powerup.spreadshot.time
             end
         else
             -- Retorna para o valor base e finaliza o powerup
@@ -93,7 +93,6 @@ end
 
 function tankPowerUp:setPowerUp(t, p)
     -- Roda powerup
-    print(p)
     self.powerups[p](t)
     return true
 end
@@ -106,17 +105,16 @@ end
 function spreadShotFire(t)
     if not t:canFire() then return end
 
-    --A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
     t.lastFire = love.timer.getTime()
     t.isCharging = false
 
     -- Calcula tamanho da bala em relação ao tempo segurado
-    local bulletSize = BS.bullet.size + t.holdtime*BS.bullet.size
+    local bulletSize = gconf.bullet.size + t.holdtime*gconf.bullet.size
 
     -- Bala do meio
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
@@ -125,7 +123,7 @@ function spreadShotFire(t)
     -- Bala sentido horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia - PU.spreadshot.mod),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia - gconf.powerup.spreadshot.mod),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
@@ -134,7 +132,7 @@ function spreadShotFire(t)
     -- Bala sentido anti-horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia + PU.spreadshot.mod),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia + gconf.powerup.spreadshot.mod),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),

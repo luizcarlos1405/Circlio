@@ -32,8 +32,8 @@ JoystickInput = Component("jsInput", {
 
 Bullet = Component("bullet", {
 	dir = false,
-	speed = BS.bullet.speed,
-	size = BS.bullet.radius,
+	speed = gconf.bullet.speed,
+	size = gconf.bullet.radius,
 	source = "none"
 	})
 
@@ -53,7 +53,7 @@ Asteroid = Component("asteroid", {
 PowerUp = Component("powerup",{
         name = "Life",
         vel = vector.zero,
-        color = PU.color
+        color = gconf.powerup.color
     }, function(name, vel)
         return {name = name, vel = vel}
     end)

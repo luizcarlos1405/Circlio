@@ -19,9 +19,9 @@ local function fire(t)
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     -- Calcula tamanho da bala em relação ao tempo segurado
-    local bulletSize = BS.bullet.size + t.holdtime*BS.bullet.size
+    local bulletSize = gconf.bullet.size + t.holdtime*gconf.bullet.size
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),

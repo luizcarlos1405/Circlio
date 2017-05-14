@@ -22,7 +22,7 @@ function BulletScript:update(b, dt)
 
 	cols = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
 
-	if (love.timer.getTime() - b.bullet.lifeTimer > BS.bullet.minlife) then
+	if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.minlife) then
 		for k,col in pairs(cols) do
 			-- Colisão com bullet
 			if col.treco.bullet then
@@ -40,7 +40,7 @@ function BulletScript:update(b, dt)
                 end
             --Colisão com a arena
             elseif col.treco.arena then
-				if (love.timer.getTime() - b.bullet.lifeTimer > BS.bullet.maxlife) then
+				if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife) then
 	                b:destroy()
 					return
 				end

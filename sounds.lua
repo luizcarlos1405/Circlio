@@ -8,7 +8,7 @@ tags = {
     sfx = ripple.newTag()
 }
 
-tags.master:setVolume(MU.volume)
+tags.master:setVolume(gconf.music.volume)
 
 effect = {
     powerupAppear = ripple.newSound(path..'powerup-appears.mp3', {tags = {tags.master, tags.sfx}}),

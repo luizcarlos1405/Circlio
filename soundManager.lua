@@ -1,5 +1,5 @@
 event.listen("tank_shoot", function(tank, bs)
-	effect.shoot:play({pitch = BS.bullet.size / (bs * 0.1 + BS.bullet.size - 1)})
+	effect.shoot:play({pitch = gconf.bullet.size / (bs * 0.1 + gconf.bullet.size - 1)})
 end)
 
 event.listen("tank_hit", function(tank)

@@ -11,10 +11,11 @@ require("scripts.keyboardInputHandler")
 require("scripts.joystickInputHandler")
 require("scripts.tankIA")
 require("scripts.tankPowerUp")
-require("scripts.powerUpControler")
 require("scripts.asteroidScript")
 require("scripts.circollider")
 require("scripts.deathMatch")
+require("scripts.powerupSpawner")
+require("scripts.powerupBoxScript")
 --require("scripts.gravity")
 
 require("soundManager")
@@ -22,14 +23,14 @@ require("soundManager")
 local trecoArena, Player1, Player2, Player3
 
 function gameScene:init()
-	trecoArena = Treco(Position(gameCenter), Arena(AR.size), Circoll(AR.size, true))
+	trecoArena = Treco(Position(gameCenter), Arena(gconf.arena.size), Circoll(gconf.arena.size, true))
     trecoArena.arena.treco = trecoArena
 
     -- Para jogar com controle descomente a linha abaixo
-	-- Player1 = Treco(Position(vector(0, 0)), Tank("Player1", trecoArena, 0, Color(0, 255, 255)), JoystickInput(1, 4), Circoll(20))
+	Player1 = Treco(Position(vector(0, 0)), Tank("Player1", trecoArena, 0, Color(0, 255, 255)), JoystickInput(1, 4), Circoll(20))
     -- Player2 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 0, Color(255, 255, 0)), JoystickInput(2, 4), Circoll(20))
     -- Teclado
-    Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color(0, 255, 170)), KeyboardInput("a","d","w"), Circoll(20))
+    --Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color(0, 255, 170)), KeyboardInput("a","d","w"), Circoll(20))
 	-- Player2 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color.red), KeyboardInput("j","l","i"), Circoll(20))
 	-- Player3 = Treco(Position(vector(0, 0)), Tank("Player3", trecoArena, 4*math.pi/3, Color.blue), KeyboardInput("left","right","up"), Circoll(20))
 
