@@ -1,3 +1,7 @@
+-- Música e sons
+MU = {}
+MU.volume = 1 -- volume de 0 a 1
+MU.active = true
 -- Power Ups
 PU = {fastfire = {}, speedboost = {}, spreadshot = {}, controler = {}}
 PU.radius = 20

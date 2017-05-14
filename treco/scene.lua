@@ -67,6 +67,18 @@ function Scene:_draw()
 	end
 end
 
+function Scene:_joystickpressed(j, b)
+	if self.joystickpressed then
+		self:joystickpressed(j, b)
+	end
+end
+
+function Scene:_joystickreleased(j, b)
+	if self.joystickreleased then
+		self:joystickreleased(j, b)
+	end
+end
+
 function Scene:loadMap(name)
 	map = require(R.mapsFolder.."."..name)
 	map.tiles = {}

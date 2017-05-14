@@ -22,6 +22,14 @@ KeyboardInput = Component("kbInput", {
 		return {left = l, right = r, shoot = s}
 	end)
 
+JoystickInput = Component("jsInput", {
+    jsnumber = 1,
+    shoot = 1
+}, function(n, s)
+		return {jsnumber = n, shoot = s}
+	end)
+
+
 Bullet = Component("bullet", {
 	dir = false,
 	speed = BS.bullet.speed,

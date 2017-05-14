@@ -35,14 +35,31 @@ function love.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
-    --print("keypressed: ", key)
+    -- print("keypressed: ", key)
     tCore:keypressed(key)
     if key == 'escape' then
         love.event.quit()
+    end
+    -- Muta som do jogo apertando m
+    if key == "m" then
+        MU.active = not MU.active
+        if MU.active then
+            tags.master:setVolume(MU.volume)
+        else
+            tags.master:setVolume(0)
+        end
     end
 end
 
 function love.keyreleased(key)
     --print("keyreleased: ", key)
 	tCore:keyreleased(key)
+end
+
+function love.joystickpressed(joystick, button)
+    tCore:joystickpressed(joystick, button)
+end
+
+function love.joystickreleased(joystick, button)
+    tCore:joystickreleased(joystick, button)
 end

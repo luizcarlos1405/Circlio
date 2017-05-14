@@ -133,6 +133,19 @@ function Script:_keyreleased(k)
 	end
 end
 
+function Script:_joystickpressed(j, b)
+	if self.joystickpressed then
+		self:callEach("joystickpressed", j, b)
+	end
+end
+
+function Script:_joystickreleased(j, b)
+	if self.joystickreleased then
+		self:callEach("joystickreleased", j, b)
+	end
+end
+
+
 function Script:callEach(func, ...)
 	for i in pairs(self.cList) do
 		self[func](self, tCore.currentScene.trecos[i], ...)

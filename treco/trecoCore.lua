@@ -128,6 +128,20 @@ function tCore:keyreleased(k)
 	end
 end
 
+function tCore:joystickpressed(j, b)
+	tCore.callScripts("_joystickpressed", j, b)
+	if tCore.currentScene and tCore.currentScene.joystickpressed then
+		tCore.currentScene:joystickpressed(j, b)
+	end
+end
+
+function tCore:joystickreleased(j, b)
+	tCore.callScripts("_joystickreleased", j, b)
+	if tCore.currentScene and tCore.currentScene.joystickreleased then
+		tCore.currentScene:joystickreleased(j, b)
+	end
+end
+
 function tCore:textinput(t)
 	if tCore.currentScene and tCore.currentScene.textinput then
 		tCore.currentScene:textinput(t)

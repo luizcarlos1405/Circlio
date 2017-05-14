@@ -170,18 +170,3 @@ function spreadShotFire(t)
     -- Efeito sonoro de tiro também acionado na função original definida no tankMotor.lua
     effect.shoot:play()
 end
-
--- function tankPowerUp:keypressed(t, key)
---     if key == 'l' then
---         self:setPowerUp(t, "Life")
---     end
---     if key == 'k' then
---         self:setPowerUp(t, "FastFire")
---     end
---     if key == 'j' then
---         self:setPowerUp(t, "SpreadShot")
---     end
---     if key == 'h' then
---         self:setPowerUp(t, "SpeedBoost")
---     end
--- end

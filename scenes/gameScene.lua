@@ -8,6 +8,7 @@ require("scripts.tankRenderer")
 require("scripts.tankMotor")
 require("scripts.bulletScript")
 require("scripts.keyboardInputHandler")
+require("scripts.joystickInputHandler")
 require("scripts.tankIA")
 require("scripts.tankPowerUp")
 require("scripts.powerUpControler")
@@ -22,9 +23,9 @@ function gameScene:init()
 	trecoArena = Treco(Position(gameCenter), Arena(gameHeight/2 - 30), Circoll(gameHeight/2 - 30, true))
     trecoArena.arena.treco = trecoArena
 
-	-- Position dos Player1 e Player2 iniciados em (0, 0) apenas para utilizar o component AllCollider
-	-- Seria isso uma gambiarra?
-	Player1 = Treco(Position(vector(0, 0)), Tank("Player1", trecoArena, 0, Color(0, 255, 255)), KeyboardInput("a","d","w"), Circoll(20))
+    -- Para jogar com controle descomente a linha abaixo
+	-- Player1 = Treco(Position(vector(0, 0)), Tank("Player1", trecoArena, 0, Color(0, 255, 255)), JoystickInput(1, 4), Circoll(20))
+    Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color.red), KeyboardInput("a","d","w"), Circoll(20))
 	-- Player2 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color.red), KeyboardInput("j","l","i"), Circoll(20))
 	-- Player3 = Treco(Position(vector(0, 0)), Tank("Player3", trecoArena, 4*math.pi/3, Color.blue), KeyboardInput("left","right","up"), Circoll(20))
 
@@ -49,10 +50,6 @@ function gameScene:update(dt)
     music.battle:update(dt, {volume = 0.1})
 	--Velocidade do jogador precisa ser relativa ao raio da arena
     -- gameArena.raio = math.max(gameArena.raio-10*dt, 50)
-end
-
-function gameScene:draw()
-
 end
 
 return gameScene
