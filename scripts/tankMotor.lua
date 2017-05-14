@@ -12,24 +12,10 @@ end
 local function fire(t)
 	if not t:canFire() then return end
 
-	--A fazer: Animar a volta do cooldown a zero, de acordo com o firerate
 	t.lastFire = love.timer.getTime()
 	t.cooldownBulletSize = 0
 	timer.tween(t.firerate, t, {cooldownBulletSize = 5}, "out-quint")
 	t.isCharging = false
-
-    -- Substitui todo esse código pelo vector.rotate pra decidir a direção da bala, é tipo a mesma coisa
-	-- local var = vector()
-	-- local aux = 0
-    --
-	-- if t.dir>0 then
-	-- 	aux = 1
-	-- elseif t.dir<0 then
-	-- 	aux = -1
-	-- end
-    --
-    -- var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
-	-- var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     -- Calcula tamanho da bala em relação ao tempo segurado
@@ -43,8 +29,7 @@ local function fire(t)
 
 	t.holdtime = 0
 
-    -- Efeito sonoro de tiro também acionado na função de spreadShot definida no tankPowerUp.lua
-    effect.shoot:play({pitch = BS.bullet.size / (bulletSize * 0.1 + BS.bullet.size - 1)})
+    event.trigger("tank_shoot", t, bulletSize)
 end
 
 local function move(t, d)
@@ -56,9 +41,6 @@ local function damage(t, d)
 	if (t.life <= 0) then
 		t.treco:destroy()
 	end
-
-    -- Efeito sonoro de quando é atingido
-    effect.hit:play({pitch = love.math.random(8, 12)/10})
 end
 
 function TankMotor:init(t)
@@ -89,7 +71,4 @@ function TankMotor:update(t, dt)
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
 
 	t.tank.pos = t.tank.pos + t.tank.speed * dt
-    -- move shape para a posição do player
-    -- local shapepos = gameCenter+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio), math.sin(t.tank.pos)*(t.tank.arena.arena.raio))
-    --t.collider.shape:moveTo(shapepos.x, shapepos.y)
 end

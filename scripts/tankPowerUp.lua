@@ -5,74 +5,62 @@ local function spreadShotFire(t)end
 
 -- Table de powerups e as funções que os definem
 tankPowerUp.powerups = {
-    Life = function(t, dt)
+    life = function(t, dt)
         -- Adiciona uma vida ao tank
         t.tank.life = t.tank.life + 1
-        -- Som de narrador anunciando o powerup
-        narrative.life:play()
     end,
-    FastFire = function(t, dt)
-        if not t.tank.powerups["FastFire"] then
+    fastFire = function(t, dt)
+        if not t.tank.powerups["fastFire"] then
             -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
             -- Inicia powerup
             t.tank.fastfiretime = PU.fastfire.time
             t.tank.firerate = t.tank.firerate * PU.fastfire.mod
-            t.tank.powerups["FastFire"] = true
-            -- Som de narrador anunciando o powerup
-            narrative.fastFire:play()
+            t.tank.powerups["fastFire"] = true
         elseif t.tank.fastfiretime > 0 then
             -- Atualiza o estado do powerup
             if dt then
                 t.tank.fastfiretime = t.tank.fastfiretime - dt
             else
                 t.tank.fastfiretime = PU.fastfire.time
-                -- Som de narrador anunciando o powerup
-                narrative.fastFire:play()
             end
         else
             -- Retorna para valores base e finaliza o powerup
             t.tank.firerate = t.tank.baseFireRate
-            t.tank.powerups["FastFire"] = false
+            t.tank.powerups["fastFire"] = false
         end
     end,
-    SpeedBoost = function(t,dt)
-        if not t.tank.powerups["SpeedBoost"] then
+    speedBoost = function(t,dt)
+        if not t.tank.powerups["speedBoost"] then
             -- Guarda valor original/base do firerate
             t.tank.baseMaxSpeed = t.tank.maxSpeed
             -- Inicia powerup
             t.tank.speedboosttime = PU.speedboost.time
             t.tank.maxSpeed = t.tank.maxSpeed * PU.speedboost.mod
-            t.tank.powerups["SpeedBoost"] = true
+            t.tank.powerups["speedBoost"] = true
 
-            -- Som de narrador anunciando o powerup
-            narrative.speedBoost:play()
         elseif t.tank.speedboosttime > 0 then
             -- Atualiza o estado do powerup
             if dt then
                 t.tank.speedboosttime = t.tank.speedboosttime - dt
             else
                 t.tank.speedboosttime = PU.speedboost.time
-                -- Som de narrador anunciando o powerup
-                narrative.speedBoost:play()
             end
         else
             -- Retorna para o valor base e finaliza o powerup
             t.tank.maxSpeed = t.tank.baseMaxSpeed
-            t.tank.powerups["SpeedBoost"] = false
+            t.tank.powerups["speedBoost"] = false
         end
     end,
-    SpreadShot = function(t, dt)
-        if not t.tank.powerups["SpreadShot"] then
+    spreadShot = function(t, dt)
+        if not t.tank.powerups["spreadShot"] then
             -- Inicia powerup
             t.tank.spreadshottime = PU.spreadshot.time
-            t.tank.powerups["SpreadShot"] = true
+            t.tank.powerups["spreadShot"] = true
             -- Reescreve função de tiro para atirar 3 bolinhas e guarda a original
             t.tank.baseFireFunction = t.tank.fire
             t.tank.fire = spreadShotFire
 
-            -- Som de narrador anunciando o powerup
-            narrative.spreadShot:play()
         elseif t.tank.spreadshottime > 0 then
             -- Atualiza o estado do powerup
             if dt then
@@ -80,12 +68,10 @@ tankPowerUp.powerups = {
             else
                 -- Se já tiver o powerup reseta o tempo
                 t.tank.spreadshottime = PU.spreadshot.time
-                -- Som de narrador anunciando o powerup
-                narrative.spreadShot:play()
             end
         else
             -- Retorna para o valor base e finaliza o powerup
-            t.tank.powerups["SpreadShot"] = false
+            t.tank.powerups["spreadShot"] = false
             -- Retorna à função de tiro original
             t.tank.fire = t.tank.baseFireFunction
         end
@@ -156,14 +142,13 @@ function spreadShotFire(t)
 
     t.holdtime = 0
 
-    -- Efeito sonoro de tiro também acionado na função original definida no tankMotor.lua
-    effect.shoot:play()
+    event.trigger("tank_shoot", t, bulletSize)
 end
 
 function tankPowerUp:keypressed(t, key)
     if key == "0" then
-        self:setPowerUp(t, "SpreadShot")
-        self:setPowerUp(t, "SpeedBoost")
-        self:setPowerUp(t, "FastFire")
+        self:setPowerUp(t, "spreadShot")
+        self:setPowerUp(t, "speedBoost")
+        self:setPowerUp(t, "fastFire")
     end
 end

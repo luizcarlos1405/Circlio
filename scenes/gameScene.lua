@@ -17,6 +17,8 @@ require("scripts.circollider")
 require("scripts.deathMatch")
 --require("scripts.gravity")
 
+require("soundManager")
+
 local trecoArena, Player1, Player2, Player3
 
 function gameScene:init()

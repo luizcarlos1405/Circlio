@@ -11,8 +11,7 @@ local function spawn(a)
     timer.tween(1, pu.circoll, {radius = PU.radius}, 'out-elastic')
     powerUpControler.powerups[pu] = true
 
-    -- Efeito sonoro variando a nota entre 70% e 100% do ton original
-    effect.powerupAppear:play({pitch = love.math.random(7, 10)/10})
+    event.trigger("powerup_spawn", pu)
 end
 
 function powerUpControler:init(a)
@@ -36,8 +35,8 @@ function powerUpControler:update(a, dt)
                 tankPowerUp:setPowerUp(col.treco, k.powerup.name)
                 self.powerups[k] = nil
                 k:destroy()
-                -- Efeito sonoro de pegar powerup
-                effect.powerupPick:play()
+                event.trigger("powerup_pickup", k.powerup, col.treco.tank)
+                
             -- Colisão com as balas
             elseif col.treco.bullet then
                 -- Colisão com qualquer outra coisa

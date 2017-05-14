@@ -11,6 +11,7 @@ require(BASE..".script")
 require(BASE..".components")
 
 R = require(BASE.."lib.resourceManager")
+event = require(BASE.."lib.eventSystem")
 
 tCore = {}
 

@@ -7,7 +7,6 @@ BulletScript = Script({Bullet})
 ]]
 
 
---local maxBounce = 1		--Máximo de vezes que a bala pode quicar antes de explodir
 local bulletRadius = 10
 
 function BulletScript:init(b)
@@ -36,6 +35,7 @@ function BulletScript:update(b, dt)
                 if not (col.treco.tank.name == b.bullet.source.tank.name) then
                     col.treco.tank:damage(-1)
                     b:destroy()
+                    event.trigger("tank_hit", col.treco)
                     return
                 end
             --Colisão com a arena
@@ -60,6 +60,5 @@ end
 
 function BulletScript:draw(b)
 	love.graphics.setColor(b.bullet.source.tank.color:value())
-    -- print(pos)
 	love.graphics.circle("fill", b.pos.x, b.pos.y, b.bullet.size)
 end
