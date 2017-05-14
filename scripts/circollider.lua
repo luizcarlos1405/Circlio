@@ -14,7 +14,7 @@ local function move(c, m)
 			if k.invert then
 				if distance > k.radius-c.radius then
 					cols[#cols+1] = k
-					local overlap = newPos:dist(k.treco.pos) - k.radius-c.radius
+					-- local overlap = newPos:dist(k.treco.pos) - k.radius-c.radius
 					newPos = k.treco.pos + (newPos-k.treco.pos):normalize()*(k.radius-c.radius)
 				end
             -- Colisão com o shape k

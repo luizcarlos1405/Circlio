@@ -29,21 +29,17 @@ function BulletScript:update(b, dt)
 			if col.treco.bullet then
 				if b.bullet.size < col.treco.bullet.size then
 					b:destroy()
+                    return
 				end
-				return
-			end
-
 			--Colisão com tank
-            if col.treco.tank then
+            elseif col.treco.tank then
                 if not (col.treco.tank.name == b.bullet.source.tank.name) then
                     col.treco.tank:damage(-1)
                     b:destroy()
                     return
                 end
-            end
-
             --Colisão com a arena
-            if col.treco.arena then
+            elseif col.treco.arena then
 				if (love.timer.getTime() - b.bullet.lifeTimer > BS.bullet.maxlife) then
 	                b:destroy()
 					return
@@ -52,7 +48,7 @@ function BulletScript:update(b, dt)
 				local aux = 2 * vector.dot(b.bullet.dir, normal)
 
 				--jeito "normal"
-				--b.bullet.dir = b.bullet.dir - normal * aux
+				-- b.bullet.dir = b.bullet.dir - normal * aux
 
 				--Melhor desempenho
 				vector.mul(normal, aux)

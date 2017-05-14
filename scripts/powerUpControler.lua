@@ -48,7 +48,6 @@ function powerUpControler:update(a, dt)
                 -- Move a bala e acelera na direção da colisão
                 col.treco.circoll:move(mtv/-2)
                 col.treco.bullet.dir = vector.normalize(vector(col.treco.bullet.dir.x - mtv.x/BS.bullet.mtvFactor, col.treco.bullet.dir.y - mtv.y/BS.bullet.mtvFactor))
-                return
             --Colisão com a arena
             elseif col.treco.arena then
                 local normal = vector.normalize(k.pos-gameCenter)
@@ -71,7 +70,7 @@ function powerUpControler:update(a, dt)
                 col.treco.powerup.vel.x = col.treco.powerup.vel.x - mtv.x * PU.mtvFactor
                 col.treco.powerup.vel.y = col.treco.powerup.vel.y - mtv.y * PU.mtvFactor
             else
-                -- COlisão genérica, move apenas o powerup
+                -- Colisão genérica, move apenas o powerup
                 -- Move o powerup e acelera na direção da colisão
                 k.circoll:move(mtv/2)
                 k.powerup.vel.x = k.powerup.vel.x + mtv.x * PU.mtvFactor

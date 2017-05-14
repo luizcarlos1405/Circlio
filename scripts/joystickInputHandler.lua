@@ -14,7 +14,7 @@ function joystickInputHandler:update(t, dt)
 end
 
 function joystickInputHandler:joystickpressed(t, joystick, button)
-    print(button)
+    -- print(button)
 	if button == t.jsInput.shoot and joystick == t.jsInput.joystick then
 		t.tank:chargeFire()
 	end

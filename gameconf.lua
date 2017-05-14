@@ -20,7 +20,7 @@ PU.spreadshot.mod = math.pi/20 -- O quanto as balas extras se separam, em radian
 -- powerUpControler.lua  Controlador: tempo para aparecimento de novos powerups
 PU.controler.mintime = 5
 PU.controler.maxtime = 10
--- bulletScript.lua BulletScript
+-- bulletScript.lua e outras coisas relacionadas às bullets que estão em outros arquivos
 BS = {bullet = {}}
 BS.bullet.speed = 200
 BS.bullet.radius = 10
@@ -29,3 +29,6 @@ BS.bullet.minlife = 0.2
 BS.bullet.mtvFactor = 20 -- Varia nível de desvio ao atingir um powerupp
 BS.bullet.size = 5
 BS.bullet.inercia = math.pi/30 -- O quanto a bala vai desviar em radianos por ser atirada andando
+-- Arena
+AR = {}
+AR.size = gameHeight/2 - 30

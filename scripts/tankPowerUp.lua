@@ -161,7 +161,9 @@ function spreadShotFire(t)
 end
 
 function tankPowerUp:keypressed(t, key)
-    if key == "j" then
+    if key == "0" then
         self:setPowerUp(t, "SpreadShot")
+        self:setPowerUp(t, "SpeedBoost")
+        self:setPowerUp(t, "FastFire")
     end
 end
