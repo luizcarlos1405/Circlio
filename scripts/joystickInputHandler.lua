@@ -1,7 +1,7 @@
 joystickInputHandler = Script({Tank, JoystickInput})
 --[[
 	joystickInputHandler
-	Controla um tank com input do jogador pelo teclado
+	Controla um tank com input do jogador pelo joystick
 ]]
 
 function joystickInputHandler:init(t)
@@ -14,13 +14,14 @@ function joystickInputHandler:update(t, dt)
 end
 
 function joystickInputHandler:joystickpressed(t, joystick, button)
-	if button == t.jsInput.shoot then
+    print(button)
+	if button == t.jsInput.shoot and joystick == t.jsInput.joystick then
 		t.tank:chargeFire()
 	end
 end
 
 function joystickInputHandler:joystickreleased(t, joystick, button)
-	if button == t.jsInput.shoot then
+    if button == t.jsInput.shoot and joystick == t.jsInput.joystick then
 		t.tank:fire()
 	end
 end

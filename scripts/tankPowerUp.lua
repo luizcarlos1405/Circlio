@@ -124,24 +124,13 @@ function spreadShotFire(t)
     t.lastFire = love.timer.getTime()
     t.isCharging = false
 
-    local var = vector()
-    local aux = 0
-
-    if t.dir>0 then
-        aux = 1
-    elseif t.dir<0 then
-        aux = -1
-    end
-
-    var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
-    var.y = (aux * math.cos(t.pos - math.pi) * 100)
-
+    -- Calcula tamanho da bala em relação ao tempo segurado
     local bulletSize = BS.bullet.size + t.holdtime*BS.bullet.size
 
     -- Bala do meio
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
@@ -150,7 +139,7 @@ function spreadShotFire(t)
     -- Bala sentido horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), PU.spreadshot.mod),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), t.dir * BS.bullet.inercia + PU.spreadshot.mod),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
@@ -159,7 +148,7 @@ function spreadShotFire(t)
     -- Bala sentido anti-horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-var-t.treco.pos), -PU.spreadshot.mod),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), t.dir * BS.bullet.inercia + PU.spreadshot.mod),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),

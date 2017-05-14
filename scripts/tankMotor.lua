@@ -18,22 +18,24 @@ local function fire(t)
 	timer.tween(t.firerate, t, {cooldownBulletSize = 5}, "out-quint")
 	t.isCharging = false
 
-	local var = vector()
-	local aux = 0
-
-	if t.dir>0 then
-		aux = 1
-	elseif t.dir<0 then
-		aux = -1
-	end
-
-    var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
-	var.y = (aux * math.cos(t.pos - math.pi) * 100)
+    -- Substitui todo esse código pelo vector.rotate pra decidir a direção da bala, é tipo a mesma coisa
+	-- local var = vector()
+	-- local aux = 0
+    --
+	-- if t.dir>0 then
+	-- 	aux = 1
+	-- elseif t.dir<0 then
+	-- 	aux = -1
+	-- end
+    --
+    -- var.x = (aux * math.sin(t.pos - math.pi) * 100) --/ math.min(t.tank.holdtime + 1, 4)
+	-- var.y = (aux * math.cos(t.pos - math.pi) * 100)
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
+    -- Calcula tamanho da bala em relação ao tempo segurado
     local bulletSize = BS.bullet.size + t.holdtime*BS.bullet.size
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.normalize(gameCenter-var-t.treco.pos),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),

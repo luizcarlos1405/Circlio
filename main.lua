@@ -1,17 +1,20 @@
 require("treco.trecoCore")
 require("gameconf")
 
-local push = require("lib.push")
+push = require("lib.push")
 require("lib.util")
 
 require("sounds")
 timer = require("lib.timer")
 
+local fs = false
 gameWidth, gameHeight = 1080, 720 --fixed game resolution
 windowWidth, windowHeight = love.window.getDesktopDimensions()
-windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
+if not fs then
+    windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
+end
 
-push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false, vsync = false})
+push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = fs, vsync = false})
 
 gameCenter = vector(push:getWidth()/2,push:getHeight()/2)
 
