@@ -5,13 +5,12 @@ TankRenderer = Script({Tank})
 ]]
 
 
-local lifeMax = 3	--Podia pegar isso de outro lugar..
 local barSize = 14	--Tamanho em graus da barra dos indicadores de potencia e vida
 
 local letterSpacing = math.rad(1.3)
 
-local singleLifeRad = math.floor(barSize/lifeMax)
-local lifeBarSpacing = barSize/lifeMax
+local singleLifeRad = math.floor(barSize/gconf.tank.maxLife)
+local lifeBarSpacing = barSize/gconf.tank.maxLife
 love.graphics.setNewFont("/font/FrancoisOne-Regular.ttf", 20)
 function TankRenderer:update(t, dt)
 	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
@@ -35,7 +34,7 @@ function TankRenderer:draw(t)
 		love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))
 	end
 	love.graphics.setLineWidth(2)
-	for i=t.tank.life, lifeMax-1 do
+	for i=t.tank.life, gconf.tank.maxLife-1 do
 		--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
 		love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))
 	end

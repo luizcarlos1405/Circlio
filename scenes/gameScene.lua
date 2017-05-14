@@ -27,21 +27,21 @@ function gameScene:init()
     trecoArena.arena.treco = trecoArena
 
     -- Para jogar com controle descomente a linha abaixo
-	Player1 = Treco(Position(vector(0, 0)), Tank("Player1", trecoArena, 0, Color(0, 255, 255)), JoystickInput(1, 4), Circoll(20))
+	--Player1 = Treco(Position(vector(0, 0)), Tank("Player1", trecoArena, 0, Color(0, 255, 255)), JoystickInput(1, 4), Circoll(20))
     -- Player2 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 0, Color(255, 255, 0)), JoystickInput(2, 4), Circoll(20))
     -- Teclado
-    --Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color(0, 255, 170)), KeyboardInput("a","d","w"), Circoll(20))
+    Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color(0, 255, 170)), KeyboardInput("a","d","w"), Circoll(20))
 	-- Player2 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color.red), KeyboardInput("j","l","i"), Circoll(20))
 	-- Player3 = Treco(Position(vector(0, 0)), Tank("Player3", trecoArena, 4*math.pi/3, Color.blue), KeyboardInput("left","right","up"), Circoll(20))
 
 	-- arenaFundo = Treco(Position(vector(200,250)), Arena(100))
 
-	Treco(Position(vector(0, 0)), Tank("Bot2", trecoArena, math.pi/3, Color.red), Bot, Circoll(20))
+	--[[Treco(Position(vector(0, 0)), Tank("Bot2", trecoArena, math.pi/3, Color.red), Bot, Circoll(20))
     Treco(Position(vector(0, 0)), Tank("Bot1", trecoArena, 0, Color.green), Bot, Circoll(20))
 	Treco(Position(vector(0, 0)), Tank("Bot3", trecoArena, 2*math.pi/3, Color.blue), Bot, Circoll(20))
 	Treco(Position(vector(0, 0)), Tank("Bot4", trecoArena, 3*math.pi/3, Color.orange), Bot, Circoll(20))
 	Treco(Position(vector(0, 0)), Tank("Bot5", trecoArena, 4*math.pi/3, Color.grey), Bot, Circoll(20))
-	Treco(Position(vector(0, 0)), Tank("Bot6", trecoArena, 5*math.pi/3, Color.white), Bot, Circoll(20))
+	Treco(Position(vector(0, 0)), Tank("Bot6", trecoArena, 5*math.pi/3, Color.white), Bot, Circoll(20))]]
 
 	--Treco(Position(gameCenter), Asteroid)
 

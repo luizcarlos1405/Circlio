@@ -7,7 +7,7 @@ local function spreadShotFire(t)end
 tankPowerUp.powerups = {
     life = function(t, dt)
         -- Adiciona uma vida ao tank
-        t.tank.life = t.tank.life + 1
+        t.tank.life = math.min(gconf.tank.maxLife, t.tank.life + 1)
     end,
     fastFire = function(t, dt)
         if not t.tank.powerups["fastFire"] then

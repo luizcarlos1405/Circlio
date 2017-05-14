@@ -5,6 +5,10 @@ gconf.music = {
 	volume = 1	-- Volume de 0 a 1
 }
 
+gconf.tank = {
+	maxLife = 4
+}
+
 -- Power Ups
 gconf.powerup = {
 	radius = 20,
