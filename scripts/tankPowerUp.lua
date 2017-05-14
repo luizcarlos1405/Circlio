@@ -139,7 +139,7 @@ function spreadShotFire(t)
     -- Bala sentido horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), t.dir * BS.bullet.inercia + PU.spreadshot.mod),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia - PU.spreadshot.mod),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
@@ -148,7 +148,7 @@ function spreadShotFire(t)
     -- Bala sentido anti-horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), t.dir * BS.bullet.inercia + PU.spreadshot.mod),
+    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * BS.bullet.inercia + PU.spreadshot.mod),
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
@@ -158,4 +158,10 @@ function spreadShotFire(t)
 
     -- Efeito sonoro de tiro também acionado na função original definida no tankMotor.lua
     effect.shoot:play()
+end
+
+function tankPowerUp:keypressed(t, key)
+    if key == "j" then
+        self:setPowerUp(t, "SpreadShot")
+    end
 end
