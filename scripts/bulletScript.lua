@@ -20,7 +20,7 @@ function BulletScript:update(b, dt)
 		if other.bullet then return "cross" end
 	end
 
-	cols = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
+	local cols, mtv = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
 
 	if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.minlife) then
 		for k,col in pairs(cols) do
@@ -38,6 +38,20 @@ function BulletScript:update(b, dt)
                     event.trigger("tank_hit", col.treco)
                     return
                 end
+
+            --Colisão com powerup
+            elseif col.treco.powerup then
+            	
+				local normal = vector.normalize(b.pos-col.treco.pos)
+				local aux = 2 * vector.dot(b.bullet.dir, normal)
+				vector.mul(normal, aux)
+				vector.sub(b.bullet.dir, normal)
+
+				vector.add(col.treco.powerup.vel,  normal * b.bullet.speed/15)
+        		
+        		--Não sei o que mtv faz, mas isso aqui parece funcionar
+        		vector.add(b.pos, mtv)
+
             --Colisão com a arena
             elseif col.treco.arena then
 				if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife) then

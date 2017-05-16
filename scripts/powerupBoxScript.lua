@@ -14,12 +14,12 @@ function PowerupBoxScript:update(t, dt)
 		elseif col.treco.bullet then
 			-- Colisão com qualquer outra coisa
 			-- Move o powerup e acelera na direção da colisão
-			t.circoll:move(mtv/2)
+			--[[t.circoll:move(mtv/2)
 			t.powerup.vel.x = t.powerup.vel.x + mtv.x * gconf.powerup.mtvFactor
-			t.powerup.vel.y = t.powerup.vel.y + mtv.y * gconf.powerup.mtvFactor
+			t.powerup.vel.y = t.powerup.vel.y + mtv.y * gconf.powerup.mtvFactor]]
 			-- Move a bala e acelera na direção da colisão
-			col.treco.circoll:move(mtv/-2)
-			col.treco.bullet.dir = vector.normalize(vector(col.treco.bullet.dir.x - mtv.x/gconf.bullet.mtvFactor, col.treco.bullet.dir.y - mtv.y/gconf.bullet.mtvFactor))
+			--[[col.treco.circoll:move(mtv/-2)
+			col.treco.bullet.dir = vector.normalize(vector(col.treco.bullet.dir.x - mtv.x/gconf.bullet.mtvFactor, col.treco.bullet.dir.y - mtv.y/gconf.bullet.mtvFactor))]]
 		--Colisão com a arena
 		elseif col.treco.arena then
 			local normal = vector.normalize(t.pos-gameCenter)
