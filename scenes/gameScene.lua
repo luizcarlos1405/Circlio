@@ -32,7 +32,7 @@ function gameScene:init()
     -- Player2 = Treco(Position(vector(0, 0)), Tank("Eric", trecoArena, love.math.random(0, 628)/100, Color(255, 255, 0)), JoystickInput(1, 4), Circoll(20))
     -- Player3 = Treco(Position(vector(0, 0)), Tank("Luiz", trecoArena, love.math.random(0, 628)/100, Color.green), JoystickInput(2, 4), Circoll(20))
     -- Teclado
-    Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color(0, 255, 170)), KeyboardInput("a","d","w"), Circoll(20))
+    Player1 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color(0, 255, 170)), KeyboardInput("left","right","space"), Circoll(20))
 	-- Player2 = Treco(Position(vector(0, 0)), Tank("Player2", trecoArena, 2*math.pi/3, Color.red), KeyboardInput("j","l","i"), Circoll(20))
 	-- Player3 = Treco(Position(vector(0, 0)), Tank("Player3", trecoArena, 4*math.pi/3, Color.blue), KeyboardInput("left","right","up"), Circoll(20))
 

@@ -63,7 +63,7 @@ function tCore.loadScene(s)
 			end
 			tCore.currentScene = s
 			for k,c in pairs(s.trecos) do
-				callScripts("addTreco", c)
+				tCore.callScripts("addTreco", c)
 			end
 		else
 			error("Invalid scene: '"..tostring(s).."'")
