@@ -6,7 +6,7 @@ gconf.music = {
 }
 
 gconf.tank = {
-	maxLife = 1
+	maxLife = 3
 }
 
 -- Power Ups
@@ -43,6 +43,6 @@ gconf.bullet = {
 	inercia = math.pi/30 -- O quanto a bala vai desviar em radianos por ser atirada andando
 }
 
-gconf.arena = {	
+gconf.arena = {
 	size = gameHeight/2 - 30
 }

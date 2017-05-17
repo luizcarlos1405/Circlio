@@ -1,7 +1,7 @@
 PowerupBoxScript = Script({PowerUp})
 
 function PowerupBoxScript:update(t, dt)
-	
+
 	local cols, mtv = t.circoll:move(t.powerup.vel * dt)
 	for _,col in pairs(cols) do
 		--Colisão com tank
@@ -9,7 +9,7 @@ function PowerupBoxScript:update(t, dt)
 			tankPowerUp:setPowerUp(col.treco, t.powerup.name)
 			t:destroy()
 			event.trigger("powerup_pickup", t.powerup, col.treco.tank)
-			
+
 		-- Colisão com as balas
 		elseif col.treco.bullet then
 			-- Colisão com qualquer outra coisa
@@ -54,7 +54,7 @@ function PowerupBoxScript:draw(t)
 	love.graphics.circle('fill', t.pos.x, t.pos.y, t.circoll.radius)
 
 	-- Nome
-	local s = ""
+	local s = t.powerup.name:match("."):upper()
 	for uppercase in string.gmatch(t.powerup.name, "%u") do
 		s = s..uppercase
 	end

@@ -1,7 +1,7 @@
 -- Primeiro define tamanho de tela e outros
 gameWidth, gameHeight = 1080, 720
 windowWidth, windowHeight = love.window.getDesktopDimensions()
-local fs = false
+local fs = true
 if not fs then
     windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
 end
@@ -46,9 +46,9 @@ function love.keypressed(key, scancode, isrepeat)
     end
     -- Muta som do jogo apertando m
     if key == "m" then
-        MU.active = not MU.active
-        if MU.active then
-            tags.master:setVolume(MU.volume)
+        gconf.music.active = not gconf.music.active
+        if gconf.music.active then
+            tags.master:setVolume(gconf.music.volume)
         else
             tags.master:setVolume(0)
         end
