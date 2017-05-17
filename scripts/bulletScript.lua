@@ -6,7 +6,6 @@ BulletScript = Script({Bullet})
 	Teoricamente deveria ser 2 scripts, mas tem pouca coisa ainda
 ]]
 
-
 local bulletRadius = 10
 
 function BulletScript:init(b)
@@ -22,53 +21,53 @@ function BulletScript:update(b, dt)
 
 	local cols, mtv = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
 
-	if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.minlife) then
-		for k,col in pairs(cols) do
-			-- Colisão com bullet
-			if col.treco.bullet then
-				if b.bullet.size < col.treco.bullet.size then
-					b:destroy()
-                    return
-				end
-			--Colisão com tank
-            elseif col.treco.tank then
+	for k,col in pairs(cols) do
+		-- Colisão com bullet
+		if col.treco.bullet then
+			if b.bullet.size < col.treco.bullet.size then
+				b:destroy()
+                return
+			end
+		--Colisão com tank
+        elseif col.treco.tank then
+            -- Se colide com tank pra não poder "pegar na faca"
+            if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.minlife) then
                 if not (col.treco.tank.name == b.bullet.source.tank.name) then
                     col.treco.tank:damage(-1, b)
                     b:destroy()
                     event.trigger("tank_hit", col.treco)
                     return
                 end
-
-            --Colisão com powerup
-            elseif col.treco.powerup then
-            	
-				local normal = vector.normalize(b.pos-col.treco.pos)
-				local aux = 2 * vector.dot(b.bullet.dir, normal)
-				vector.mul(normal, aux)
-				vector.sub(b.bullet.dir, normal)
-
-				vector.add(col.treco.powerup.vel,  normal * b.bullet.speed/15)
-        		
-        		--Não sei o que mtv faz, mas isso aqui parece funcionar
-        		vector.add(b.pos, mtv)
-
-            --Colisão com a arena
-            elseif col.treco.arena then
-				if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife) then
-	                b:destroy()
-					return
-				end
-				local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)
-				local aux = 2 * vector.dot(b.bullet.dir, normal)
-
-				--jeito "normal"
-				-- b.bullet.dir = b.bullet.dir - normal * aux
-
-				--Melhor desempenho
-				vector.mul(normal, aux)
-				vector.sub(b.bullet.dir, normal)
             end
-		end
+        --Colisão com powerup
+        elseif col.treco.powerup then
+
+			local normal = vector.normalize(b.pos-col.treco.pos)
+			local aux = 2 * vector.dot(b.bullet.dir, normal)
+			vector.mul(normal, aux)
+			vector.sub(b.bullet.dir, normal)
+
+			vector.add(col.treco.powerup.vel,  normal * b.bullet.speed/15)
+
+    		--Não sei o que mtv faz, mas isso aqui parece funcionar
+    		vector.add(b.pos, mtv)
+
+        --Colisão com a arena
+        elseif col.treco.arena then
+			if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife) then
+                b:destroy()
+				return
+			end
+			local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)
+			local aux = 2 * vector.dot(b.bullet.dir, normal)
+
+			--jeito "normal"
+			-- b.bullet.dir = b.bullet.dir - normal * aux
+
+			--Melhor desempenho
+			vector.mul(normal, aux)
+            vector.sub(b.bullet.dir, normal)
+        end
 	end
 end
 
