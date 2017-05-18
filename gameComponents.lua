@@ -17,9 +17,10 @@ Tank = Component("tank", {
 KeyboardInput = Component("kbInput", {
 	left = "a",
 	right = "d",
-	shoot = "w"
-	}, function(l,r,s)
-		return {left = l, right = r, shoot = s}
+	shoot = "w",
+	dash = "s"
+	}, function(l,r,s,d)
+		return {left = l, right = r, shoot = s, dash = d}
 	end)
 
 JoystickInput = Component("jsInput", {

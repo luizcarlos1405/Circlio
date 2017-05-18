@@ -31,4 +31,7 @@ function KeyboardInputHandler:keypressed(t, key)
 		t.tank:chargeFire()
 		t.kbInput.isCharging = true
 	end
+    if key == t.kbInput.dash then
+        t.tank:dash()
+    end
 end

@@ -25,6 +25,7 @@ function love.load()
 	--love.window.setMode(1080, 720, {vsync=false})
 	tCore.loadScene(R.scene.gameScene)
 end
+local frame = 1
 
 function love.update(dt)
 	tCore.update(dt)
@@ -32,12 +33,17 @@ function love.update(dt)
 end
 
 function love.draw()
+    local startTime = love.timer.getTime()
 	love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
     push:start()
 
 	tCore.draw()
 
     push:finish()
+    if love.timer.getTime()-startTime > 0.002 then
+        print(frame, love.timer.getTime()-startTime)
+    end
+    frame = frame + 1
 end
 
 function love.keypressed(key, scancode, isrepeat)

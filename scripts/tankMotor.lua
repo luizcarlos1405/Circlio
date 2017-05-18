@@ -1,6 +1,6 @@
 TankMotor = Script({Tank})
 
-local bulletImage = love.graphics.newImage("assets/bullet1flame.png")
+local bulletImage = love.graphics.newImage("assets/bullet2flame.png")
 
 local function canFire(t)
 	return love.timer.getTime() - t.lastFire > t.firerate
@@ -28,16 +28,7 @@ local function fire(t)
 	    size = bulletSize,
 	    source = t.treco}),
 	    Circoll(bulletSize),
-		Trail({ trails = {trail:new({
-				type = "point",
-				content = {
-					type = "circle",
-					radius = bulletSize
-				},
-				fade = "shrink",
-				amount = 5,
-				duration = .2
-			}), trail:new({
+		Trail({ trails = { trail:new({
 				type = "mesh",
 				content = {
 					source = bulletImage,
@@ -45,7 +36,7 @@ local function fire(t)
 					mode = "stretch"
 				},
 				duration = 1
-			})
+			}):setPosition(bulletPos.x, bulletPos.y)
 		}, color = Color(t.color:value())})
 	)
 
@@ -56,6 +47,11 @@ end
 
 local function move(t, d)
 	t.dir = d
+end
+
+local function dash(t)
+	timer.tween(0.1, t, {pos = t.pos + t.dir * 0.2}, "in-out-quad")
+--	t.pos = t.pos + t.dir * 0.1
 end
 
 local function damage(t, d, source)
@@ -80,6 +76,7 @@ function TankMotor:init(t)
 	t.tank.chargeFire = chargeFire
 	t.tank.fire = fire
 	t.tank.move = move
+	t.tank.dash = dash
 	t.tank.damage = damage
 
 	--Referencia de volta ao treco, pois as funções daqui vao receber a table do componente direto, e não do treco
