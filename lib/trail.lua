@@ -114,7 +114,6 @@ function trailObject:update(dt)
   if self.active then
     self.time = self.time - dt
     if self.time < 0 then
-      if self.type == "point" then print("added stuff") end
       self:add(self.x, self.y)
       self.time = self.time % self.delay
     end
