@@ -38,6 +38,7 @@ Bullet = Component("bullet", {
 	})
 
 Trail = Component("trail", {
+	color = Color(255, 255, 255),
 	trails = {}
 	}
 )

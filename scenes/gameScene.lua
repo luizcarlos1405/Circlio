@@ -3,6 +3,7 @@ gameScene = Scene("gameScene")
 require("gameComponents")
 
 --Scripts
+require("scripts.trailRenderer")
 require("scripts.arenaRenderer")
 require("scripts.tankRenderer")
 require("scripts.tankMotor")
@@ -17,7 +18,6 @@ require("scripts.deathMatch")
 require("scripts.powerupSpawner")
 require("scripts.powerupBoxScript")
 require("scripts.scoreboard")
-require("scripts.trailRenderer")
 --require("scripts.gravity")
 
 require("soundManager")

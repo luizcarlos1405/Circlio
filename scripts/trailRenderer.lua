@@ -8,8 +8,7 @@ function TrailRenderer:update(t, dt)
 end
 
 function TrailRenderer:draw(t)
-	r, g, b, a = t.bullet.source.tank.color:value()
-	love.graphics.setColor(r, g, b, a)
+	love.graphics.setColor(t.trail.color:value())
 	for _, v in pairs(t.trail.trails) do
 		v:draw()
 	end

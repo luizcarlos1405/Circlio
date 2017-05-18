@@ -7,8 +7,20 @@ local function spawn(t)
 	local r = love.math.random(1, #tankPowerUp.indices)
 
 	local pu = Treco(Position(gameCenter.x+math.cos(angle)*dist, gameCenter.y+math.sin(angle)*dist),
-	Circoll(8),
-	PowerUp(tankPowerUp.indices[r]))
+		Circoll(8),
+		PowerUp(tankPowerUp.indices[r]),
+		Trail({trails = {trail:new({
+				type = "point",
+				content = {
+					type = "circle",
+					radius = 20
+				},
+				fade = "shrink",
+				amount = 5,
+				duration = .5
+			})}, color = Color.blue
+		})
+	)
 	timer.tween(1, pu.circoll, {radius = gconf.powerup.radius}, 'out-elastic')
 	--powerUpControler.powerups[pu] = true
 

@@ -2,6 +2,7 @@ tankPowerUp = Script({Tank})
 
 -- Função especial de tiro para o update Spread Shot protótipo
 local function spreadShotFire(t)end
+local bulletImage = love.graphics.newImage("assets/bullet1flame.png")
 
 -- Table de powerups e as funções que os definem
 tankPowerUp.powerups = {
@@ -118,7 +119,26 @@ function spreadShotFire(t)
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
-    Circoll(bulletSize))
+    Circoll(bulletSize),
+	Trail({ trails = {trail:new({
+			type = "point",
+			content = {
+				type = "circle",
+				radius = bulletSize
+			},
+			fade = "shrink",
+			amount = 5,
+			duration = .2
+		}), trail:new({
+			type = "mesh",
+			content = {
+				source = bulletImage,
+				width = bulletSize*6,
+				mode = "stretch"
+			},
+			duration = 1
+		})
+	}, color = Color(t.color:value())}))
 
     -- Bala sentido horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
@@ -127,7 +147,26 @@ function spreadShotFire(t)
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
-    Circoll(bulletSize))
+    Circoll(bulletSize),
+	Trail({ trails = {trail:new({
+			type = "point",
+			content = {
+				type = "circle",
+				radius = bulletSize
+			},
+			fade = "shrink",
+			amount = 5,
+			duration = .2
+		}), trail:new({
+			type = "mesh",
+			content = {
+				source = bulletImage,
+				width = bulletSize*6,
+				mode = "stretch"
+			},
+			duration = 1
+		})
+	}, color = Color(t.color:value())}))
 
     -- Bala sentido anti-horario
     bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
@@ -136,7 +175,26 @@ function spreadShotFire(t)
     speed = 300 + (1.913^t.holdtime) * 100,
     size = bulletSize,
     source = t.treco}),
-    Circoll(bulletSize))
+    Circoll(bulletSize),
+	Trail({ trails = {trail:new({
+			type = "point",
+			content = {
+				type = "circle",
+				radius = bulletSize
+			},
+			fade = "shrink",
+			amount = 5,
+			duration = .2
+		}), trail:new({
+			type = "mesh",
+			content = {
+				source = bulletImage,
+				width = bulletSize*6,
+				mode = "stretch"
+			},
+			duration = 1
+		})
+	}, color = Color(t.color:value())}))
 
     t.holdtime = 0
 

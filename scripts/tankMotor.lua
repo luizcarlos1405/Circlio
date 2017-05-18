@@ -46,7 +46,7 @@ local function fire(t)
 				},
 				duration = 1
 			})
-		}})
+		}, color = Color(t.color:value())})
 	)
 
 	t.holdtime = 0
