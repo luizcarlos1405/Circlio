@@ -1,5 +1,7 @@
 TankMotor = Script({Tank})
 
+local bulletImage = love.graphics.newImage("assets/bullet1flame.png")
+
 local function canFire(t)
 	return love.timer.getTime() - t.lastFire > t.firerate
 end
@@ -21,11 +23,31 @@ local function fire(t)
     -- Calcula tamanho da bala em relação ao tempo segurado
     local bulletSize = gconf.bullet.size + t.holdtime*gconf.bullet.size
     Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia),
-    speed = 300 + (1.913^t.holdtime) * 100,
-    size = bulletSize,
-    source = t.treco}),
-    Circoll(bulletSize))
+	    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia),
+	    speed = 300 + (1.913^t.holdtime) * 100,
+	    size = bulletSize,
+	    source = t.treco}),
+	    Circoll(bulletSize),
+		Trail({ trails = {trail:new({
+				type = "point",
+				content = {
+					type = "circle",
+					radius = bulletSize
+				},
+				fade = "shrink",
+				amount = 5,
+				duration = .2
+			}), trail:new({
+				type = "mesh",
+				content = {
+					source = bulletImage,
+					width = bulletSize*6,
+					mode = "stretch"
+				},
+				duration = 1
+			})
+		}})
+	)
 
 	t.holdtime = 0
 

@@ -17,6 +17,7 @@ function TankRenderer:update(t, dt)
 end
 
 function TankRenderer:draw(t)
+
 	--Atualiza posição real com a posição com rad
 	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
 
@@ -61,7 +62,7 @@ function TankRenderer:draw(t)
 		local text = love.graphics.newText(love.graphics.getFont(), string.sub(t.tank.name, i, i))
 		love.graphics.draw(text,
 			t.tank.arena.pos.x + (math.cos((t.tank.pos - stringAng/2 + letterSpacing/2)+letterSpacing*(i-1))*(t.tank.arena.arena.raio+40)),
-			t.tank.arena.pos.y + (math.sin((t.tank.pos - stringAng/2 + letterSpacing/2)+ letterSpacing*(i-1))*(t.tank.arena.arena.raio+40)), 
+			t.tank.arena.pos.y + (math.sin((t.tank.pos - stringAng/2 + letterSpacing/2)+ letterSpacing*(i-1))*(t.tank.arena.arena.raio+40)),
 			math.rad(90)+(t.tank.pos - stringAng/2 + letterSpacing/2)+ letterSpacing*(i-1),
 			1, 1, text:getWidth()/2, text:getHeight()/2)
 	end

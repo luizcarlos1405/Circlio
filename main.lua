@@ -15,6 +15,8 @@ require("lib.util")
 require("sounds")
 timer = require("lib.timer")
 
+trail = require("lib.trail")
+
 push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = fs, vsync = false})
 
 gameCenter = vector(push:getWidth()/2,push:getHeight()/2)

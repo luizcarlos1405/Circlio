@@ -17,6 +17,7 @@ require("scripts.deathMatch")
 require("scripts.powerupSpawner")
 require("scripts.powerupBoxScript")
 require("scripts.scoreboard")
+require("scripts.trailRenderer")
 --require("scripts.gravity")
 
 require("soundManager")

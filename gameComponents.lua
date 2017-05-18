@@ -37,6 +37,11 @@ Bullet = Component("bullet", {
 	source = "none"
 	})
 
+Trail = Component("trail", {
+	trails = {}
+	}
+)
+
 Arena = Component("arena", {
 	raio = 100
 	}, function(raio)
