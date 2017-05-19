@@ -1,5 +1,6 @@
 event.listen("tank_shoot", function(tank, bs)
-	effect.shoot:play({pitch = gconf.bullet.size / (bs * 0.1 + gconf.bullet.size - 1)})
+    local maxBulletSize = gconf.bullet.size + gconf.bullet.maxHoldTime*gconf.bullet.size
+	effect.shoot:play({pitch = 1.2 - cpml.utils.map(bs, gconf.bullet.size, maxBulletSize, 0, 0.4)})
 end)
 
 event.listen("tank_hit", function(tank)
@@ -13,6 +14,5 @@ end)
 
 event.listen("powerup_pickup", function(pu, tank)
 	effect.powerupPick:play()
-	narrative[pu.name]:play()            
+	narrative[pu.name]:play()
 end)
-
