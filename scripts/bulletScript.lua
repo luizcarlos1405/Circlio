@@ -73,5 +73,5 @@ end
 
 function BulletScript:draw(b)
 	love.graphics.setColor(b.bullet.source.tank.color:value())
-	love.graphics.circle("fill", b.pos.x, b.pos.y, b.bullet.size)
+	--love.graphics.circle("fill", b.pos.x, b.pos.y, b.bullet.size)
 end

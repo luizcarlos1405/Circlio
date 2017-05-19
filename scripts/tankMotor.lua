@@ -31,11 +31,11 @@ local function fire(t)
 		Trail({ trails = { trail:new({
 				type = "mesh",
 				content = {
-					source = bulletImage,
-					width = bulletSize*6,
+					source = bulletSize<10 and R.texture.bullet1 or R.texture.bullet2,
+					width = bulletSize*2,
 					mode = "stretch"
 				},
-				duration = 1
+				duration = bulletSize<10 and 0.2 or 0.15
 			}):setPosition(bulletPos.x, bulletPos.y)
 		}, color = Color(t.color:value())})
 	)
@@ -87,6 +87,10 @@ end
 
 function TankMotor:update(t, dt)
 	if(t.tank.isCharging and t.tank:canFire()) then
+		--FastFire
+		--t.tank:fire()
+		--t.tank.isCharging = true
+
 		t.tank.holdtime = math.min(t.tank.holdtime + dt, 3)
 	end
 

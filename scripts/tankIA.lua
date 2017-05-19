@@ -7,17 +7,17 @@ end
 
 function TankIA:update(t, dt)
 
-	if love.math.random()<0.005 then
+	if love.math.random()<0.01 then
 		t.bot.dir = -t.bot.dir
 	end
 
 	if not t.bot.isCharging then
-		if love.math.random()<0.1 then
+		if love.math.random()<0.2 then
 			t.bot.isCharging = true
 			t.tank:chargeFire()
 		end
 	else
-		if love.math.random()<0.005 then
+		if love.math.random()<0.01 then
 			t.bot.isCharging = false
 			t.tank:fire()
 		end
