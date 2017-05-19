@@ -20,7 +20,7 @@ function measure(f, ...)
 end
 
 function spawnBullet(t, bpos, bsize, bdir)
-    imgPos = bpos + (bdir * gconf.bullet.imgOffset)
+    imgPos = bpos + (bdir * bsize * gconf.bullet.collOffset)
     Treco(Position(bpos.x, bpos.y),
 	    Bullet({dir = bdir,
 	    speed = 300 + (1.913^t.holdtime) * 100,

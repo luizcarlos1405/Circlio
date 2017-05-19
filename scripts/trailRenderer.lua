@@ -1,9 +1,12 @@
 TrailRenderer = Script({Trail})
 
 function TrailRenderer:update(t, dt)
-    imgPos = t.pos + (t.bullet.dir * gconf.bullet.imgOffset)
+    local pos = t.pos
+    if t.bullet then
+        pos = t.pos + (t.bullet.dir * t.bullet.size * gconf.bullet.collOffset)
+    end
 	for _, v in pairs(t.trail.trails) do
-		v:setPosition(imgPos.x, imgPos.y)
+		v:setPosition(pos.x, pos.y)
 		v:update(dt)
 	end
 end

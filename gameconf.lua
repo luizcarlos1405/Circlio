@@ -42,7 +42,7 @@ gconf.bullet = {
 	mtvFactor = 20, 	-- Varia nível de desvio ao atingir um powerupp
 	size = 5,
 	inercia = math.pi/30, -- O quanto a bala vai desviar em radianos por ser atirada andando
-    imgOffset = 10
+    collOffset = 1.4 -- Multiplica o offset que é baseado no raio da bullet
 }
 
 gconf.arena = {
