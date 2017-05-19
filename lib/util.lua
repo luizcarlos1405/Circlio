@@ -12,3 +12,9 @@ function approach(g, c, dt)
 		return g
 	end
 end
+
+function measure(f, ...)
+	local startTime = love.timer.getTime()
+	f(...)
+	return love.timer.getTime() - startTime
+end

@@ -9,21 +9,21 @@ local function move(c, m)
     local mtv = vector.zero
 	for k in pairs(tCirc) do
 		if k ~= c then
-            local distance = newPos:dist(k.treco.pos)
+            local distance = newPos:dist2(k.treco.pos)
             -- Colisão com a parte interna do shape k
 			if k.invert then
-				if distance > k.radius-c.radius then
+				if distance > math.pow(k.radius-c.radius,2) then
 					cols[#cols+1] = k
 					-- local overlap = newPos:dist(k.treco.pos) - k.radius-c.radius
 					newPos = k.treco.pos + (newPos-k.treco.pos):normalize()*(k.radius-c.radius)
 				end
             -- Colisão com o shape k
 			else
-                if distance < c.radius + k.radius then
+                if distance < math.pow(c.radius + k.radius,2) then
                     cols[#cols+1] = k
                     -- Calcula mtv que separa k de c
                     local V = vector.normalize(vector(c.treco.pos.x - k.treco.pos.x, c.treco.pos.y - k.treco.pos.y))
-                    mtv = V * (k.radius + c.radius - distance)
+                    mtv = V * (k.radius + c.radius - math.sqrt(distance))
                 end
 			end
 		end
@@ -50,7 +50,6 @@ function CirCollider:drawBefore(t)
 		end
 	end
 end
-
 function CirCollider:onRemoval(c)
 	tCirc[c.circoll] = nil
 end

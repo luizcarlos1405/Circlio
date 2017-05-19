@@ -12,6 +12,15 @@ local letterSpacing = math.rad(1.3)
 local singleLifeRad = math.floor(barSize/gconf.tank.maxLife)
 local lifeBarSpacing = barSize/gconf.tank.maxLife
 love.graphics.setNewFont("/font/FrancoisOne-Regular.ttf", 20)
+
+function TankRenderer:init(t)
+	t.tank.nameText = {}
+	local stringAng = letterSpacing * string.len(t.tank.name)
+	for i=1, t.tank.name:len() do
+		t.tank.nameText[i] = love.graphics.newText(love.graphics.getFont(), string.sub(t.tank.name, i, i))
+	end
+end
+
 function TankRenderer:update(t, dt)
 	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
 end
@@ -58,8 +67,7 @@ function TankRenderer:draw(t)
 	--love.graphics.setColor(r.label.color.r, r.label.color.g, r.label.color.b, r.label.color.a)
 
 	local stringAng = letterSpacing * string.len(t.tank.name)
-	for i=1, t.tank.name:len() do
-		local text = love.graphics.newText(love.graphics.getFont(), string.sub(t.tank.name, i, i))
+	for i,text in ipairs(t.tank.nameText) do
 		love.graphics.draw(text,
 			t.tank.arena.pos.x + (math.cos((t.tank.pos - stringAng/2 + letterSpacing/2)+letterSpacing*(i-1))*(t.tank.arena.arena.raio+40)),
 			t.tank.arena.pos.y + (math.sin((t.tank.pos - stringAng/2 + letterSpacing/2)+ letterSpacing*(i-1))*(t.tank.arena.arena.raio+40)),

@@ -29,20 +29,31 @@ function love.load()
 	tCore.loadScene(R.scene.gameScene)
 end
 local frame = 1
-
+local startTime
+local _dt
+local fpsCont = 0
+local fps = 0
 function love.update(dt)
-	
+    _dt = dt
+    startTime = love.timer.getTime()
     tCore.update(dt)
     timer.update(dt)
 end
 
 function love.draw()
-	love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+	
     push:start()
 
 	tCore.draw()
 
     push:finish()
+    fpsCont = fpsCont + 1
+    if fpsCont == 20 then
+        fpsCont = 0
+        fps = math.floor(1/(_dt + (love.timer.getTime()-startTime)))
+    end
+
+    love.graphics.print("FPS: "..fps, 10, 10)
 end
 
 function love.keypressed(key, scancode, isrepeat)
