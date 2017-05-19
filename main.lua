@@ -11,6 +11,7 @@ require("gameconf")
 
 push = require("lib.push")
 require("lib.util")
+cpml = require("lib.cpml.init")
 
 require("sounds")
 timer = require("lib.timer")

@@ -87,7 +87,7 @@ end
 
 function TankMotor:update(t, dt)
 	if(t.tank.isCharging and t.tank:canFire()) then
-		t.tank.holdtime = math.min(t.tank.holdtime + dt, 3)
+		t.tank.holdtime = math.min(t.tank.holdtime + dt, gconf.bullet.maxHoldTime)
 	end
 
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
