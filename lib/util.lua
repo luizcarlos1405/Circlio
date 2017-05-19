@@ -18,3 +18,23 @@ function measure(f, ...)
 	f(...)
 	return love.timer.getTime() - startTime
 end
+
+function spawnBullet(t, bpos, bsize, bdir)
+    Treco(Position(bpos.x, bpos.y),
+	    Bullet({dir = bdir,
+	    speed = 300 + (1.913^t.holdtime) * 100,
+	    size = bsize,
+	    source = t.treco}),
+	    Circoll(bsize),
+		Trail({ trails = { trail:new({
+				type = "mesh",
+				content = {
+					source = bsize<10 and R.texture.bullet1 or R.texture.bullet2,
+					width = bsize*2,
+					mode = "stretch"
+				},
+				duration = bsize<10 and 0.2 or 0.15
+			}):setPosition(bpos.x, bpos.y)
+		}, color = Color(t.color:value())})
+	)
+end

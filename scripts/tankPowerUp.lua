@@ -111,90 +111,17 @@ function spreadShotFire(t)
 
     -- Calcula tamanho da bala em relação ao tempo segurado
     local bulletSize = gconf.bullet.size + t.holdtime*gconf.bullet.size
+    -- Posição da bullet de acordo com o player
+    local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
 
     -- Bala do meio
-    local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
-    Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia),
-    speed = 300 + (1.913^t.holdtime) * 100,
-    size = bulletSize,
-    source = t.treco}),
-    Circoll(bulletSize),
-	Trail({ trails = {trail:new({
-			type = "point",
-			content = {
-				type = "circle",
-				radius = bulletSize
-			},
-			fade = "shrink",
-			amount = 5,
-			duration = .2
-		}), trail:new({
-			type = "mesh",
-			content = {
-				source = bulletImage,
-				width = bulletSize*6,
-				mode = "stretch"
-			},
-			duration = 1
-		})
-	}, color = Color(t.color:value())}))
+    spawnBullet(t, bulletPos, bulletSize, vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia))
 
     -- Bala sentido horario
-    bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
-    Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia - gconf.powerup.spreadshot.mod),
-    speed = 300 + (1.913^t.holdtime) * 100,
-    size = bulletSize,
-    source = t.treco}),
-    Circoll(bulletSize),
-	Trail({ trails = {trail:new({
-			type = "point",
-			content = {
-				type = "circle",
-				radius = bulletSize
-			},
-			fade = "shrink",
-			amount = 5,
-			duration = .2
-		}), trail:new({
-			type = "mesh",
-			content = {
-				source = bulletImage,
-				width = bulletSize*6,
-				mode = "stretch"
-			},
-			duration = 1
-		})
-	}, color = Color(t.color:value())}))
+    spawnBullet(t, bulletPos, bulletSize, vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia - gconf.powerup.spreadshot.mod))
 
     -- Bala sentido anti-horario
-    bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
-    Treco(Position(bulletPos.x, bulletPos.y),
-    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia + gconf.powerup.spreadshot.mod),
-    speed = 300 + (1.913^t.holdtime) * 100,
-    size = bulletSize,
-    source = t.treco}),
-    Circoll(bulletSize),
-	Trail({ trails = {trail:new({
-			type = "point",
-			content = {
-				type = "circle",
-				radius = bulletSize
-			},
-			fade = "shrink",
-			amount = 5,
-			duration = .2
-		}), trail:new({
-			type = "mesh",
-			content = {
-				source = bulletImage,
-				width = bulletSize*6,
-				mode = "stretch"
-			},
-			duration = 1
-		})
-	}, color = Color(t.color:value())}))
+    spawnBullet(t, bulletPos, bulletSize, vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia + gconf.powerup.spreadshot.mod))
 
     t.holdtime = 0
 

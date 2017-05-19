@@ -20,25 +20,11 @@ local function fire(t)
 	t.isCharging = false
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
+
     -- Calcula tamanho da bala em relação ao tempo segurado
     local bulletSize = gconf.bullet.size + t.holdtime*gconf.bullet.size
-    Treco(Position(bulletPos.x, bulletPos.y),
-	    Bullet({dir = vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia),
-	    speed = 300 + (1.913^t.holdtime) * 100,
-	    size = bulletSize,
-	    source = t.treco}),
-	    Circoll(bulletSize),
-		Trail({ trails = { trail:new({
-				type = "mesh",
-				content = {
-					source = bulletSize<10 and R.texture.bullet1 or R.texture.bullet2,
-					width = bulletSize*2,
-					mode = "stretch"
-				},
-				duration = bulletSize<10 and 0.2 or 0.15
-			}):setPosition(bulletPos.x, bulletPos.y)
-		}, color = Color(t.color:value())})
-	)
+    -- Cria bullet
+    spawnBullet(t, bulletPos, bulletSize, vector.rotate(vector.normalize(gameCenter-t.treco.pos), -t.dir * gconf.bullet.inercia))
 
 	t.holdtime = 0
 
@@ -91,7 +77,7 @@ function TankMotor:update(t, dt)
 		--t.tank:fire()
 		--t.tank.isCharging = true
 
-		t.tank.holdtime = math.min(t.tank.holdtime + dt, 3)
+		t.tank.holdtime = math.min(t.tank.holdtime + dt, gconf.bullet.maxHoldTime)
 	end
 
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)
