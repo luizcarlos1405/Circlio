@@ -8,12 +8,29 @@ local names = {
 }
 
 local colors = {
-	Color.blue,
-	Color.red,
-	Color.green,
-	Color.orange,
-	Color.white,
-	Color.grey
+	Color(240,163,255),
+	Color(0,117,220),
+	Color(153,63,0),
+	Color(0,92,49),
+	Color(43,206,72),
+	Color(255,204,153),
+	Color(128,128,128),
+	Color(148,255,181),
+	Color(143,124,0),
+	Color(157,204,0),
+	Color(194,0,136),
+	Color(255,164,5),
+	Color(255,168,187),
+	Color(66,102,0),
+	Color(255,0,16),
+	Color(94,241,242),
+	Color(0,153,143),
+	Color(224,255,102),
+	Color(116,10,255),
+	Color(153,0,0),
+	Color(255,255,128),
+	Color(255,255,0),
+	Color(255,80,5)
 }
 
 
