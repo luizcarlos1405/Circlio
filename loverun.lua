@@ -42,7 +42,7 @@ function love.run()
 			love.graphics.present()
 		end
 		--Novo
-		if love.timer then love.timer.sleep((1/60)-dt) end		
+		if love.timer then love.timer.sleep((1/100)-dt) end		
 		--FimNovo		
  		
  		--Antigo: limita o FPS em 1000

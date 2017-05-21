@@ -50,6 +50,10 @@ function tCore.registerScript(script)
 	tCore.scripts[script.sType][script.id] = script
 end
 
+function tCore.unregisterScript(script)
+	tCore.scripts[script.sType][script.id] = nil
+end
+
 function tCore.registerScene(scene)
 	tCore.scenes[scene.name] = scene
 end

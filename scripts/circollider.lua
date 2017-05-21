@@ -1,6 +1,6 @@
 CirCollider = Script({Circoll})
 
-local debug = true
+local debug = false
 local tCirc = {}
 
 local function move(c, m)

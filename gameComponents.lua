@@ -1,4 +1,5 @@
 Tank = Component("tank", {
+	active = false,
     name = "Player",
     arena = false,
     pos = 0,
@@ -45,6 +46,8 @@ Trail = Component("trail", {
 )
 
 Arena = Component("arena", {
+	started = false,
+	ended = false,
 	raio = 100
 	}, function(raio)
 		return {raio = raio}

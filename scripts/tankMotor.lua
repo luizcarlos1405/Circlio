@@ -7,12 +7,13 @@ local function canFire(t)
 end
 
 local function chargeFire(t)
+	if not t.active then return end
 	t.holdtime = 0
 	t.isCharging = true
 end
 
 local function fire(t)
-	if not t:canFire() then return end
+	if not t:canFire() or not t.active then return end
 
 	t.lastFire = love.timer.getTime()
 	t.cooldownBulletSize = 0
@@ -32,15 +33,17 @@ local function fire(t)
 end
 
 local function move(t, d)
+	if not t.active then return end
 	t.dir = d
 end
 
 local function dash(t)
+	if not t.active then return end
 	timer.tween(0.1, t, {pos = t.pos + t.dir * 0.2}, "in-out-quad")
---	t.pos = t.pos + t.dir * 0.1
 end
 
 local function damage(t, d, source)
+	if not t.active then return end
 	t.life = math.min(gconf.tank.maxLife, t.life + d)
 	if (t.life <= 0) then
 		event.trigger("tank_die", t, source)
