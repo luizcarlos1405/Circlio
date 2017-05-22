@@ -20,7 +20,6 @@ function measure(f, ...)
 end
 
 function spawnBullet(t, bpos, bsize, bdir)
-    imgPos = bpos + (bdir * bsize * gconf.bullet.collOffset)
     Treco(Position(bpos.x, bpos.y),
 	    Bullet({dir = bdir,
 	    speed = 300 + (1.913^t.holdtime) * 100,
@@ -35,7 +34,7 @@ function spawnBullet(t, bpos, bsize, bdir)
 					mode = "stretch"
 				},
 				duration = bsize<10 and 0.2 or 0.15
-			}):setPosition(imgPos.x, imgPos.y)
+			}, bpos) -- Passando imgPos como argumento para a função new do trail.lua modificada que impede o bug
 		}, color = Color(t.color:value())})
 	)
 end

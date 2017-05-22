@@ -34,6 +34,7 @@ local _dt
 local fpsCont = 0
 local fps = 0
 function love.update(dt)
+    -- dt = dt * 0.1
     _dt = dt
     startTime = love.timer.getTime()
     tCore.update(dt)
@@ -41,7 +42,7 @@ function love.update(dt)
 end
 
 function love.draw()
-	
+
     push:start()
 
 	tCore.draw()
