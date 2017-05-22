@@ -28,13 +28,14 @@ function spawnBullet(t, bpos, bsize, bdir)
 	    Circoll(bsize),
 		Trail({ trails = { trail:new({
 				type = "mesh",
+                position = {bpos.x, bpos.y},
 				content = {
 					source = bsize<10 and R.texture.bullet1 or R.texture.bullet2,
 					width = bsize*2,
 					mode = "stretch"
 				},
 				duration = bsize<10 and 0.2 or 0.15
-			}, bpos) -- Passando imgPos como argumento para a função new do trail.lua modificada que impede o bug
+			}) -- Passando imgPos como argumento para a função new do trail.lua modificada que impede o bug
 		}, color = Color(t.color:value())})
 	)
 end

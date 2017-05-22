@@ -26,7 +26,7 @@ setmetatable(trail, trail)
 
 --[[ Public ]]--
 
-function trail:new(f, pos)
+function trail:new(f)
 
   local _object = f
 
@@ -47,10 +47,12 @@ function trail:new(f, pos)
 
     _object.content.mode = _object.content.mode or default.mode
     _object.width = f.content.width or default.width
-    _object.content.mesh = love.graphics.newMesh(_object.duration / _object.delay / _object.delay, "strip")
+    _object.content.mesh = love.graphics.newMesh((_object.duration / _object.delay / _object.delay), "strip")
     _object.content.mesh:setTexture(_object.content.source)
-    for i = 1, _object.content.mesh:getVertexCount() do
-        _object.content.mesh:setVertex(i, pos.x, pos.y)
+    if _object.position then
+        for i = 1, _object.content.mesh:getVertexCount() do
+            _object.content.mesh:setVertex(i, _object.position[1], _object.position[2])
+        end
     end
   end
 
