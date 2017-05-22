@@ -28,7 +28,7 @@ function love.load()
 	--love.window.setMode(1080, 720, {vsync=false})
 	tCore.loadScene(R.scene.gameScene)
 end
-local frame = 1
+
 local startTime
 local _dt
 local fpsCont = 0
@@ -39,6 +39,7 @@ function love.update(dt)
     startTime = love.timer.getTime()
     tCore.update(dt)
     timer.update(dt)
+    love.graphics.setBackgroundColor(20, 20, 20)
 end
 
 function love.draw()

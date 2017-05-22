@@ -1,7 +1,5 @@
 TankMotor = Script({Tank})
 
-local bulletImage = love.graphics.newImage("assets/bullet2flame.png")
-
 local function canFire(t)
 	return love.timer.getTime() - t.lastFire > t.firerate
 end
