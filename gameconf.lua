@@ -6,7 +6,8 @@ gconf.music = {
 }
 
 gconf.tank = {
-	maxLife = 5
+	maxLife = 5,
+    dashCooldown = 1
 }
 
 -- Power Ups
