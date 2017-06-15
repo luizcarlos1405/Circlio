@@ -27,8 +27,10 @@ require("soundManager")
 local trecoArena, Player1, Player2, Player3
 
 function gameScene:init()
-	trecoArena = Treco(Position(gameCenter), Arena(gconf.arena.size), Circoll(gconf.arena.size, true))
+	trecoArena = Treco(Position(gameCenter), Arena(1), Circoll(gconf.arena.size, true))
     trecoArena.arena.treco = trecoArena
+
+    timer.tween(0.5, trecoArena.arena, {raio = gconf.arena.size}, "in-quad")
 
     -- Para jogar com controle descomente a linha abaixo
 	-- Player1 = Treco(Position(vector(0, 0)), Tank("Luiz", trecoArena, love.math.random(0, 2*math.pi), Color(0, 255, 255)), JoystickInput(3, 4), Circoll(20))
@@ -54,7 +56,7 @@ function gameScene:init()
 
     -- Inicia musica de fundo
     if gconf.music.active then
-        music.battle:play()
+        --music.battle:play()
     end
 end
 

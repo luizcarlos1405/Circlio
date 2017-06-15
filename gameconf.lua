@@ -47,5 +47,5 @@ gconf.bullet = {
 }
 
 gconf.arena = {
-	size = gameHeight/2 - 30
+	size = gameHeight/2 - 50
 }

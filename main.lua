@@ -30,7 +30,7 @@ cmr = camera()
 function love.load()
 	--love.window.setMode(1080, 720, {vsync=false})
 	tCore.loadScene(R.scene.gameScene)
-
+    
 end
 
 local startTime
@@ -47,14 +47,14 @@ function love.update(dt)
 end
 
 function love.draw()
-    cmr:attach()
     push:start()
     ParticleRenderer.drawOnce()
+    cmr:attach()
     --love.graphics.draw(R.texture.bg, 0,0)
 	tCore.draw()
 
-    push:finish()
     cmr:detach()
+    push:finish()
     fpsCont = fpsCont + 1
     if fpsCont == 20 then
         fpsCont = 0

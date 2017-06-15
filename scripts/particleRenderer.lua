@@ -65,7 +65,6 @@ fundo()
 function ParticleRenderer.drawOnce()
 
 	for k,v in pairs(particles) do
-		love.graphics.print(v.system:getCount( ), 100, 0)
 		love.graphics.setColor(v.color:value())
 		love.graphics.draw(v.system, v.pos.x, v.pos.y)
 	end
