@@ -11,6 +11,10 @@ function TankIA:update(t, dt)
 		t.bot.dir = -t.bot.dir
 	end
 
+    if love.math.random()<0.001 then
+        
+    end
+
 	if not t.bot.isCharging then
 		if love.math.random()<0.2 then
 			t.bot.isCharging = true

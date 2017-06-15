@@ -49,9 +49,10 @@ function trail:new(f)
     _object.width = f.content.width or default.width
     _object.content.mesh = love.graphics.newMesh((_object.duration / _object.delay / _object.delay), "strip")
     _object.content.mesh:setTexture(_object.content.source)
-    if _object.position then
+    if _object.initPosition then
+        -- Modify inicial position of the vertices. They are set to {0, 0, 0, 0, 255, 255, 255, 255} by newMesh
         for i = 1, _object.content.mesh:getVertexCount() do
-            _object.content.mesh:setVertex(i, _object.position[1], _object.position[2])
+            _object.content.mesh:setVertex(i, _object.initPosition[1], _object.initPosition[2])
         end
     end
   end

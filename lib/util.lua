@@ -28,7 +28,7 @@ function spawnBullet(t, bpos, bsize, bdir)
 	    Circoll(bsize),
 		Trail({ trails = { trail:new({
 				type = "mesh",
-                position = {bpos.x, bpos.y},
+                initPosition = {bpos.x, bpos.y},
 				content = {
 					source = bsize<10 and R.texture.bullet1 or R.texture.bullet2,
 					width = bsize*2,

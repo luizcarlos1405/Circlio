@@ -6,6 +6,7 @@ Tank = Component("tank", {
     color = Color.blue,
     life = gconf.tank.maxLife,
     firerate = 0.4,
+    dashCooldown = gconf.tank.dashCooldown,
     maxSpeed = 1.4,
     powerups = {FastFire = false,
     SpreadShot = false,

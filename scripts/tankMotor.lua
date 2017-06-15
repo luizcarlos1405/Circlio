@@ -4,6 +4,11 @@ local function canFire(t)
 	return love.timer.getTime() - t.lastFire > t.firerate
 end
 
+local function canDash(t)
+    -- Da dash se estiver no cooldown e se estiver andando
+    return (love.timer.getTime() - t.lastDash > t.dashCooldown) and (t.dir ~= 0)
+end
+
 local function chargeFire(t)
 	if not t.active then return end
 	t.holdtime = 0
@@ -36,7 +41,10 @@ local function move(t, d)
 end
 
 local function dash(t)
-	if not t.active then return end
+	if not t:canDash() or not t.active then return end
+
+    t.lastDash = love.timer.getTime()
+
 	timer.tween(0.1, t, {pos = t.pos + t.dir * 0.2}, "in-out-quad")
 end
 
@@ -52,6 +60,7 @@ end
 function TankMotor:init(t)
 	--Inicializa variaveis internas
 	t.tank.lastFire = love.timer.getTime()
+    t.tank.lastDash = t.tank.lastFire
 	t.tank.holdtime = 0
 	t.tank.speed = 0
 	t.tank.dir = 0
@@ -60,6 +69,7 @@ function TankMotor:init(t)
 
 	--Referencia as funções locais
 	t.tank.canFire = canFire
+    t.tank.canDash = canDash
 	t.tank.chargeFire = chargeFire
 	t.tank.fire = fire
 	t.tank.move = move
