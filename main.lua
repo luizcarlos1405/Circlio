@@ -49,7 +49,8 @@ end
 function love.draw()
     cmr:attach()
     push:start()
-    love.graphics.draw(R.texture.bg, 0,0)
+    ParticleRenderer.drawOnce()
+    --love.graphics.draw(R.texture.bg, 0,0)
 	tCore.draw()
 
     push:finish()

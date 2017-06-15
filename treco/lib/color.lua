@@ -20,6 +20,10 @@ function Color:value()
 	return self.r, self.g, self.b, self.a
 end
 
+function Color:clone()
+	return new(self.r, self.g, self.b, self.a)
+end
+
 setmetatable(Color, {__call = function(_, ...) return new(...) end})
 
 --Constantes

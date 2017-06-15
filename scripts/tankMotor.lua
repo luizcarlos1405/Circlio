@@ -61,7 +61,7 @@ local function die(t)
 	timer.during(0.6, function()
 		t.color.a = math.random(128,255)
 	end)
-	timer.tween(0.6,t.color, {r=255,g=255,b=255}, "out-quad");
+	--timer.tween(0.6,t.color, {r=255,g=255,b=255}, "out-quad");
 	timer.tween(0.6,t, {size = 30}, "in-quad", function()
 		timer.tween(0.3,t.color, {a=0}, "out-quad");
 		timer.tween(0.3, t, {size = 0}, "out-quad", function()
@@ -78,6 +78,8 @@ local function damage(t, d, source)
 		screenShake(0.5)
 		die(t)
 		--t.treco:destroy()
+	else
+		screenShake(0.1)
 	end
 end
 
