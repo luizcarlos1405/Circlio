@@ -20,6 +20,7 @@ require("scripts.powerupBoxScript")
 --require("scripts.scoreboard")
 --require("scripts.gravity")
 require("scripts.lobby")
+require("scripts.particleRenderer")
 
 require("soundManager")
 
@@ -53,7 +54,7 @@ function gameScene:init()
 
     -- Inicia musica de fundo
     if gconf.music.active then
-        --music.battle:play()
+        music.battle:play()
     end
 end
 
