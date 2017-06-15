@@ -15,13 +15,17 @@ local function chargeFire(t)
 	t.isCharging = true
 end
 
-local function fire(t)
-	if not t:canFire() or not t.active then return end
-
+local function resetBullet(t)
 	t.lastFire = love.timer.getTime()
 	t.cooldownBulletSize = 0
 	timer.tween(t.firerate, t, {cooldownBulletSize = 5}, "out-quint")
 	t.isCharging = false
+end
+
+local function fire(t)
+	if not t:canFire() or not t.active then return end
+
+	resetBullet(t)
 
     local bulletPos = gameCenter+vector(math.cos(t.pos)*(t.arena.arena.raio-35), math.sin(t.pos)*(t.arena.arena.raio-35))
 
@@ -48,14 +52,34 @@ local function dash(t)
 	timer.tween(0.1, t, {pos = t.pos + t.dir * 0.2}, "in-out-quad")
 end
 
+
+local function die(t)
+	t.active = false
+	t.dir = 0
+	t.isCharging = false
+	timer.during(0.6, function()
+		t.color.a = math.random(128,255)
+	end)
+	timer.tween(0.6,t.color, {r=255,g=255,b=255}, "out-quad");
+	timer.tween(0.6,t, {size = 30}, "in-quad", function()
+		timer.tween(0.3,t.color, {a=0}, "out-quad");
+		timer.tween(0.3, t, {size = 0}, "out-quad", function()
+			t.treco:destroy()
+		end)
+	end)
+end
+
 local function damage(t, d, source)
 	if not t.active then return end
 	t.life = math.min(gconf.tank.maxLife, t.life + d)
 	if (t.life <= 0) then
 		event.trigger("tank_die", t, source)
-		t.treco:destroy()
+		screenShake(0.5)
+		die(t)
+		--t.treco:destroy()
 	end
 end
+
 
 function TankMotor:init(t)
 	--Inicializa variaveis internas
@@ -71,6 +95,7 @@ function TankMotor:init(t)
 	t.tank.canFire = canFire
     t.tank.canDash = canDash
 	t.tank.chargeFire = chargeFire
+	t.tank.resetBullet = resetBullet
 	t.tank.fire = fire
 	t.tank.move = move
 	t.tank.dash = dash

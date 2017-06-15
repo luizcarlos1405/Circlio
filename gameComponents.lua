@@ -3,6 +3,7 @@ Tank = Component("tank", {
     name = "Player",
     arena = false,
     pos = 0,
+    size = 15,
     color = Color.blue,
     life = gconf.tank.maxLife,
     firerate = 0.4,

@@ -6,7 +6,7 @@ gconf.music = {
 }
 
 gconf.tank = {
-	maxLife = 3,
+	maxLife = 5,
     dashCooldown = 1
 }
 
@@ -25,7 +25,7 @@ gconf.powerup = {
 		mod = 2
 	},
 	spreadshot = {
-		time = 7,
+		time = 4,
 		mod = math.pi/20
 	},
 	spawner = {

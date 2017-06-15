@@ -10,6 +10,7 @@ local bulletRadius = 10
 
 function BulletScript:init(b)
 	b.bullet.lifeTimer = love.timer.getTime()
+	b.bullet.bounceCount = 0
 end
 
 function BulletScript:update(b, dt)
@@ -54,7 +55,8 @@ function BulletScript:update(b, dt)
 
         --Colisão com a arena
         elseif col.treco.arena then
-			if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife) then
+        	b.bullet.bounceCount = b.bullet.bounceCount + 1
+			if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife or b.bullet.bounceCount > 4) then
                 b:destroy()
 				return
 			end
