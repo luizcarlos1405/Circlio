@@ -16,6 +16,7 @@ effect = {
     shoot = ripple.newSound(path.."shoot.mp3", {tags = {tags.master, tags.sfx}}),
     hit = ripple.newSound(path.."hit.mp3", {tags = {tags.master, tags.sfx}}),
     die = ripple.newSound(path.."destroyed.mp3", {tags = {tags.master, tags.sfx}}),
+    dash = ripple.newSound(path.."dash.mp3", {tags = {tags.master, tags.sfx}}),
 }
 
 music = {

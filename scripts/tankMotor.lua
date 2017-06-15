@@ -6,6 +6,7 @@ end
 
 local function canDash(t)
     -- Da dash se estiver no cooldown e se estiver andando
+    event.trigger("tank_dash")
     return (love.timer.getTime() - t.lastDash > t.dashCooldown) and (t.dir ~= 0)
 end
 

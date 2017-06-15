@@ -6,13 +6,16 @@ function TankIA:init(t)
 end
 
 function TankIA:update(t, dt)
+    if not t.tank.active then return end
 
 	if love.math.random()<0.01 then
 		t.bot.dir = -t.bot.dir
 	end
 
     if love.math.random()<0.001 then
-        
+        if t.tank:canDash() then
+            t.tank:dash()
+        end
     end
 
 	if not t.bot.isCharging then

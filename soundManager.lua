@@ -18,6 +18,12 @@ event.listen("tank_die", function(tank)
     end
 end)
 
+event.listen("tank_dash", function(tank)
+    if gconf.music.active then
+        effect.dash:play({pitch = love.math.random(10, 12)/10})
+    end
+end)
+
 event.listen("powerup_spawn", function(pu)
  	if gconf.music.active then
 		-- Efeito sonoro variando a nota entre 70% e 100% do ton original
