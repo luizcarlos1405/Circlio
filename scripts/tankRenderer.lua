@@ -7,7 +7,7 @@ TankRenderer = Script({Tank})
 
 local barSize = 14	--Tamanho em graus da barra dos indicadores de potencia e vida
 
-local letterSpacing = math.rad(1.3)
+local letterSpacing = math.rad(2.5)
 
 local singleLifeRad = math.floor(barSize/gconf.tank.maxLife)
 local lifeBarSpacing = barSize/gconf.tank.maxLife
@@ -34,27 +34,31 @@ function TankRenderer:draw(t)
 	love.graphics.setColor(t.tank.color:value())
 
 	--Desenha tank
-	love.graphics.circle("fill", t.pos.x, t.pos.y, 15)
+	love.graphics.circle("fill", t.pos.x, t.pos.y, t.tank.size)
 	--love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio-7, t.tank.pos-0.1, t.tank.pos+0.1)
 
-	--Desenha vida
-	--love.graphics.setColor(Color.red:value())
-	for i=0,t.tank.life-1 do
-		--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
-		love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))
-	end
-	love.graphics.setLineWidth(2)
-	for i=t.tank.life, gconf.tank.maxLife-1 do
-		--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
-		love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))
+	if t.tank.life>0 then
+		--Desenha vida
+		--love.graphics.setColor(Color.red:value())
+		for i=0,t.tank.life-1 do
+			--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
+			love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))
+		end
+		love.graphics.setLineWidth(2)
+		for i=t.tank.life, gconf.tank.maxLife-1 do
+			--print(i, i * lifeBarSpacing - barSize/2, i * lifeBarSpacing - barSize/2 + singleLifeRad)
+			love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio+18, t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2), t.tank.pos-math.rad(i * lifeBarSpacing - barSize/2 + singleLifeRad))
+		end
 	end
 
-	--Desenha bullet crescendo
-	local bulletPos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-35), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-35))
-	if t.tank.isCharging then
-		love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
-	else
-		love.graphics.circle("fill", bulletPos.x, bulletPos.y, t.tank.cooldownBulletSize)
+	if t.tank.active then
+		--Desenha bullet crescendo
+		local bulletPos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-35), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-35))
+		if t.tank.isCharging then
+			love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
+		else
+			love.graphics.circle("fill", bulletPos.x, bulletPos.y, t.tank.cooldownBulletSize)
+		end
 	end
 
 	love.graphics.setLineWidth(10)

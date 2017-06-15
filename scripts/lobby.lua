@@ -73,6 +73,7 @@ function Lobby:update(t, dt)
 		tCore.unregisterScript(Lobby)
 		for i,v in ipairs(tanks) do
 			v.tank.active = true
+			v.tank:resetBullet()
 		end
 		t.arena.started = true
 	end
