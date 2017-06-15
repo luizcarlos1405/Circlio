@@ -14,7 +14,8 @@ effect = {
     powerupAppear = ripple.newSound(path..'powerup-appears.mp3', {tags = {tags.master, tags.sfx}}),
     powerupPick = ripple.newSound(path.."powerup-pick.mp3", {tags = {tags.master, tags.sfx}}),
     shoot = ripple.newSound(path.."shoot.mp3", {tags = {tags.master, tags.sfx}}),
-    hit = ripple.newSound(path.."hit.mp3", {tags = {tags.master, tags.sfx}})
+    hit = ripple.newSound(path.."hit.mp3", {tags = {tags.master, tags.sfx}}),
+    die = ripple.newSound(path.."destroyed.mp3", {tags = {tags.master, tags.sfx}}),
 }
 
 music = {
