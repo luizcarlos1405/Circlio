@@ -1,9 +1,9 @@
 require("loverun")
 
 -- Primeiro define tamanho de tela e outros
-gameWidth, gameHeight = 1080, 720
+gameWidth, gameHeight = 1366, 768
 windowWidth, windowHeight = love.window.getDesktopDimensions()
-local fs = false
+local fs = true
 if not fs then
     windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
 end
@@ -17,6 +17,7 @@ cpml = require("lib.cpml.init")
 
 require("sounds")
 timer = require("lib.timer")
+camera = require("lib.camera")
 
 trail = require("lib.trail")
 
@@ -24,9 +25,12 @@ push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen =
 
 gameCenter = vector(push:getWidth()/2,push:getHeight()/2)
 
+cmr = camera()
+
 function love.load()
 	--love.window.setMode(1080, 720, {vsync=false})
 	tCore.loadScene(R.scene.gameScene)
+
 end
 
 local startTime
@@ -39,16 +43,17 @@ function love.update(dt)
     startTime = love.timer.getTime()
     tCore.update(dt)
     timer.update(dt)
-    love.graphics.setBackgroundColor(20, 20, 20)
+    love.graphics.setBackgroundColor(0, 0, 0)
 end
 
 function love.draw()
-
+    cmr:attach()
     push:start()
-
+    love.graphics.draw(R.texture.bg, 0,0)
 	tCore.draw()
 
     push:finish()
+    cmr:detach()
     fpsCont = fpsCont + 1
     if fpsCont == 20 then
         fpsCont = 0

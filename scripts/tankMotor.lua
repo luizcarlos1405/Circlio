@@ -45,6 +45,7 @@ local function damage(t, d, source)
 	t.life = math.min(gconf.tank.maxLife, t.life + d)
 	if (t.life <= 0) then
 		event.trigger("tank_die", t, source)
+		screenShake(0.5)
 		t.treco:destroy()
 	end
 end

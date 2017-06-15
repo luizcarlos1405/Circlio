@@ -39,3 +39,13 @@ function spawnBullet(t, bpos, bsize, bdir)
 		}, color = Color(t.color:value())})
 	)
 end
+
+function screenShake(t)
+	local orig_x, orig_y = cmr:position()
+	timer.during(t, function()
+		cmr:lookAt(orig_x + math.random(-2,2), orig_y + math.random(-2,2))
+	end, function()
+		-- reset cmr position
+		cmr:lookAt(orig_x, orig_y)
+	end)
+end
