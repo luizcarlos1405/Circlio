@@ -30,7 +30,7 @@ function gameScene:init()
 	trecoArena = Treco(Position(gameCenter), Arena(1), Circoll(gconf.arena.size, true))
     trecoArena.arena.treco = trecoArena
 
-    timer.tween(0.5, trecoArena.arena, {raio = gconf.arena.size}, "in-quad")
+    timer.tween(0.5, trecoArena.arena, {raio = gconf.arena.size}, "in-out-quint")
 
     -- Para jogar com controle descomente a linha abaixo
 	-- Player1 = Treco(Position(vector(0, 0)), Tank("Luiz", trecoArena, love.math.random(0, 2*math.pi), Color(0, 255, 255)), JoystickInput(3, 4), Circoll(20))

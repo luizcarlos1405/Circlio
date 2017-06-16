@@ -43,7 +43,7 @@ function love.update(dt)
     startTime = love.timer.getTime()
     tCore.update(dt)
     timer.update(dt)
-    love.graphics.setBackgroundColor(0, 0, 0)
+    love.graphics.setBackgroundColor(10, 10, 10)
 end
 
 function love.draw()

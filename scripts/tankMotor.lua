@@ -6,7 +6,7 @@ end
 
 local function canDash(t)
     -- Da dash se estiver no cooldown e se estiver andando
-    event.trigger("tank_dash")
+    
     return (love.timer.getTime() - t.lastDash > t.dashCooldown) and (t.dir ~= 0)
 end
 
@@ -47,7 +47,7 @@ end
 
 local function dash(t)
 	if not t:canDash() or not t.active then return end
-
+	event.trigger("tank_dash")
     t.lastDash = love.timer.getTime()
 
 	timer.tween(0.1, t, {pos = t.pos + t.dir * 0.2}, "in-out-quad")
@@ -68,6 +68,8 @@ local function die(t)
 			t.treco:destroy()
 		end)
 	end)
+
+	t.arena.addDecal(t.arena, t.pos, t.color)
 end
 
 local function damage(t, d, source)
