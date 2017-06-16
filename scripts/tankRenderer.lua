@@ -31,10 +31,18 @@ function TankRenderer:draw(t)
 	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
 
 	love.graphics.setLineWidth(10)
-	love.graphics.setColor(t.tank.color:value())
 
 	--Desenha tank
-	love.graphics.circle("fill", t.pos.x, t.pos.y, t.tank.size)
+	--love.graphics.circle("fill", t.pos.x, t.pos.y, t.tank.size)
+	local scale = 0.07
+	love.graphics.setColor(t.tank.color:value())
+	love.graphics.draw(R.texture.asa1, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.draw(R.texture.asa2, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.setColor(Color.white:value())
+	love.graphics.draw(R.texture.asa3, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.draw(R.texture.base, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.setColor(t.tank.color:value())
+
 	--love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio-7, t.tank.pos-0.1, t.tank.pos+0.1)
 
 	if t.tank.life>0 then

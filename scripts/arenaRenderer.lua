@@ -19,7 +19,7 @@ function ArenaRenderer:init(t)
 	
 	t.addDecal = addDecal
 	t.drawFunc = function()
-	    love.graphics.setLineWidth(10)
+	    love.graphics.setLineWidth(15)
 	    love.graphics.circle("line", t.pos.x, t.pos.y, t.arena.raio)
 	end
 end

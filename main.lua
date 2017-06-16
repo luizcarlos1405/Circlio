@@ -3,7 +3,7 @@ require("loverun")
 -- Primeiro define tamanho de tela e outros
 gameWidth, gameHeight = 1366, 768
 windowWidth, windowHeight = love.window.getDesktopDimensions()
-local fs = true
+local fs = false
 if not fs then
     windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
 end
