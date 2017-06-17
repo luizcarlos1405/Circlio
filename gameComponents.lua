@@ -28,9 +28,10 @@ KeyboardInput = Component("kbInput", {
 
 JoystickInput = Component("jsInput", {
     jsnumber = 1,
-    shoot = 1
-}, function(n, s)
-		return {jsnumber = n, shoot = s}
+    shoot = 1,
+    dash = 2
+}, function(n, s, d)
+		return {jsnumber = n, shoot = s, dash = d}
 	end)
 
 

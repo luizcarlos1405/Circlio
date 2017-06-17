@@ -81,6 +81,7 @@ local function damage(t, d, source)
 		die(t)
 		--t.treco:destroy()
 	else
+		event.trigger("tank_damage", t, source)
 		screenShake(0.1)
 	end
 end

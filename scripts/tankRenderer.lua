@@ -34,7 +34,7 @@ function TankRenderer:draw(t)
 
 	--Desenha tank
 	--love.graphics.circle("fill", t.pos.x, t.pos.y, t.tank.size)
-	local scale = 0.07
+	local scale = 0.06
 	love.graphics.setColor(t.tank.color:value())
 	love.graphics.draw(R.texture.asa1, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
 	love.graphics.draw(R.texture.asa2, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)

@@ -114,7 +114,7 @@ function Lobby:joystickpressed(t, joy, b)
 		tanks[#tanks+1] = Treco(
 			Position(vector(0, 0)), 
 			Tank(names[playerCont], t, 0, nextColor()),
-			JoystickInput(joy, joyControls),
+			JoystickInput(joy, joyControls, 2),
 			Circoll(20))
 		refreshPositions()
 		lastInput = love.timer.getTime()
