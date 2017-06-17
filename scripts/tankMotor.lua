@@ -11,7 +11,7 @@ local function canDash(t)
 end
 
 local function chargeFire(t)
-	if not t.active then return end
+	if t.freeze then return end
 	t.holdtime = 0
 	t.isCharging = true
 end
@@ -24,7 +24,7 @@ local function resetBullet(t)
 end
 
 local function fire(t)
-	if not t:canFire() or not t.active then return end
+	if not t:canFire() or t.freeze then return end
 
 	resetBullet(t)
 
@@ -41,12 +41,12 @@ local function fire(t)
 end
 
 local function move(t, d)
-	if not t.active then return end
+	if t.freeze then return end
 	t.dir = d
 end
 
 local function dash(t)
-	if not t:canDash() or not t.active then return end
+	if not t:canDash() or t.freeze then return end
 	event.trigger("tank_dash")
     t.lastDash = love.timer.getTime()
 
@@ -56,6 +56,7 @@ end
 
 local function die(t)
 	t.active = false
+	t.freeze = true
 	t.dir = 0
 	t.isCharging = false
 	timer.during(0.6, function()
@@ -73,12 +74,12 @@ local function die(t)
 end
 
 local function damage(t, d, source)
-	if not t.active then return end
+	if t.freeze then return end
 	t.life = math.min(gconf.tank.maxLife, t.life + d)
 	if (t.life <= 0) then
-		event.trigger("tank_die", t, source)
 		screenShake(0.5)
 		die(t)
+		event.trigger("tank_die", t, source)
 		--t.treco:destroy()
 	else
 		event.trigger("tank_damage", t, source)
@@ -115,6 +116,17 @@ function TankMotor:init(t)
 end
 
 function TankMotor:update(t, dt)
+	
+	
+	if not t.tank.active then return end
+	--Atualiza posição real com a posição com rad
+	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
+	
+	if t.tank.freeze then return end
+	
+	
+
+
 	if(t.tank.isCharging and t.tank:canFire()) then
 		--FastFire
 		--t.tank:fire()

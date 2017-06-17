@@ -11,7 +11,7 @@ local letterSpacing = math.rad(2.5)
 
 local singleLifeRad = math.floor(barSize/gconf.tank.maxLife)
 local lifeBarSpacing = barSize/gconf.tank.maxLife
-love.graphics.setNewFont("/font/FrancoisOne-Regular.ttf", 20)
+
 
 --Escala da textura
 local scale = 0.06
@@ -25,14 +25,11 @@ function TankRenderer:init(t)
 end
 
 function TankRenderer:update(t, dt)
-	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
 end
 
 function TankRenderer:draw(t)
 
-	--Atualiza posição real com a posição com rad
-	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
-
+	
 	love.graphics.setLineWidth(10)
 
 	--Desenha tank
@@ -40,12 +37,14 @@ function TankRenderer:draw(t)
 	love.graphics.setColor(t.tank.color:value())
 	love.graphics.draw(R.texture.asa, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale*t.tank.size, scale*t.tank.size, 317, 356)
 	--love.graphics.draw(R.texture.asa2, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
-	love.graphics.setColor(Color.white:value())
+	love.graphics.setColor(Color.white:value(t.tank.color.a))
 	--love.graphics.draw(R.texture.asa3, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
 	love.graphics.draw(R.texture.base, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale*t.tank.size, scale*t.tank.size, 317, 356)
 	love.graphics.setColor(t.tank.color:value())
 
 	--love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio-7, t.tank.pos-0.1, t.tank.pos+0.1)
+
+	if not t.tank.active  then return end
 
 	if t.tank.life>0 then
 		--Desenha vida
@@ -61,7 +60,7 @@ function TankRenderer:draw(t)
 		end
 	end
 
-	if t.tank.active then 	
+	if not t.tank.freeze then 	
 		--Desenha bullet crescendo
 		local bulletPos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-35), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-35))
 		if t.tank.isCharging then

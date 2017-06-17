@@ -8,29 +8,23 @@ local names = {
 }
 
 local colors = {
-	Color(194,0,136),
-	Color(255,164,5),
-	Color(255,168,187),
-	Color(66,102,0),
-	Color(255,0,16),
-	Color(94,241,242),
-	Color(0,153,143),
-	Color(224,255,102),
-	Color(116,10,255),
-	Color(153,0,0),
-	Color(255,255,128),
-	Color(255,255,0),
-	Color(240,163,255),
 	Color(0,117,220),
 	Color(153,63,0),
+	Color(255,0,16),
+	Color(66,102,0),
+	Color(255,164,5),
 	Color(0,92,49),
 	Color(43,206,72),
-	Color(255,204,153),
 	Color(128,128,128),
 	Color(148,255,181),
 	Color(143,124,0),
 	Color(157,204,0),
-	Color(255,80,5)
+	Color(194,0,136),
+	Color(0,153,143),
+	Color(224,255,102),
+	Color(116,10,255),
+	Color(153,0,0),
+	Color(255,255,0)
 }
 
 
@@ -60,7 +54,14 @@ end
 local function refreshPositions()
 	local spacing = math.pi/#tanks*2
 	for i,v in ipairs(tanks) do
-		v.tank.pos = spacing * (i-1)
+		--Muda a posição dos novos tanks para animar anti-horário
+		if v.tank.pos == 0 and playerCont+botCont ~= 1 then
+			v.tank.pos = 2*math.pi
+		end	
+		--v.tank.pos = spacing * (i-1)
+		
+		timer.tween(0.2, v.tank, {pos = spacing * (i-1)+0.001}, "out-quad")
+		
 	end
 end
 
@@ -72,7 +73,7 @@ function Lobby:update(t, dt)
 	if countDown<=0 then
 		tCore.unregisterScript(Lobby)
 		for i,v in ipairs(tanks) do
-			v.tank.active = true
+			v.tank.freeze = false
 			v.tank:resetBullet()
 		end
 		t.arena.started = true
@@ -80,6 +81,7 @@ function Lobby:update(t, dt)
 end
 
 function Lobby:draw(t)	
+	love.graphics.setColor(Color.white:value())
 	love.graphics.print(countDown, t.pos.x, t.pos.y)
 end
 

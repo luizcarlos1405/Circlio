@@ -5,6 +5,7 @@ local decal = R.texture.decal3
 local decalOffset = vector(decal:getWidth()/2, decal:getHeight()/2)
 
 local function addDecal(a, p, color, s)
+	if a.gameOver then return end
 	a.decals[#a.decals+1] = {
 		p = p,
 		color = color:clone(),
@@ -44,10 +45,10 @@ function ArenaRenderer:draw(t)
     love.graphics.setStencilTest("greater", 0)    
 
     --Comenta essas 4 linhas pra voltar pra trilho
-    --[[love.graphics.stencil(t.drawFunc2, "replace", 1)
+    love.graphics.stencil(t.drawFunc2, "replace", 1)
     love.graphics.setColor(Color(200):value())
     love.graphics.setStencilTest("less", 1)
-    love.graphics.rectangle("fill", 0, 0, 2000, 1200)]]
+    love.graphics.rectangle("fill", 0, 0, 2000, 1200)
 
     for i,v in ipairs(t.arena.decals) do
     	love.graphics.circle("fill", t.pos.x, t.pos.y, 10)

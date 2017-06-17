@@ -5,6 +5,9 @@ require("gameComponents")
 --Scripts
 require("scripts.trailRenderer")
 require("scripts.arenaRenderer")
+require("scripts.powerupSpawner")
+require("scripts.powerupBoxScript")
+require("scripts.deathMatch")
 require("scripts.tankRenderer")
 require("scripts.tankMotor")
 require("scripts.bulletScript")
@@ -14,9 +17,6 @@ require("scripts.tankIA")
 require("scripts.tankPowerUp")
 require("scripts.asteroidScript")
 require("scripts.circollider")
-require("scripts.deathMatch")
-require("scripts.powerupSpawner")
-require("scripts.powerupBoxScript")
 --require("scripts.scoreboard")
 --require("scripts.gravity")
 require("scripts.lobby")
@@ -56,7 +56,7 @@ function gameScene:init()
 
     -- Inicia musica de fundo
     if gconf.music.active then
-        music.battle:play()
+        --music.battle:play()
     end
 end
 

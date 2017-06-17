@@ -34,7 +34,7 @@ end
 function PowerupSpawner:update(t, dt)
 	t.arena.powerupTimer = t.arena.powerupTimer - dt
 
-	if t.arena.powerupTimer < 0 then
+	if t.arena.powerupTimer < 0  and not t.arena.gameOver then
 		t.arena.powerupTimer = love.math.random(gconf.powerup.spawner.mintime, gconf.powerup.spawner.maxtime)
 		spawn(t)
 	end

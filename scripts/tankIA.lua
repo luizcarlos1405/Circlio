@@ -6,7 +6,7 @@ function TankIA:init(t)
 end
 
 function TankIA:update(t, dt)
-    if not t.tank.active then return end
+    if t.tank.freeze then return end
 
 	if love.math.random()<0.01 then
 		t.bot.dir = -t.bot.dir

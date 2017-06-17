@@ -1,5 +1,11 @@
 PowerupBoxScript = Script({PowerUp})
 
+function PowerupBoxScript:init(t)
+	event.listen("gameOver", function()
+		t:destroy()
+	end)
+end
+
 function PowerupBoxScript:update(t, dt)
 
 	local cols, mtv = t.circoll:move(t.powerup.vel * dt)

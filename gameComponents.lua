@@ -1,5 +1,6 @@
 Tank = Component("tank", {
-	active = false,
+	active = true,
+	freeze = true,
     name = "Player",
     arena = false,
     pos = 0,
