@@ -62,14 +62,14 @@ local function die(t)
 		t.color.a = math.random(128,255)
 	end)
 	--timer.tween(0.6,t.color, {r=255,g=255,b=255}, "out-quad");
-	timer.tween(0.6,t, {size = 30}, "in-quad", function()
+	timer.tween(0.6,t, {size = 1.5}, "in-quad", function()
 		timer.tween(0.3,t.color, {a=0}, "out-quad");
 		timer.tween(0.3, t, {size = 0}, "out-quad", function()
 			t.treco:destroy()
 		end)
 	end)
 
-	t.arena.addDecal(t.arena, t.pos, t.color)
+	t.arena.arena:addDecal(t.treco.pos:clone(), t.color)
 end
 
 local function damage(t, d, source)
@@ -94,6 +94,7 @@ function TankMotor:init(t)
 	t.tank.holdtime = 0
 	t.tank.speed = 0
 	t.tank.dir = 0
+	t.tank.size = 1
 
 	t.tank.cooldownBulletSize = 5
 

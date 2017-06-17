@@ -11,14 +11,17 @@ local bulletRadius = 10
 function BulletScript:init(b)
 	b.bullet.lifeTimer = love.timer.getTime()
 	b.bullet.bounceCount = 0
+	b.bullet.active = true
+end
+
+local bulletFilter = function(item, other)
+	if other.tank then return "cross" end
+	if other.bullet then return "cross" end
 end
 
 function BulletScript:update(b, dt)
 
-	local bulletFilter = function(item, other)
-		if other.tank then return "cross" end
-		if other.bullet then return "cross" end
-	end
+	if not b.bullet.active then return end	
 
 	local cols, mtv = b.circoll:move(b.bullet.dir*b.bullet.speed*dt, bulletFilter)
 
@@ -55,9 +58,15 @@ function BulletScript:update(b, dt)
 
         --Colisão com a arena
         elseif col.treco.arena then
+			col.treco.arena.addDecal(col.treco.arena, b.pos:clone(), b.bullet.source.tank.color,b.bullet.size/50)
         	b.bullet.bounceCount = b.bullet.bounceCount + 1
 			if (love.timer.getTime() - b.bullet.lifeTimer > gconf.bullet.maxlife or b.bullet.bounceCount > 4) then
-                b:destroy()
+                b.bullet.speed = 0
+                b.bullet.active = false
+                timer.after(0.2,function()
+                	b:destroy()	
+                end)
+                
 				return
 			end
 			local normal = vector.normalize(b.pos-b.bullet.source.tank.arena.pos)

@@ -13,6 +13,9 @@ local singleLifeRad = math.floor(barSize/gconf.tank.maxLife)
 local lifeBarSpacing = barSize/gconf.tank.maxLife
 love.graphics.setNewFont("/font/FrancoisOne-Regular.ttf", 20)
 
+--Escala da textura
+local scale = 0.06
+
 function TankRenderer:init(t)
 	t.tank.nameText = {}
 	local stringAng = letterSpacing * string.len(t.tank.name)
@@ -34,13 +37,12 @@ function TankRenderer:draw(t)
 
 	--Desenha tank
 	--love.graphics.circle("fill", t.pos.x, t.pos.y, t.tank.size)
-	local scale = 0.06
 	love.graphics.setColor(t.tank.color:value())
-	love.graphics.draw(R.texture.asa, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.draw(R.texture.asa, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale*t.tank.size, scale*t.tank.size, 317, 356)
 	--love.graphics.draw(R.texture.asa2, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
 	love.graphics.setColor(Color.white:value())
 	--love.graphics.draw(R.texture.asa3, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
-	love.graphics.draw(R.texture.base, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.draw(R.texture.base, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale*t.tank.size, scale*t.tank.size, 317, 356)
 	love.graphics.setColor(t.tank.color:value())
 
 	--love.graphics.arc("line", "open", t.tank.arena.pos.x, t.tank.arena.pos.y, t.tank.arena.arena.raio-7, t.tank.pos-0.1, t.tank.pos+0.1)
