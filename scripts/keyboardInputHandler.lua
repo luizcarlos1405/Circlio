@@ -24,6 +24,13 @@ function KeyboardInputHandler:update(t, dt)
     	t.tank:fire()
     	t.kbInput.isCharging = false
     end
+
+    -- Se estiver no fastFire atirar só de segurar o botão e não ficar carregando
+    -- No tankPowerUp.lua ele da chardFire quando acaba o powerup pra ficar tudo certo
+    -- Este código está "repetido" no joystickInputHandler
+    if t.tank:canFire() and love.keyboard.isDown(t.kbInput.shoot) and t.tank.powerups["fastFire"] then
+        t.tank:fire()
+    end
 end
 
 function KeyboardInputHandler:keypressed(t, key)

@@ -18,6 +18,12 @@ tankPowerUp.powerups = {
             t.tank.fastfiretime = gconf.powerup.fastfire.time
             t.tank.firerate = t.tank.firerate * gconf.powerup.fastfire.mod
             t.tank.powerups["fastFire"] = true
+            -- Coloca como não charging para que as balas saiam todas do mesmo tamanho
+            if t.kbInput then
+                t.kbInput.isCharging = false
+            elseif t.jsInput then
+                t.jsInput.isCharging = false
+            end
         elseif t.tank.fastfiretime > 0 then
             -- Atualiza o estado do powerup
             if dt then
@@ -29,6 +35,7 @@ tankPowerUp.powerups = {
             -- Retorna para valores base e finaliza o powerup
             t.tank.firerate = t.tank.baseFireRate
             t.tank.powerups["fastFire"] = false
+            t.tank:chargeFire()
         end
     end,
     speedBoost = function(t,dt)

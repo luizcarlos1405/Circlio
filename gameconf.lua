@@ -18,7 +18,7 @@ gconf.powerup = {
 	mtvFactor = 30, -- Varia nível de desvio ao atingir uma bala
 	fastfire = {
 		time = 8,
-		mod = 0.1
+		mod = 0.2
 	},
 	speedboost = {
 		time = 5,

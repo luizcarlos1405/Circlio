@@ -56,7 +56,7 @@ function gameScene:init()
 
     -- Inicia musica de fundo
     if gconf.music.active then
-        --music.battle:play()
+        music.battle:play()
     end
 end
 
