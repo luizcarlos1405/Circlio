@@ -48,6 +48,13 @@ function joystickInputHandler:update(t, dt)
     if not t.jsInput.isVibrating then
     	t.jsInput.joystick:setVibration(0,t.tank.holdtime/10)
     end
+
+    -- Se estiver no fastFire atirar só de segurar o botão e não ficar carregando
+    -- No tankPowerUp.lua ele da chardFire quando acaba o powerup pra ficar tudo certo
+    -- Este código está "repetido" no keyboardInputHandler
+    if t.tank:canFire() and t.jsInput.joystick:isDown(t.jsInput.shoot) and t.tank.powerups["fastFire"] then
+        t.tank:fire()
+    end
 end
 
 function joystickInputHandler:joystickpressed(t, joystick, button)
@@ -61,4 +68,3 @@ function joystickInputHandler:joystickpressed(t, joystick, button)
 		end
 	end
 end
-
