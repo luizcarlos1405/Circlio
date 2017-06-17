@@ -36,10 +36,10 @@ function TankRenderer:draw(t)
 	--love.graphics.circle("fill", t.pos.x, t.pos.y, t.tank.size)
 	local scale = 0.06
 	love.graphics.setColor(t.tank.color:value())
-	love.graphics.draw(R.texture.asa1, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
-	love.graphics.draw(R.texture.asa2, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	love.graphics.draw(R.texture.asa, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	--love.graphics.draw(R.texture.asa2, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
 	love.graphics.setColor(Color.white:value())
-	love.graphics.draw(R.texture.asa3, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
+	--love.graphics.draw(R.texture.asa3, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
 	love.graphics.draw(R.texture.base, t.pos.x, t.pos.y, t.tank.pos-math.pi/2, scale, scale, 317, 356)
 	love.graphics.setColor(t.tank.color:value())
 
@@ -59,13 +59,19 @@ function TankRenderer:draw(t)
 		end
 	end
 
-	if t.tank.active then
+	if t.tank.active then 	
 		--Desenha bullet crescendo
 		local bulletPos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-35), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-35))
 		if t.tank.isCharging then
-			love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
+			local bsize = 0.10+t.tank.holdtime/16
+			local rndPos = t.tank.holdtime/2
+			love.graphics.draw(R.texture.ball, bulletPos.x + math.random(-rndPos, rndPos), bulletPos.y + math.random(-rndPos, rndPos), 0, bsize, bsize, 50, 50)
+			--love.graphics.circle("fill", bulletPos.x, bulletPos.y, 5+t.tank.holdtime*5)
 		else
-			love.graphics.circle("fill", bulletPos.x, bulletPos.y, t.tank.cooldownBulletSize)
+			local bsize = t.tank.cooldownBulletSize/4
+			love.graphics.draw(R.texture.ball, bulletPos.x, bulletPos.y, 0, bsize, bsize, 50, 50)
+			
+			--love.graphics.circle("fill", bulletPos.x, bulletPos.y, t.tank.cooldownBulletSize)
 		end
 	end
 

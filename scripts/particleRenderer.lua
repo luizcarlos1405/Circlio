@@ -38,15 +38,15 @@ end)
 
 local function fundo()
 	local psystem = love.graphics.newParticleSystem(R.texture.bolaredonda, 750)
-	psystem:setParticleLifetime(5,15) -- Particles live at least 2s and at most 5s.
-	psystem:setEmissionRate(50)
+	psystem:setParticleLifetime(10,30) -- Particles live at least 2s and at most 5s.
+	psystem:setEmissionRate(25)
 	psystem:setSizeVariation(1)
 	psystem:setSizes(0.2,1,0.5)
 	psystem:setSpinVariation(1)
 	psystem:setAreaSpread("normal", 400,400)
 	--psystem:setLinearAcceleration( -3, -3, 3, 3)
 	--psystem:setLinearDamping(1,2)
-	psystem:setSpeed(-100,100)
+	psystem:setSpeed(-10,10)
 	psystem:setSpread(2*math.pi)
 	psystem:setTangentialAcceleration(-20,20)
 	--psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.

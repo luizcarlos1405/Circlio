@@ -19,7 +19,7 @@ end
 local function resetBullet(t)
 	t.lastFire = love.timer.getTime()
 	t.cooldownBulletSize = 0
-	timer.tween(t.firerate, t, {cooldownBulletSize = 5}, "out-quint")
+	timer.tween(t.firerate, t, {cooldownBulletSize = t.firerate}, "out-quint")
 	t.isCharging = false
 end
 

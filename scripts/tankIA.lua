@@ -18,13 +18,15 @@ function TankIA:update(t, dt)
         end
     end
 
+    local fireChance = t.tank.powerups.fastFire and 1 or 0.01
+
 	if not t.bot.isCharging then
 		if love.math.random()<0.2 then
 			t.bot.isCharging = true
 			t.tank:chargeFire()
 		end
 	else
-		if love.math.random()<0.01 then
+		if love.math.random()<fireChance then
 			t.bot.isCharging = false
 			t.tank:fire()
 		end
