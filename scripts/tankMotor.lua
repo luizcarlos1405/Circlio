@@ -83,7 +83,7 @@ local function damage(t, d, source)
 		--t.treco:destroy()
 	else
 		event.trigger("tank_damage", t, source)
-		screenShake(0.1)
+		screenShake(0.1, 1)
 	end
 end
 
@@ -132,7 +132,7 @@ function TankMotor:update(t, dt)
 		--t.tank:fire()
 		--t.tank.isCharging = true
 
-		t.tank.holdtime = math.min(t.tank.holdtime + dt, gconf.bullet.maxHoldTime)
+		t.tank.holdtime = math.min(t.tank.holdtime + dt*t.tank.chargeMultiplier, gconf.bullet.maxHoldTime)
 	end
 
 	t.tank.speed = approach(t.tank.dir*t.tank.maxSpeed, t.tank.speed, dt*15)

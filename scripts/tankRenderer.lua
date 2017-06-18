@@ -7,7 +7,7 @@ TankRenderer = Script({Tank})
 
 local barSize = 14	--Tamanho em graus da barra dos indicadores de potencia e vida
 
-local letterSpacing = math.rad(2.5)
+local letterSpacing = math.rad(1.6)
 
 local singleLifeRad = math.floor(barSize/gconf.tank.maxLife)
 local lifeBarSpacing = barSize/gconf.tank.maxLife
@@ -28,7 +28,8 @@ function TankRenderer:update(t, dt)
 end
 
 function TankRenderer:draw(t)
-
+	--hack pra separar as letras quando a arena encolhe
+	letterSpacing = math.rad(1.6) + ((gconf.arena.size - t.tank.arena.arena.raio)/7000)
 	
 	love.graphics.setLineWidth(10)
 

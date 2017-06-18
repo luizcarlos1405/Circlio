@@ -14,9 +14,11 @@ tankPowerUp.powerups = {
         if not t.tank.powerups["fastFire"] then
             -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
+            t.tank.baseMaxSpeed = t.tank.maxSpeed
             -- Inicia powerup
             t.tank.fastfiretime = gconf.powerup.fastfire.time
             t.tank.firerate = t.tank.firerate * gconf.powerup.fastfire.mod
+            t.tank.maxSpeed = t.tank.maxSpeed * 0.7
             t.tank.powerups["fastFire"] = true
             -- Coloca como não charging para que as balas saiam todas do mesmo tamanho
             if t.kbInput then
@@ -45,6 +47,7 @@ tankPowerUp.powerups = {
             -- Inicia powerup
             t.tank.speedboosttime = gconf.powerup.speedboost.time
             t.tank.maxSpeed = t.tank.maxSpeed * gconf.powerup.speedboost.mod
+            t.tank.chargeMultiplier = 2
             t.tank.powerups["speedBoost"] = true
 
         elseif t.tank.speedboosttime > 0 then
@@ -57,6 +60,7 @@ tankPowerUp.powerups = {
         else
             -- Retorna para o valor base e finaliza o powerup
             t.tank.maxSpeed = t.tank.baseMaxSpeed
+            t.tank.chargeMultiplier = 1
             t.tank.powerups["speedBoost"] = false
         end
     end,

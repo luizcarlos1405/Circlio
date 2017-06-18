@@ -79,12 +79,12 @@ end
 function deathMatch:draw(t)
     love.graphics.setColor(Color.white:value())
     for k,v in pairs(killLog) do
-        love.graphics.print(v.killer.name.." matou "..v.killed.name, 0, 30*k)
+        love.graphics.print(v.killer.name.." matou "..v.killed.name, 10, 30*k)
     end
     local i = 0
     for k,v in pairs(tanks) do
         i = i + 1
-        love.graphics.print(k.name..": \t"..v, 0, 400+30*i)
+        love.graphics.print(k.name..": \t"..v, 10, 400+30*i)
     end
 
     
@@ -92,7 +92,9 @@ function deathMatch:draw(t)
 
     if t.arena.gameOver then
         love.graphics.setColor(Color.white:value(200))
-        love.graphics.circle("fill", t.pos.x, t.pos.y, t.arena.winnerCircle)
+        love.graphics.circle("fill", t.pos.x, t.pos.y, t.arena.winnerCircle-2)
+        --Por algum motivo, a borda com o modo line é mais suave
+        love.graphics.circle("line", t.pos.x, t.pos.y, t.arena.winnerCircle)
         love.graphics.setColor(t.arena.bgColor:value())
         love.graphics.print("Winner!", t.pos.x-30, t.pos.y-80)
         love.graphics.print(t.arena.winner.name, t.pos.x-font:getWidth(t.arena.winner.name)/2, t.pos.y+40)

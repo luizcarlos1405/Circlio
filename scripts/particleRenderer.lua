@@ -49,7 +49,7 @@ local function fundo()
 	--psystem:setLinearDamping(1,2)
 	psystem:setSpeed(-2,2)
 	psystem:setSpread(2*math.pi)
-	--psystem:setTangentialAcceleration(-20,20)
+	psystem:setTangentialAcceleration(-20,20)
 	--psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
 	psystem:setColors(255, 255, 255, 0, 255, 255, 255, 255, 255, 255, 255, 0) -- Fade to transparency.
 
