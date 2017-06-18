@@ -48,7 +48,7 @@ local tanks = {}
 local countDown
 
 local function nextColor()
-	return colors[math.max(1,((playerCont+botCont)%#colors))]
+	return colors[math.max(1,((playerCont+botCont)%#colors))]:clone()
 end
 
 local function refreshPositions()
@@ -65,13 +65,26 @@ local function refreshPositions()
 	end
 end
 
+function Lobby:init(t)
+	event.listen("gameOver", function()
+		playerCont = 0
+		botCont = 0
+		tanks = {}
+		kbPlayer = false
+		joyPlayer = {
+			false, false, false, false	--Suporte pra 4 controles
+		}
+	end)
+end
+
 function Lobby:update(t, dt)
+	if t.arena.started then return end
 	if playerCont + botCont < 2 then
 		lastInput = love.timer.getTime()
 	end
 	countDown = math.ceil(3 - (love.timer.getTime() - lastInput))
 	if countDown<=0 then
-		tCore.unregisterScript(Lobby)
+		--tCore.unregisterScript(Lobby)
 		for i,v in ipairs(tanks) do
 			v.tank.freeze = false
 			v.tank:resetBullet()
@@ -81,11 +94,15 @@ function Lobby:update(t, dt)
 end
 
 function Lobby:draw(t)	
+	if t.arena.started then return end
+	love.graphics.setFont(bigFont)
 	love.graphics.setColor(Color.white:value())
-	love.graphics.print(countDown, t.pos.x, t.pos.y)
+	love.graphics.print(countDown, t.pos.x-bigFont:getWidth(countDown)/2, t.pos.y-bigFont:getHeight()/2)
+	love.graphics.setFont(font)
 end
 
 function Lobby:keypressed(t, k)
+	if t.arena.started then return end
 	if k == kbControls[3] and not kbPlayer then
 		playerCont = playerCont + 1
 		tanks[#tanks+1] = Treco(
@@ -109,6 +126,7 @@ function Lobby:keypressed(t, k)
 end
 
 function Lobby:joystickpressed(t, joy, b)
+	if t.arena.started then return end
 	joy = joy:getID()
 	if b == joyControls and not joyPlayer[joy] then
 		playerCont = playerCont + 1

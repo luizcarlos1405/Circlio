@@ -36,6 +36,8 @@ function ArenaRenderer:init(t)
 	t.drawFunc2 = function()
 	    love.graphics.circle("fill", t.pos.x, t.pos.y, t.arena.raio-8)
 	end
+
+	t.arena.bgColor = Color(200,200,200,0)
 end
 
 function ArenaRenderer:draw(t)
@@ -45,10 +47,16 @@ function ArenaRenderer:draw(t)
     love.graphics.setStencilTest("greater", 0)    
 
     --Comenta essas 4 linhas pra voltar pra trilho
-    love.graphics.stencil(t.drawFunc2, "replace", 1)
-    love.graphics.setColor(Color(200):value())
-    love.graphics.setStencilTest("less", 1)
-    love.graphics.rectangle("fill", 0, 0, 2000, 1200)
+    if t.arena.bgColor.a>0 then
+	    love.graphics.setColor(t.arena.bgColor:value())
+	    if t.arena.gameOver then
+	    	love.graphics.stencil(t.drawFunc2, "replace", 1)
+	    else
+	    	love.graphics.stencil(t.drawFunc, "replace", 1)
+	    end
+	    love.graphics.setStencilTest("less", 1)
+	    love.graphics.rectangle("fill", 0, 0, 2000, 1200)
+	end
 
     for i,v in ipairs(t.arena.decals) do
     	love.graphics.circle("fill", t.pos.x, t.pos.y, 10)

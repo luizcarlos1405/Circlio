@@ -42,9 +42,9 @@ function CirCollider:init(t)
 end
 
 function CirCollider:drawBefore(t)
+	if debug then
 	love.graphics.setLineWidth(2)
 	love.graphics.setColor(Color.grey:value())
-	if debug then
 		for c in pairs(tCirc) do
 			love.graphics.circle("line", c.treco.pos.x, c.treco.pos.y, c.radius)
 		end
