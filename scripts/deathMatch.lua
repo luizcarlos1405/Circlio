@@ -13,9 +13,9 @@ local function reset(t)
     if reseting then return end
     reseting = true
     t.arena.decals = {}
-    
+
     tanks = {}
-    killLog = {}  
+    killLog = {}
 
     timer.tween(1.5, t.arena, {winnerCircle = 0}, "in-out-quint")
     timer.tween(1.5, t.arena, {raio = gconf.arena.size}, "in-out-quint")
@@ -24,7 +24,7 @@ local function reset(t)
     timer.tween(1.5, t.arena.winner, {size = 0, pos = 10}, "in-out-quint", function()
         t.arena.winner.treco:destroy()
         t.arena.gameOver = false
-        t.arena.started = false  
+        t.arena.started = false
         t.arena.winner = nil
         tankCont = 0
         gameTimer = 0
@@ -96,10 +96,10 @@ function deathMatch:draw(t)
     local i = 0
     for k,v in pairs(tanks) do
         i = i + 1
-        love.graphics.print(k.name..": \t"..v, 10, 400+30*i)
+        love.graphics.print(k.name..": \t"..v, 10, 30*i - 20)
     end
 
-    
+
     love.graphics.print(string.format("%02d:%02d", math.floor(gameTimer/60), math.floor(gameTimer%60)), gameCenter.x-25, 10)
 
     if t.arena.gameOver then

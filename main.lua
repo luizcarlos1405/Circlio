@@ -50,7 +50,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    cmr:attach()
+    -- cmr:attach()
     push:start()
     --ParticleRenderer.drawOnce()
 
@@ -58,7 +58,7 @@ function love.draw()
 	tCore.draw()
 
     push:finish()
-    cmr:detach()
+    -- cmr:detach()
 end
 
 function drawFPS()
