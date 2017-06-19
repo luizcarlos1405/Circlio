@@ -33,6 +33,8 @@ function joystickInputHandler:init(t)
 end
 
 function joystickInputHandler:update(t, dt)
+    if t.tank.freeze then return end
+    
 	local input = -t.jsInput.joystick:getAxis(1)
 	-- lida com deadzone
 	if math.abs(input) < 0.2 then
@@ -40,11 +42,20 @@ function joystickInputHandler:update(t, dt)
 	end
     t.tank:move(input)
 
+    if t.jsInput.joystick:isDown(t.jsInput.shoot) and not t.kbInput.isCharging and t.tank:canFire() then
+        t.tank:chargeFire()
+        t.jsInput.isCharging = true
+    end
+
+    if t.jsInput.joystick:isDown(t.jsInput.dash) and t.tank:canDash() then
+        t.tank:dash()
+    end
 
     if t.jsInput.isCharging and not t.jsInput.joystick:isDown(t.jsInput.shoot) then
     	t.tank:fire()
     	t.jsInput.isCharging = false
     end
+
     if not t.jsInput.isVibrating then
     	t.jsInput.joystick:setVibration(0,t.tank.holdtime/10)
     end
@@ -55,16 +66,4 @@ function joystickInputHandler:update(t, dt)
     if t.tank:canFire() and t.jsInput.joystick:isDown(t.jsInput.shoot) and t.tank.powerups["fastFire"] then
         t.tank:fire()
     end
-end
-
-function joystickInputHandler:joystickpressed(t, joystick, button)
-	if joystick == t.jsInput.joystick then
-		if button == t.jsInput.shoot then
-			t.tank:chargeFire()
-	    	t.jsInput.isCharging = true
-		end
-		if button == t.jsInput.dash then
-			t.tank:dash()
-		end
-	end
 end

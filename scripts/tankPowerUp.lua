@@ -12,6 +12,10 @@ tankPowerUp.powerups = {
     end,
     fastFire = function(t, dt)
         if not t.tank.powerups["fastFire"] then
+            -- Se estiver carregando atirar o tiro carregado antes de começar o fastFire
+            if t.tank.isCharging then
+                t.tank:fire()
+            end
             -- Guarda valor original/base do firerate e da função fire original
             t.tank.baseFireRate = t.tank.firerate
             -- Inicia powerup

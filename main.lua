@@ -35,7 +35,6 @@ love.graphics.setFont(font)
 function love.load()
 	--love.window.setMode(1080, 720, {vsync=false})
 	tCore.loadScene(R.scene.gameScene)
-
 end
 
 local startTime
@@ -54,7 +53,7 @@ function love.draw()
     --cmr:attach()
     push:start()
     --ParticleRenderer.drawOnce()
-    
+
     --love.graphics.draw(R.texture.bg, 0,0)
 	tCore.draw()
 

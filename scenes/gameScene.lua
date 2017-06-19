@@ -67,12 +67,7 @@ function gameScene:update(dt)
 end
 
 function gameScene:keypressed(key)
-    if key == "=" then
-        for k,v in pairs(self.trecos) do
-            self:removeTreco(v)
-        end
-        self:init()
-    end
+    
 end
 
 return gameScene

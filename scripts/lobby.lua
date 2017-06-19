@@ -3,8 +3,8 @@ Lobby = Script({Arena})
 local names = {
 	"Coxinha",
 	"Risoles",
-	"Fulano",
-	"Ciclano"
+	"Quibe",
+	"Pastel"
 }
 
 local colors = {
@@ -57,11 +57,11 @@ local function refreshPositions()
 		--Muda a posição dos novos tanks para animar anti-horário
 		if v.tank.pos == 0 and playerCont+botCont ~= 1 then
 			v.tank.pos = 2*math.pi
-		end	
+		end
 		--v.tank.pos = spacing * (i-1)
-		
+
 		timer.tween(0.2, v.tank, {pos = spacing * (i-1)+0.001}, "out-quad")
-		
+
 	end
 end
 
@@ -93,7 +93,7 @@ function Lobby:update(t, dt)
 	end
 end
 
-function Lobby:draw(t)	
+function Lobby:draw(t)
 	if t.arena.started then return end
 	love.graphics.setFont(bigFont)
 	love.graphics.setColor(Color.white:value())
@@ -106,14 +106,14 @@ function Lobby:keypressed(t, k)
 	if k == kbControls[3] and not kbPlayer then
 		playerCont = playerCont + 1
 		tanks[#tanks+1] = Treco(
-			Position(vector(0, 0)), 
+			Position(vector(0, 0)),
 			Tank(names[playerCont], t, 0, nextColor()),
 			KeyboardInput(kbControls[1], kbControls[2], kbControls[3], kbControls[4]),
 			Circoll(20))
 		refreshPositions()
 		kbPlayer = true
 		lastInput = love.timer.getTime()
-	end	
+	end
 	if k == botKey then
 		botCont = botCont + 1
 		tanks[#tanks+1] = Treco(
@@ -132,7 +132,7 @@ function Lobby:joystickpressed(t, joy, b)
 		playerCont = playerCont + 1
 		joyPlayer[joy] = true
 		tanks[#tanks+1] = Treco(
-			Position(vector(0, 0)), 
+			Position(vector(0, 0)),
 			Tank(names[playerCont], t, 0, nextColor()),
 			JoystickInput(joy, joyControls, 2),
 			Circoll(20))

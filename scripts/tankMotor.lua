@@ -6,7 +6,6 @@ end
 
 local function canDash(t)
     -- Da dash se estiver no cooldown e se estiver andando
-    
     return (love.timer.getTime() - t.lastDash > t.dashCooldown) and (t.dir ~= 0)
 end
 
@@ -116,16 +115,13 @@ function TankMotor:init(t)
 end
 
 function TankMotor:update(t, dt)
-	
-	
+
+
 	if not t.tank.active then return end
 	--Atualiza posição real com a posição com rad
 	t.pos = t.tank.arena.pos+vector(math.cos(t.tank.pos)*(t.tank.arena.arena.raio-7), math.sin(t.tank.pos)*(t.tank.arena.arena.raio-7))
-	
-	if t.tank.freeze then return end
-	
-	
 
+	if t.tank.freeze then return end
 
 	if(t.tank.isCharging and t.tank:canFire()) then
 		--FastFire

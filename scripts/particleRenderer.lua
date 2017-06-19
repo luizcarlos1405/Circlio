@@ -28,7 +28,7 @@ local tab = {
 		color = tank.color:clone()
 	}
 	particles[tab] = true
-	
+
 	timer.after(1, function()
 		psystem:stop()
 		timer.after(2,function()
@@ -47,17 +47,17 @@ local function fundo()
 	psystem:setAreaSpread("normal", 400,400)
 	--psystem:setLinearAcceleration( -3, -3, 3, 3)
 	--psystem:setLinearDamping(1,2)
-	psystem:setSpeed(-2,2)
+	psystem:setSpeed(-10,10)
 	psystem:setSpread(2*math.pi)
-	--psystem:setTangentialAcceleration(-20,20)
-	--psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
+	-- psystem:setTangentialAcceleration(-20,20)
+	-- psystem:setLinearAcceleration(-20, -20, 20, 20) -- Random movement in all directions.
 	psystem:setColors(255, 255, 255, 0, 255, 255, 255, 255, 255, 255, 255, 0) -- Fade to transparency.
 
 	psystem:emit(100)
 	for i=1,10 do
 		psystem:update(1)	--Dá varios updates pra começar o jogo com particula já
 	end
-	
+
 
 	particles[{
 		system = psystem,

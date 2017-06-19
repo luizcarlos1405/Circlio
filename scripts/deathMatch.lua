@@ -13,9 +13,9 @@ local function reset(t)
     if reseting then return end
     reseting = true
     t.arena.decals = {}
-    
+
     tanks = {}
-    killLog = {}  
+    killLog = {}
 
     timer.tween(1.5, t.arena, {winnerCircle = 0}, "in-out-quint")
     timer.tween(1.5, t.arena, {raio = gconf.arena.size}, "in-out-quint")
@@ -24,7 +24,7 @@ local function reset(t)
     timer.tween(1.5, t.arena.winner, {size = 0, pos = 10}, "in-out-quint", function()
         t.arena.winner.treco:destroy()
         t.arena.gameOver = false
-        t.arena.started = false  
+        t.arena.started = false
         t.arena.winner = nil
         tankCont = 0
         gameTimer = 0
@@ -78,16 +78,28 @@ end
 
 function deathMatch:draw(t)
     love.graphics.setColor(Color.white:value())
-    for k,v in pairs(killLog) do
-        love.graphics.print(v.killer.name.." matou "..v.killed.name, 0, 30*k)
+    -- for k,v in pairs(killLog) do
+    --     love.graphics.print(v.killer.name.." matou "..v.killed.name, 0, 30*k)
+    -- end
+    for i= 1, #killLog do
+        love.graphics.setColor(255, 255, 255, 155 + i * 20)
+        love.graphics.print(killLog[i].killer.name.." matou "..killLog[i].killed.name, gameWidth - 200, 30*i - 20)
     end
+    if #killLog >= 6 then
+        for i=1,#killLog-5 do
+            table.remove(killLog, i)
+        end
+    end
+
+    love.graphics.setColor(255, 255, 255, 255)
+
     local i = 0
     for k,v in pairs(tanks) do
         i = i + 1
-        love.graphics.print(k.name..": \t"..v, 0, 400+30*i)
+        love.graphics.print(k.name..": \t"..v, 10, 30*i - 20)
     end
 
-    
+
     love.graphics.print(string.format("%02d:%02d", math.floor(gameTimer/60), math.floor(gameTimer%60)), gameCenter.x-25, 10)
 
     if t.arena.gameOver then
@@ -96,14 +108,13 @@ function deathMatch:draw(t)
         love.graphics.setColor(t.arena.bgColor:value())
         love.graphics.print("Winner!", t.pos.x-30, t.pos.y-80)
         love.graphics.print(t.arena.winner.name, t.pos.x-font:getWidth(t.arena.winner.name)/2, t.pos.y+40)
-        
+
         love.graphics.setColor(Color.white:value())
         love.graphics.print("[R]eset", t.pos.x-font:getWidth("[R]eset")/2, push:getHeight()-40)
 
     end
 
 end
-
 
 function deathMatch:update(t, dt)
     if t.arena.started and not t.arena.gameOver then
@@ -121,6 +132,5 @@ end
 
 function deathMatch:keyreleased(t, k)
     if t.arena.gameOver and k == "r" then
-        reset(t)
-    end
+        reset(t)    end
 end

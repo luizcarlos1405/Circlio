@@ -32,7 +32,9 @@ function PowerupSpawner:init(t)
 end
 
 function PowerupSpawner:update(t, dt)
-	t.arena.powerupTimer = t.arena.powerupTimer - dt
+    if t.arena.started then
+        t.arena.powerupTimer = t.arena.powerupTimer - dt
+    end
 
 	if t.arena.powerupTimer < 0  and not t.arena.gameOver and t.arena.started then
 		t.arena.powerupTimer = love.math.random(gconf.powerup.spawner.mintime, gconf.powerup.spawner.maxtime)
