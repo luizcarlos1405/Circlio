@@ -28,8 +28,8 @@ gameCenter = vector(push:getWidth()/2,push:getHeight()/2)
 cmr = camera()
 
 
-font = love.graphics.newFont("/font/FrancoisOne-Regular.ttf", 20)
-bigFont = love.graphics.newFont("/font/FrancoisOne-Regular.ttf", 50)
+font = love.graphics.newFont("/font/encode-sans.compressed-black.ttf", 20)
+bigFont = love.graphics.newFont("/font/encode-sans.compressed-black.ttf", 50)
 love.graphics.setFont(font)
 
 function love.load()
@@ -50,7 +50,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    --cmr:attach()
+    cmr:attach()
     push:start()
     --ParticleRenderer.drawOnce()
 
@@ -58,7 +58,7 @@ function love.draw()
 	tCore.draw()
 
     push:finish()
-    --cmr:detach()
+    cmr:detach()
 end
 
 function drawFPS()

@@ -6,6 +6,7 @@ local names = {
 	"Quibe",
 	"Pastel"
 }
+--TODO: nomes pros bots
 
 local colors = {
 	Color(0,117,220),
@@ -16,7 +17,7 @@ local colors = {
 	Color(0,92,49),
 	Color(43,206,72),
 	Color(128,128,128),
-	Color(148,255,181),
+	Color(148,200,181),
 	Color(143,124,0),
 	Color(157,204,0),
 	Color(194,0,136),

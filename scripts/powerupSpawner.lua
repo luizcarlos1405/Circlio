@@ -41,3 +41,9 @@ function PowerupSpawner:update(t, dt)
 		spawn(t)
 	end
 end
+
+function PowerupSpawner:keypressed(t,k)
+	if k == "9" then
+		spawn(t)
+	end
+end

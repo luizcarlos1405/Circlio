@@ -40,10 +40,11 @@ function spawnBullet(t, bpos, bsize, bdir)
 	)
 end
 
-function screenShake(t)
+function screenShake(t, pot)
+	pot = pot or 2
 	local orig_x, orig_y = cmr:position()
 	timer.during(t, function()
-		cmr:lookAt(orig_x + math.random(-2,2), orig_y + math.random(-2,2))
+		cmr:lookAt(orig_x + math.random(-pot,pot), orig_y + math.random(-pot,pot))
 	end, function()
 		-- reset cmr position
 		cmr:lookAt(orig_x, orig_y)

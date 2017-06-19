@@ -6,6 +6,7 @@ gconf.music = {
 }
 
 gconf.tank = {
+	firerate = 0.2,
 	maxLife = 5,
     dashCooldown = 1
 }
@@ -18,7 +19,7 @@ gconf.powerup = {
 	mtvFactor = 30, -- Varia nível de desvio ao atingir uma bala
 	fastfire = {
 		time = 8,
-		mod = 0.2
+		mod = 0.5
 	},
 	speedboost = {
 		time = 5,
