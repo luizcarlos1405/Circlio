@@ -37,7 +37,7 @@ function ArenaRenderer:init(t)
 	    love.graphics.circle("fill", t.pos.x, t.pos.y, t.arena.raio-8)
 	end
 
-	t.arena.bgColor = Color(200,200,200,0)
+	t.arena.bgColor = Color(100,100,100,0)
 end
 
 function ArenaRenderer:draw(t)

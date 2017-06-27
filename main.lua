@@ -21,6 +21,8 @@ camera = require("lib.camera")
 
 trail = require("lib.trail")
 
+click = require("lib.Click")
+
 push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = fs, vsync = false})
 
 gameCenter = vector(push:getWidth()/2,push:getHeight()/2)
@@ -34,7 +36,7 @@ love.graphics.setFont(font)
 
 function love.load()
 	--love.window.setMode(1080, 720, {vsync=false})
-	tCore.loadScene(R.scene.gameScene)
+	tCore.loadScene(R.scene.menuScene)
 end
 
 local startTime
@@ -46,7 +48,6 @@ function love.update(dt)
     startTime = love.timer.getTime()
     tCore.update(dt)
     timer.update(dt)
-    love.graphics.setBackgroundColor(10, 10, 10)
 end
 
 function love.draw()

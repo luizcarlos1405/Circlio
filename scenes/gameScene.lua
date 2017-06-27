@@ -3,7 +3,6 @@ gameScene = Scene("gameScene")
 require("gameComponents")
 
 --Scripts
-require("scripts.particleRenderer")
 require("scripts.trailRenderer")
 require("scripts.arenaRenderer")
 require("scripts.powerupSpawner")

@@ -142,7 +142,7 @@ function push:start()
 end
 
 function push:finish(shader)
-  love.graphics.setBackgroundColor(unpack(self._borderColor))
+  --love.graphics.setBackgroundColor(unpack(self._borderColor))
   if self._canvas then
     local _render = self:getCanvasTable("_render")
 

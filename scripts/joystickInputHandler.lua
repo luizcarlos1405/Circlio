@@ -42,7 +42,7 @@ function joystickInputHandler:update(t, dt)
 	end
     t.tank:move(input)
 
-    if t.jsInput.joystick:isDown(t.jsInput.shoot) and not t.kbInput.isCharging and t.tank:canFire() then
+    if t.jsInput.joystick:isDown(t.jsInput.shoot) and not t.jsInput.isCharging and t.tank:canFire() then
         t.tank:chargeFire()
         t.jsInput.isCharging = true
     end

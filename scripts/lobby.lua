@@ -46,7 +46,7 @@ local botCont = 0
 
 local tanks = {}
 
-local countDown
+local countDown = 0
 
 local function nextColor()
 	return colors[math.max(1,((playerCont+botCont)%#colors))]:clone()
